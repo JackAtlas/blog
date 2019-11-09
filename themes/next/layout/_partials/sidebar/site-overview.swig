@@ -1,6 +1,6 @@
 <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <img class="site-author-image" itemprop="image" alt="{{ author }}"
-    src="{{ url_for(theme.avatar.url or theme.images + '/avatar.gif') }}">
+    src="{{ url_for(theme.avatar.url or theme.images + '/avatar.jpeg') }}">
   <p class="site-author-name" itemprop="name">{{ author }}</p>
   <div class="site-description" itemprop="description">{{ description }}</div>
 </div>

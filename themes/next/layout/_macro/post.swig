@@ -5,7 +5,7 @@
     <link itemprop="mainEntityOfPage" href="{{ config.url }}{{ url_for(post.path) }}">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="{{ url_for(theme.avatar.url or theme.images + '/avatar.gif') }}">
+      <meta itemprop="image" content="{{ url_for(theme.avatar.url or theme.images + '/avatar.jpeg') }}">
       <meta itemprop="name" content="{{ author }}">
       <meta itemprop="description" content="{{ description }}">
     </span>
