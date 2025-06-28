@@ -1,0 +1,69 @@
+type Query {
+  posts(status: PostStatus, includeDeleted: Boolean): [Post!]!
+  post(id: ID!): Post
+  postBySlug(slug: String!): Post
+  trashedPosts: [Post!]!
+
+  categories: [Category!]!
+  category(id: ID!): Category
+  categoryBySlug(slug: String!): Category
+
+  tags: [Tag!]!
+  tag(id: ID!): Tag
+
+  comments(postId: ID!, includeUnapproved: Boolean): [Comment!]!
+  pendingComments: [Comment!]!
+}
+
+type Mutation {
+  createPost(input: CreatePostInput!): Post!
+  updatePost(id: ID!, input: UpdatePostInput!): Post!
+  deletePost(id: ID!, hardDelete: Boolean): Boolean!
+  restorePost(id: ID!): Post!
+  toggleTopPost(id: ID!): Post!
+
+  createCategory(input: CreateCategoryInput!): Category!
+
+  createComment(input: CreateCommentInput!): Comment!
+  deleteComment(id: ID!, hardDelete: Boolean): Boolean!
+  approveComment(id: ID!): Comment!
+  toggleTopComment(id: ID!): Comment!
+}
+
+input CreatePostInput {
+  title: String!
+  content: String!
+  categoryId: Int
+  tagIds: [Int!]
+  status: PostStatus = DRAFT
+}
+
+input CreateCommentInput {
+  postId: Int!
+  content: String!
+  name: String
+  email: String
+  parentId: Int
+}
+
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  status: PostStatus!
+  isTop: Boolean!
+  author: User!
+  category: Category
+  tags: [Tag!]!
+  comments: [Comment!]!
+}
+
+type Comment {
+  id: ID!
+  content: String!
+  author: User
+  name: String
+  replies: [Comment!]!
+  isTop: Boolean!
+  approved: Boolean!
+}
