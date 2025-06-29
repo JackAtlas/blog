@@ -1,7 +1,66 @@
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  articles: [Article!]!
+}
+
+type Article {
+  id: ID!
+  title: String!
+  englishTitle: String!
+  content: String!
+  status: ArticleStatus!
+  isPinned: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  author: User!
+  category: Category
+  tags: [Tag!]!
+  comments: [Comment!]!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  parent: Category
+  children: [Category!]!
+}
+
+type Tag {
+  id: ID!
+  name: String!
+}
+
+type Comment {
+  id: ID!
+  content: String!
+  authorName: String
+  authorEmail: String
+  user: User
+  parent: Comment
+  replies: [Comment!]!
+  isPinned: Boolean!
+  status: CommentStatus!
+  createdAt: String!
+  updatedAt: String!
+}
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum CommentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 type Query {
-  posts(status: PostStatus, includeDeleted: Boolean): [Post!]!
-  post(id: ID!): Post
-  postBySlug(slug: String!): Post
+  articles(status: ArticleStatus, isPinned: Boolean): [Article!]!
+  article(id: ID!): Article
+  articleBySlug(slug: String!): Article
   trashedPosts: [Post!]!
 
   categories: [Category!]!
@@ -11,59 +70,38 @@ type Query {
   tags: [Tag!]!
   tag(id: ID!): Tag
 
-  comments(postId: ID!, includeUnapproved: Boolean): [Comment!]!
-  pendingComments: [Comment!]!
+  comments(articleId: ID!): [Comment!]!
 }
 
 type Mutation {
-  createPost(input: CreatePostInput!): Post!
-  updatePost(id: ID!, input: UpdatePostInput!): Post!
-  deletePost(id: ID!, hardDelete: Boolean): Boolean!
-  restorePost(id: ID!): Post!
-  toggleTopPost(id: ID!): Post!
+  createArticle(
+    title: String!
+    content: String!
+    authorId: ID!
+    categoryId: ID!
+    tagIds: [ID!]
+  ): Article!
+  updatePost(
+    id: ID!
+    title: String
+    content: String
+    status: ArticleStatus
+    isPinned: Boolean
+  ): Article!
+  softDeleteArticle(id: ID!): Article!
+  restoreArticle(id: ID!): Article!
+  hardDeleteArticle(id: ID!): Boolean!
 
-  createCategory(input: CreateCategoryInput!): Category!
-
-  createComment(input: CreateCommentInput!): Comment!
-  deleteComment(id: ID!, hardDelete: Boolean): Boolean!
+  createComment(
+    articleId: ID!
+    content: String!
+    authorName: String
+    authorEmail: String
+    UserId: ID
+    parentId: ID
+  ): Comment!
   approveComment(id: ID!): Comment!
-  toggleTopComment(id: ID!): Comment!
-}
-
-input CreatePostInput {
-  title: String!
-  content: String!
-  categoryId: Int
-  tagIds: [Int!]
-  status: PostStatus = DRAFT
-}
-
-input CreateCommentInput {
-  postId: Int!
-  content: String!
-  name: String
-  email: String
-  parentId: Int
-}
-
-type Post {
-  id: ID!
-  title: String!
-  content: String!
-  status: PostStatus!
-  isTop: Boolean!
-  author: User!
-  category: Category
-  tags: [Tag!]!
-  comments: [Comment!]!
-}
-
-type Comment {
-  id: ID!
-  content: String!
-  author: User
-  name: String
-  replies: [Comment!]!
-  isTop: Boolean!
-  approved: Boolean!
+  rejectComment(id: ID!): Comment!
+  softDeleteComment(id: ID!): Comment!
+  hardDeleteComment(id: ID!): Boolean!
 }
