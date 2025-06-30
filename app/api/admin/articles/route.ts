@@ -4,7 +4,7 @@ export async function POST(req: Request) {
   const { title, content, categoryId, tags, status } =
     await req.json()
 
-  const post = await prisma.post.create({
+  const post = await prisma.article.create({
     data: {
       title,
       content,
@@ -24,7 +24,7 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
   const includeDeleted = searchParams.get('deleted') === 'true'
 
-  const posts = await prisma.post.findMany({
+  const posts = await prisma.article.findMany({
     where: {
       OR: [
         { deleted: false },
