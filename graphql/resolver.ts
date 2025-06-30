@@ -1,11 +1,22 @@
 import { PrismaClient } from '@/generated/prisma'
+import type { GraphQLResolveInfo } from 'graphql'
+import {
+  ArticleArgs,
+  ArticlesArgs,
+  CommentsArgs
+} from '@/types/graphql'
 
 const prisma = new PrismaClient()
 
 export const resolvers = {
   Query: {
-    posts: async (_parent, args) => {
-      return prisma.post.findMany({
+    articles: async (
+      _parent: any,
+      args: ArticlesArgs,
+      _context: unknown,
+      _info: GraphQLResolveInfo
+    ) => {
+      return prisma.article.findMany({
         where: {
           status: args.status,
           isPinned: args.isPinned ?? undefined,
@@ -14,8 +25,13 @@ export const resolvers = {
         include: { author: true, category: true, tags: true }
       })
     },
-    post: async (_parent, args) => {
-      return prisma.post.findUnique({
+    article: async (
+      _parent: any,
+      args: ArticleArgs,
+      _context: unknown,
+      _info: GraphQLResolveInfo
+    ) => {
+      return prisma.article.findUnique({
         where: { id: Number(args.id), deletedAt: null },
         include: { author: true, category: true, tags: true }
       })
@@ -29,13 +45,23 @@ export const resolvers = {
     tags: async () => {
       return prisma.tag.findMany()
     },
-    comments: async (_parent, args) => {
+    comments: async (
+      _parent: any,
+      args: CommentsArgs,
+      _context: unknown,
+      _info: GraphQLResolveInfo
+    ) => {
       return prisma.comment.findMany({
         where: {
-          postId: Number(args.postId),
+          articleId: Number(args.articleId),
           parentId: null,
           status: 'APPROVED',
           deletedAt: null
+        },
+        include: {
+          replies: {
+            where: { deletedAt: null, status: 'APPROVED' }
+          }
         }
       })
     }
