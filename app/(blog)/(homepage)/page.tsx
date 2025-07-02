@@ -1,4 +1,6 @@
 import ArchiveSection from '@/sections/ArchiveSection'
+import CategoriesSection from '@/sections/CategoriesSection'
+import LinksSection from '@/sections/LinksSection'
 import TagsSection from '@/sections/TagsSection'
 
 export default function HomePage() {
@@ -9,14 +11,18 @@ export default function HomePage() {
           模块 A
         </div>
         <div className="order-2 lg:hidden flex flex-col gap-6">
-          <div className="bg-green-200 p-4">B 模块</div>
+          <div>
+            <LinksSection />
+            <CategoriesSection />
+          </div>
           <div>
             <ArchiveSection />
             <TagsSection />
           </div>
         </div>
-        <div className="hidden lg:block order-1 bg-green-200 p-4">
-          B 模块
+        <div className="hidden lg:block order-1">
+          <LinksSection />
+          <CategoriesSection />
         </div>
         <div className="hidden lg:block order-3">
           <ArchiveSection />

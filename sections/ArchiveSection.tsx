@@ -12,7 +12,7 @@ export default function ArchiveSection() {
         <ul>
           <li>
             <Link
-              className="flex items-center justify-between h-9"
+              className="flex items-center justify-between hover:bg-gray-100 h-9 px-2"
               href="/archives/2025/04/"
               title="/archives/2025/04/"
             >
@@ -24,7 +24,7 @@ export default function ArchiveSection() {
           </li>
           <li>
             <Link
-              className="flex items-center justify-between h-9"
+              className="flex items-center justify-between hover:bg-gray-100 h-9 px-2"
               href="/archives/2025/03/"
               title="/archives/2025/03/"
             >
@@ -36,7 +36,7 @@ export default function ArchiveSection() {
           </li>
           <li>
             <Link
-              className="flex items-center justify-between h-9"
+              className="flex items-center justify-between hover:bg-gray-100 h-9 px-2"
               href="/archives/2025/02/"
               title="/archives/2025/02/"
             >

@@ -9,38 +9,50 @@ export default function TagsSection() {
           Tags
         </div>
         <div className="flex flex-wrap gap-4">
-          <div className="flex">
+          <a href="/tag/demo" className="flex" title="Demo">
             <div className="bg-blue-600 text-xs text-white rounded-l-sm px-2 py-1 whitespace-nowrap">
               Demo
             </div>
             <div className="bg-gray-100 text-xs rounded-r-sm px-2 py-1">
               19
             </div>
-          </div>
-          <div className="flex">
+          </a>
+          <a
+            href="/tag/getting-started"
+            className="flex"
+            title="Getting Started"
+          >
             <div className="bg-blue-600 text-xs text-white rounded-l-sm px-2 py-1 whitespace-nowrap">
               Getting Started
             </div>
             <div className="bg-gray-100 text-xs rounded-r-sm px-2 py-1">
               4
             </div>
-          </div>
-          <div className="flex">
+          </a>
+          <a
+            href="/tag/icarus-user-guide"
+            className="flex"
+            title="Icarus User Guide"
+          >
             <div className="bg-blue-600 text-xs text-white rounded-l-sm px-2 py-1 whitespace-nowrap">
               Icarus User Guide
             </div>
             <div className="bg-gray-100 text-xs rounded-r-sm px-2 py-1">
               12
             </div>
-          </div>
-          <div className="flex">
+          </a>
+          <a
+            href="/tag/icarus-用户指南"
+            className="flex"
+            title="Icarus用户指南"
+          >
             <div className="bg-blue-600 text-xs text-white rounded-l-sm px-2 py-1 whitespace-nowrap">
               Icarus用户指南
             </div>
             <div className="bg-gray-100 text-xs rounded-r-sm px-2 py-1">
               12
             </div>
-          </div>
+          </a>
         </div>
       </CardContent>
     </Card>
