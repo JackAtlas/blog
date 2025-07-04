@@ -28,7 +28,7 @@ export default function BlogHeader() {
           <div className="flex">
             <a
               href="https://github.com/jackatlas"
-              className="flex items-center px-5 py-3"
+              className="flex items-center px-5 py-3 hover:bg-[#fafafa] hover:text-[#3273dc]"
               target="_blank"
               title="https://github.com/jackatlas"
             >
@@ -36,7 +36,7 @@ export default function BlogHeader() {
             </a>
             <a
               href="javascript:void(0)"
-              className="flex items-center px-5 py-3"
+              className="flex items-center px-5 py-3 hover:bg-[#fafafa] hover:text-[#3273dc]"
               title="搜索"
             >
               <LuSearch />
