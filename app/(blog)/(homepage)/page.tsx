@@ -3,6 +3,7 @@ import ArticlesSection from '@/sections/ArticlesSection'
 import CategoriesSection from '@/sections/CategoriesSection'
 import LinksSection from '@/sections/LinksSection'
 import ProfileSection from '@/sections/ProfileSection'
+import RecentsSection from '@/sections/RecentsSection'
 import TagsSection from '@/sections/TagsSection'
 
 export default function HomePage() {
@@ -19,6 +20,7 @@ export default function HomePage() {
             <CategoriesSection />
           </div>
           <div>
+            <RecentsSection />
             <ArchiveSection />
             <TagsSection />
           </div>
@@ -29,6 +31,7 @@ export default function HomePage() {
           <CategoriesSection />
         </div>
         <div className="hidden lg:block order-3">
+          <RecentsSection />
           <ArchiveSection />
           <TagsSection />
         </div>
