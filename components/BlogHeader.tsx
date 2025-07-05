@@ -5,7 +5,7 @@ import { LuSearch } from 'react-icons/lu'
 export default function BlogHeader() {
   return (
     <header className="bg-white shadow shadow-black/5">
-      <div className="container min-h-14 flex">
+      <div className="container min-h-17 flex">
         <div className="flex items-center">JackAtlas</div>
         <div className="flex justify-between flex-1">
           <div className="flex">

@@ -1,7 +1,14 @@
 import Image from 'next/image'
-import { FaLocationDot } from 'react-icons/fa6'
+import {
+  FaFacebookF,
+  FaGithub,
+  FaLocationDot,
+  FaRss,
+  FaTwitter
+} from 'react-icons/fa6'
 import Card from '@/components/ui/Card'
 import CardContent from '@/components/ui/CardContent'
+import { SiGitee } from 'react-icons/si'
 
 export default function ProfileSection() {
   return (
@@ -17,7 +24,7 @@ export default function ProfileSection() {
           />
         </div>
         <div className="flex items-center justify-center text-xl uppercase mt-2">
-          JackAtlas
+          Jack Atlas
         </div>
         <div className="flex items-center justify-center text-sm mt-2">
           Web Developer
@@ -39,6 +46,28 @@ export default function ProfileSection() {
             <div className="uppercase text-xs">tags</div>
             <div className="mt-1 text-2xl">4</div>
           </div>
+        </div>
+        <div className="grid grid-cols-5 mt-6">
+          <a
+            href="https://github.com/jackatlas"
+            target="_blank"
+            title="github"
+            className="flex items-center justify-center h-8"
+          >
+            <FaGithub />
+          </a>
+          <a className="flex items-center justify-center h-8">
+            <SiGitee />
+          </a>
+          <a className="flex items-center justify-center h-8">
+            <FaFacebookF />
+          </a>
+          <a className="flex items-center justify-center h-8">
+            <FaTwitter />
+          </a>
+          <a className="flex items-center justify-center h-8">
+            <FaRss />
+          </a>
         </div>
       </CardContent>
     </Card>
