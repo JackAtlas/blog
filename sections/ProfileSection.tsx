@@ -6,8 +6,8 @@ import {
   FaRss,
   FaTwitter
 } from 'react-icons/fa6'
-import Card from '@/components/ui/Card'
-import CardContent from '@/components/ui/CardContent'
+import Card from '@/components/custom/Card'
+import CardContent from '@/components/custom/CardContent'
 import { SiGitee } from 'react-icons/si'
 
 export default function ProfileSection() {

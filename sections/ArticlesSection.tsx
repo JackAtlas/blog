@@ -1,6 +1,6 @@
-import Card from '@/components/ui/Card'
-import CardContent from '@/components/ui/CardContent'
-import CardHeader from '@/components/ui/CardHeader'
+import Card from '@/components/custom/Card'
+import CardContent from '@/components/custom/CardContent'
+import CardHeader from '@/components/custom/CardHeader'
 import Image from 'next/image'
 import Link from 'next/link'
 
