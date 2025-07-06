@@ -1,12 +1,22 @@
 import prisma from '@/lib/prisma'
 
 export async function POST(req: Request) {
-  const { title, content, categoryId, tags, status } =
-    await req.json()
+  const {
+    title,
+    englishTitle,
+    slug,
+    content,
+    categoryId,
+    tags,
+    status,
+    userId
+  } = await req.json()
 
   const post = await prisma.article.create({
     data: {
       title,
+      englishTitle,
+      slug,
       content,
       status,
       authorId: userId,
