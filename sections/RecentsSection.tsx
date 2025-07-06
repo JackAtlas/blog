@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Card from '@/components/custom/Card'
-import CardContent from '@/components/custom/CardContent'
+import Card from '@/components/blog/Card'
+import CardContent from '@/components/blog/CardContent'
 
 export default function RecentsSection() {
   return (
