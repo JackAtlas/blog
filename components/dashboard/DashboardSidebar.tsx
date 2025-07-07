@@ -5,6 +5,7 @@ import {
   LuTags,
   LuTrash2
 } from 'react-icons/lu'
+import { MdOutlineArticle } from 'react-icons/md'
 import {
   Collapsible,
   CollapsibleContent,
@@ -34,6 +35,11 @@ const items = [
     title: '首页',
     url: '/dashboard',
     icon: LuHouse
+  },
+  {
+    title: '文章',
+    url: '/dashboard/articles',
+    icon: MdOutlineArticle
   },
   {
     title: '栏目',
@@ -110,7 +116,7 @@ export default function DashboardSidebar() {
                     <CollapsibleContent>
                       <SidebarMenuSub>
                         {item.children?.map((child) => (
-                          <Collapsible key={child.title}>
+                          <Collapsible defaultOpen key={child.title}>
                             <SidebarMenuSubItem>
                               <SidebarMenuSubButton asChild>
                                 <Link href={child.url}>
