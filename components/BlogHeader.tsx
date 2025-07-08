@@ -6,22 +6,27 @@ export default function BlogHeader() {
   return (
     <header className="bg-white shadow shadow-black/5">
       <div className="container min-h-17 flex">
-        <div className="flex items-center">JackAtlas</div>
+        <div className="flex items-center text-2xl mr-4">
+          JackAtlas
+        </div>
         <div className="flex justify-between flex-1">
           <div className="flex">
-            <Link className="flex items-center" href="/">
+            <Link className="flex items-center px-3" href="/">
               首页
             </Link>
-            <Link className="flex items-center" href="/categories">
+            <Link
+              className="flex items-center px-3"
+              href="/categories"
+            >
               栏目
             </Link>
-            <Link className="flex items-center" href="/tags">
+            <Link className="flex items-center px-3" href="/tags">
               标签
             </Link>
-            <Link className="flex items-center" href="/archives">
+            <Link className="flex items-center px-3" href="/archives">
               归档
             </Link>
-            <Link className="flex items-center" href="/about">
+            <Link className="flex items-center px-3" href="/about">
               关于
             </Link>
           </div>
