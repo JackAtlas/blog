@@ -26,9 +26,14 @@ export default function ArticlesSection() {
                 3 minutes read (about 495 words)
               </div>
             </div>
-            <h2 className="text-3xl mt-2 mb-6 hover:text-[#3273dc]">
-              Getting Started with Icarus
-            </h2>
+            <Link
+              href="/article/getting-started-width-icarus"
+              title="Getting Started with Icarus"
+            >
+              <h2 className="text-3xl mt-2 mb-6 hover:text-[#3273dc]">
+                Getting Started with Icarus
+              </h2>
+            </Link>
             <div className="mb-6">
               <p className="mt-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing
