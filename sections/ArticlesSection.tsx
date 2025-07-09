@@ -19,7 +19,7 @@ export default function ArticlesSection() {
             />
           </CardHeader>
           <CardContent>
-            <div className="flex text-xs uppercase">
+            <div className="flex text-xs uppercase text-[#7a7a7a]">
               <div>posted 5 years ago</div>
               <div className="ms-3">plugins/comment</div>
               <div className="ms-3">
