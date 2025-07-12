@@ -1,3 +1,5 @@
+'use client'
+
 import {
   LuChevronRight,
   LuFolder,
@@ -29,6 +31,7 @@ import {
   SidebarRail
 } from '@/components/ui/sidebar'
 import Link from 'next/link'
+import NavUser from './NavUser'
 
 const items = [
   {
@@ -164,7 +167,14 @@ export default function DashboardSidebar() {
         </SidebarGroup>
         <SidebarGroup />
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <NavUser
+          user={{
+            name: 'JackAtlas',
+            email: 'jackatlas8864@gmail.com'
+          }}
+        />
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   )
