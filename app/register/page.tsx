@@ -1,26 +1,23 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useActionState } from 'react'
 import { LuGalleryVerticalEnd, LuLoaderCircle } from 'react-icons/lu'
 import { toast } from 'sonner'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { login } from '@/lib/actions/auth/login'
+import { register } from '@/lib/actions/auth/register'
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
-
   const [formState, formAction, isPending] = useActionState(
     async (_: any, formData: FormData) => {
-      const result = await login(formData)
+      const result = await register(formData)
 
       if (!result.error) {
-        toast.success('登入成功！')
-        router.push(callbackUrl)
+        toast.success('注册成功！')
+        router.push('/login')
       }
 
       return result
@@ -46,9 +43,9 @@ export default function LoginPage() {
           <div className="w-full max-w-xs">
             <form action={formAction} className="flex flex-col gap-6">
               <div className="flex flex-col items-center gap-2 text-center">
-                <h1 className="text-2xl font-bold">登入账号</h1>
+                <h1 className="text-2xl font-bold">注册账号</h1>
                 <p className="text-muted-foreground text-sm text-nowrap">
-                  输入邮箱和密码登入您的账号
+                  输入邮箱地址和密码以创建账号
                 </p>
               </div>
               <div className="grid gap-6">
@@ -63,15 +60,7 @@ export default function LoginPage() {
                   />
                 </div>
                 <div className="grid gap-3">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">密码</Label>
-                    <a
-                      href="#"
-                      className="ml-auto text-sm underline-offset-4 hover:underline"
-                    >
-                      忘记密码？
-                    </a>
-                  </div>
+                  <Label htmlFor="password">密码</Label>
                   <Input
                     id="password"
                     name="password"
@@ -90,7 +79,7 @@ export default function LoginPage() {
                 {isPending ? (
                   <LuLoaderCircle className="animate-spin" />
                 ) : (
-                  '登入'
+                  '注册'
                 )}
               </Button>
             </form>
