@@ -1,5 +1,8 @@
 'use client'
 
+import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+import { MdOutlineArticle } from 'react-icons/md'
 import {
   LuChevronRight,
   LuFolder,
@@ -7,7 +10,6 @@ import {
   LuTags,
   LuTrash2
 } from 'react-icons/lu'
-import { MdOutlineArticle } from 'react-icons/md'
 import {
   Collapsible,
   CollapsibleContent,
@@ -30,8 +32,7 @@ import {
   SidebarMenuSubItem,
   SidebarRail
 } from '@/components/ui/sidebar'
-import Link from 'next/link'
-import NavUser from './NavUser'
+import NavUser from '@/components/dashboard/NavUser'
 
 const items = [
   {
@@ -86,6 +87,8 @@ const items = [
 ]
 
 export default function DashboardSidebar() {
+  const { data: session } = useSession()
+
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader />
@@ -168,12 +171,7 @@ export default function DashboardSidebar() {
         <SidebarGroup />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser
-          user={{
-            name: 'JackAtlas',
-            email: 'jackatlas8864@gmail.com'
-          }}
-        />
+        {session?.user && <NavUser user={session.user} />}
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
