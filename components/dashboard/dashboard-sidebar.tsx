@@ -32,7 +32,7 @@ import {
   SidebarMenuSubItem,
   SidebarRail
 } from '@/components/ui/sidebar'
-import NavUser from '@/components/dashboard/NavUser'
+import NavUser from '@/components/dashboard/nav-user'
 
 const items = [
   {

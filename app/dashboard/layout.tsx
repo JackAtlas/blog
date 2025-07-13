@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers'
-import DashboardSidebar from '@/components/dashboard/DashboardSidebar'
+import DashboardSidebar from '@/components/dashboard/dashboard-sidebar'
 import {
   SidebarInset,
   SidebarProvider,

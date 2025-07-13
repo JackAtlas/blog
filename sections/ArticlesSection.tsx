@@ -1,6 +1,6 @@
-import Card from '@/components/blog/Card'
-import CardContent from '@/components/blog/CardContent'
-import CardHeader from '@/components/blog/CardHeader'
+import Card from '@/components/blog/card'
+import CardContent from '@/components/blog/card-content'
+import CardHeader from '@/components/blog/card-header'
 import Image from 'next/image'
 import Link from 'next/link'
 

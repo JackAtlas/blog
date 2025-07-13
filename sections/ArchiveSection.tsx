@@ -1,5 +1,5 @@
-import Card from '@/components/blog/Card'
-import CardContent from '@/components/blog/CardContent'
+import Card from '@/components/blog/card'
+import CardContent from '@/components/blog/card-content'
 import Link from 'next/link'
 
 export default function ArchiveSection() {
