@@ -110,7 +110,7 @@ export default function DashboardSidebar() {
                         <span>{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
-                    {item.children && (
+                    {/* {item.children && (
                       <SidebarMenuAction className="hover:bg-zinc-200 cursor-pointer">
                         <CollapsibleTrigger asChild>
                           <span>
@@ -161,7 +161,7 @@ export default function DashboardSidebar() {
                           </Collapsible>
                         ))}
                       </SidebarMenuSub>
-                    </CollapsibleContent>
+                    </CollapsibleContent> */}
                   </SidebarMenuItem>
                 </Collapsible>
               ))}
