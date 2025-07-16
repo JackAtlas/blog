@@ -24,13 +24,13 @@ import { FlattenedCategory } from '@/lib/data/category'
 
 interface CategoryEditorProps {
   categories: FlattenedCategory[]
-  targetId?: number | null
+  targetId?: number
   onSubmit: ({
     targetId,
     name,
     parentId
   }: {
-    targetId: number | null
+    targetId: number
     name: string
     parentId: number
   }) => void
@@ -38,14 +38,15 @@ interface CategoryEditorProps {
 
 export default function CategoryEditor({
   categories,
-  targetId = null,
+  targetId = 0,
   onSubmit
 }: CategoryEditorProps) {
+  const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<number>(0)
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           variant="outline"
@@ -121,13 +122,14 @@ export default function CategoryEditor({
           <Button
             className="cursor-pointer"
             disabled={name ? false : true}
-            onClick={() =>
+            onClick={() => {
               onSubmit({
                 targetId,
                 name,
                 parentId: selectedCategory
               })
-            }
+              setOpen(false)
+            }}
           >
             保存
           </Button>

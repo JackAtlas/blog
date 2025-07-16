@@ -10,6 +10,7 @@ import CategoryEditor from '@/components/dashboard/category-editor'
 import DataTable from '@/components/data-table'
 import { flatten, FlattenedCategory } from '@/lib/data/category'
 import { format } from 'date-fns'
+import { toast } from 'sonner'
 
 const columns: ColumnDef<FlattenedCategory>[] = [
   {
@@ -52,25 +53,39 @@ export default function CategoriesPage() {
       name,
       parentId
     }: {
-      targetId: number | null
+      targetId: number
       name: string
       parentId: number
     }) => {
       if (targetId) {
         // Edit
       } else {
-        await fetch('/api/categories/add', {
+        const res = await fetch('/api/categories', {
           method: 'POST',
           body: JSON.stringify({ name, parentId }),
           headers: { 'Content-Type': 'application/json' }
         })
+
+        if (!res.ok) {
+          const errorData = await res.json()
+          throw new Error(
+            errorData.message || '栏目创建失败，未知错误'
+          )
+        }
+
+        return await res.json()
       }
     },
     onSuccess: () => {
+      toast.success('栏目创建成功')
       queryClient.invalidateQueries({ queryKey: ['categories'] })
     },
     onError: (error) => {
-      console.log(error)
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : '栏目创建失败，未知错误'
+      )
     }
   })
 

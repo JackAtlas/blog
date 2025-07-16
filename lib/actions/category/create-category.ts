@@ -4,7 +4,7 @@ import prisma from '@/lib/prisma'
 
 interface CategoryCreateInput {
   name: string
-  parentId: number | null
+  parentId: number
 }
 
 export async function createCategory({
@@ -12,9 +12,7 @@ export async function createCategory({
   parentId
 }: CategoryCreateInput) {
   if (!name || name.trim() === '') {
-    return {
-      error: '栏目名称不能为空'
-    }
+    throw new Error('栏目名称不能为空')
   }
 
   const existingCategory = await prisma.category.findFirst({
@@ -24,20 +22,10 @@ export async function createCategory({
   })
 
   if (existingCategory) {
-    return {
-      error: '同名栏目已存在'
-    }
+    throw new Error('同名栏目已存在')
   }
 
-  if (typeof parentId === 'string') {
-    parentId = parseInt(parentId)
-  }
-
-  if (parentId && isNaN(parentId)) {
-    return {
-      error: '父级栏目 ID 无效'
-    }
-  }
+  const data: { name: string; parentId?: number } = { name }
 
   if (parentId) {
     const parentCategory = await prisma.category.findUnique({
@@ -47,28 +35,17 @@ export async function createCategory({
     })
 
     if (!parentCategory) {
-      return {
-        error: '父级栏目不存在'
-      }
+      throw new Error('父级栏目不存在')
     }
+
+    data['parentId'] = parentId
   }
 
-  try {
-    const result = await prisma.category.create({
-      data: {
-        name,
-        parentId
-      }
-    })
+  const result = await prisma.category.create({ data })
 
-    if (result) {
-      return { data: result }
-    } else {
-      return { error: '创建失败' }
-    }
-  } catch (error) {
-    return {
-      error
-    }
+  if (result) {
+    return { data: result }
+  } else {
+    throw new Error('栏目创建失败，未知错误')
   }
 }
