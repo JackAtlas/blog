@@ -76,7 +76,7 @@ const items = [
   },
   {
     title: '标签',
-    url: '#',
+    url: '/dashboard/tags',
     icon: LuTags
   },
   {
