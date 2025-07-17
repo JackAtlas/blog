@@ -18,7 +18,7 @@ export const flatten = (
   return nodes.flatMap((node, index, arr) => {
     const isLast = index === arr.length - 1
     const currentPrefix = prefix + (isLast ? '└─ ' : '├─ ')
-    const childPrefix = prefix + (isLast ? '' : '│\u3000')
+    const childPrefix = prefix + (isLast ? '\u3000\u3000' : '│\u3000')
     return [
       {
         id: node.id,
