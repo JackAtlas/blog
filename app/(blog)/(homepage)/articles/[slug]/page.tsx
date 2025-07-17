@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
-import { getArticleBySlug } from '@/lib/actions/article/getBySlug'
+import { getArticleBySlug } from '@/lib/actions/article/get-article-by-slug'
 
 export default async function ArticlePage({
   params
