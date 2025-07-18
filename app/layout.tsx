@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { SessionProvider } from 'next-auth/react'
 import './globals.css'
 import { Toaster } from '@/components/ui/sonner'
-import ReactQueryProvider from '@/providers/query-provider'
+import { AppProviders } from '@/components/providers/app-providers'
 
 export const metadata: Metadata = {
   title: 'JackAtlas',
@@ -18,7 +18,7 @@ export default function RootLayout({
     <SessionProvider>
       <html lang="zh-cmn-Hans">
         <body className="antialiased">
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <AppProviders>{children}</AppProviders>
           <Toaster richColors />
         </body>
       </html>
