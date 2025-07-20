@@ -18,12 +18,27 @@ export function ThemeAndModeSwitcher() {
   const { theme: mode, setTheme: setMode } = useTheme()
   const [appTheme, setAppTheme] = useState('default')
 
+  const darkMode = window.sessionStorage.getItem('theme')
+  if (darkMode === 'light') {
+    document.documentElement.setAttribute('data-color-mode', 'light')
+  } else {
+    document.documentElement.setAttribute('data-color-mode', 'dark')
+  }
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', appTheme)
   }, [appTheme])
 
   const toggleMode = () => {
     setMode(mode === 'light' ? 'dark' : 'light')
+    if (mode === 'light') {
+      document.documentElement.setAttribute('data-color-mode', 'dark')
+    } else {
+      document.documentElement.setAttribute(
+        'data-color-mode',
+        'light'
+      )
+    }
   }
 
   return (
