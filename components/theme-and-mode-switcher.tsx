@@ -27,7 +27,7 @@ export function ThemeAndModeSwitcher() {
   }
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 px-4">
       <Select
         defaultValue={appTheme}
         onValueChange={(value) => setAppTheme(value)}
