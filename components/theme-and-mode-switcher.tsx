@@ -10,7 +10,8 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui'
-import { LuMoon, LuSun } from 'react-icons/lu'
+import { FaSun } from 'react-icons/fa'
+import { LuMoon } from 'react-icons/lu'
 
 const themes = ['default', 'pastel-dreams'] as const
 
@@ -18,12 +19,16 @@ export function ThemeAndModeSwitcher() {
   const { theme: mode, setTheme: setMode } = useTheme()
   const [appTheme, setAppTheme] = useState('default')
 
-  const darkMode = window.sessionStorage.getItem('theme')
-  if (darkMode === 'light') {
-    document.documentElement.setAttribute('data-color-mode', 'light')
-  } else {
-    document.documentElement.setAttribute('data-color-mode', 'dark')
-  }
+  useEffect(() => {
+    if (mode === 'dark') {
+      document.documentElement.setAttribute('data-color-mode', 'dark')
+    } else {
+      document.documentElement.setAttribute(
+        'data-color-mode',
+        'light'
+      )
+    }
+  }, [mode])
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', appTheme)
@@ -59,7 +64,7 @@ export function ThemeAndModeSwitcher() {
         </SelectContent>
       </Select>
       <Button onClick={() => toggleMode()} className="cursor-pointer">
-        {mode === 'light' ? <LuMoon /> : <LuSun />}
+        {mode === 'light' ? <LuMoon /> : <FaSun />}
       </Button>
     </div>
   )
