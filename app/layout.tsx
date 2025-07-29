@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <SessionProvider>
-      <html lang="zh-cmn-Hans">
+      <html lang="zh-cmn-Hans" suppressHydrationWarning>
         <body className="antialiased">
           <AppProviders>{children}</AppProviders>
           <Toaster richColors />
