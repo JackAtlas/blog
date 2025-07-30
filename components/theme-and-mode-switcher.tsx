@@ -18,21 +18,28 @@ const themes = ['default', 'pastel-dreams'] as const
 export function ThemeAndModeSwitcher() {
   const { theme: mode, setTheme: setMode } = useTheme()
   const [appTheme, setAppTheme] = useState('default')
+  const [isMounted, setIsmounted] = useState(false)
 
   useEffect(() => {
-    if (mode === 'dark') {
-      document.documentElement.setAttribute('data-color-mode', 'dark')
-    } else {
-      document.documentElement.setAttribute(
-        'data-color-mode',
-        'light'
-      )
+    setIsmounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (isMounted) {
+      if (mode === 'dark') {
+        document.documentElement.setAttribute(
+          'data-color-mode',
+          'dark'
+        )
+      } else {
+        document.documentElement.setAttribute(
+          'data-color-mode',
+          'light'
+        )
+      }
+      document.documentElement.setAttribute('data-theme', appTheme)
     }
-  }, [mode])
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', appTheme)
-  }, [appTheme])
+  }, [mode, appTheme, isMounted])
 
   const toggleMode = () => {
     setMode(mode === 'light' ? 'dark' : 'light')
@@ -63,9 +70,14 @@ export function ThemeAndModeSwitcher() {
           ))}
         </SelectContent>
       </Select>
-      <Button onClick={() => toggleMode()} className="cursor-pointer">
-        {mode === 'light' ? <LuMoon /> : <FaSun />}
-      </Button>
+      {isMounted && (
+        <Button
+          onClick={() => toggleMode()}
+          className="cursor-pointer"
+        >
+          {mode === 'light' ? <LuMoon /> : <FaSun />}
+        </Button>
+      )}
     </div>
   )
 }
