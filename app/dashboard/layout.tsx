@@ -52,7 +52,7 @@ export default async function DashboardLayout({
             <ThemeAndModeSwitcher />
           </div>
         </header>
-        <div className="flex-1 p-4 pt-0">{children}</div>
+        <div className="flex-1 p-4 lg:p-6">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   )
