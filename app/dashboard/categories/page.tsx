@@ -36,7 +36,13 @@ export default function CategoriesPage() {
       const res = await fetch('/api/categories')
       const data = await res.json()
 
-      return flatten(data)
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.message)
+      } else {
+        const data = await res.json()
+        return flatten(data)
+      }
     }
   })
 
