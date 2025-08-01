@@ -147,3 +147,14 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+[data-color-mode*='light']:not([data-theme='default']) .wmde-markdown,
+[data-color-mode*='light']:not([data-theme='default'])
+  .wmde-markdown-var,
+.wmde-markdown-var[data-color-mode*='light']:not(
+    [data-theme='default']
+  ),
+.wmde-markdown[data-color-mode*='light']:not([data-theme='default']),
+body[data-color-mode*='light']:not([data-theme='default']) {
+  --color-canvas-default: transparent;
+}
