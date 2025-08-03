@@ -34,7 +34,6 @@ export default function CategoriesPage() {
     queryKey: ['categories'],
     queryFn: async () => {
       const res = await fetch('/api/categories')
-      const data = await res.json()
 
       if (!res.ok) {
         const errorData = await res.json()
@@ -179,6 +178,7 @@ export default function CategoriesPage() {
   }
 
   if (error) {
+    console.error(error)
     return <div>出错了</div>
   }
 
