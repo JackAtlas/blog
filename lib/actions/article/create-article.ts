@@ -10,6 +10,7 @@ interface ArticleCreateInput {
   content: string
   excerpt?: string
   status: 'DRAFT' | 'PUBLISHED'
+  categoryId: number | undefined
 }
 
 export async function createArticle({
@@ -18,12 +19,10 @@ export async function createArticle({
   slug,
   content,
   excerpt = '',
-  status = 'DRAFT'
+  status = 'DRAFT',
+  categoryId = undefined
 }: ArticleCreateInput) {
   const session = await auth()
-
-  console.log('user')
-  console.log(session)
 
   if (!session || !session.user || !session.user.email) {
     throw new Error('请先登录')
@@ -62,6 +61,8 @@ export async function createArticle({
     throw new Error('同名文章已存在')
   }
 
+  console.log(categoryId)
+
   const result = await prisma.article.create({
     data: {
       title,
@@ -70,7 +71,8 @@ export async function createArticle({
       content,
       excerpt,
       status,
-      authorId: user.id
+      authorId: user.id,
+      categoryId: categoryId || undefined
     }
   })
 
