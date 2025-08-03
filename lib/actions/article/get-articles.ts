@@ -7,6 +7,11 @@ export async function getArticles() {
         select: {
           name: true
         }
+      },
+      category: {
+        select: {
+          name: true
+        }
       }
     }
   })
