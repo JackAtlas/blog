@@ -11,6 +11,7 @@ interface ArticleCreateInput {
   excerpt?: string
   status: 'DRAFT' | 'PUBLISHED'
   categoryId: number | undefined
+  tagIds: number[]
 }
 
 export async function createArticle({
@@ -20,7 +21,8 @@ export async function createArticle({
   content,
   excerpt = '',
   status = 'DRAFT',
-  categoryId = undefined
+  categoryId = undefined,
+  tagIds = []
 }: ArticleCreateInput) {
   const session = await auth()
 
@@ -61,7 +63,22 @@ export async function createArticle({
     throw new Error('同名文章已存在')
   }
 
-  console.log(categoryId)
+  const existingTags = await prisma.tag.findMany({
+    where: { id: { in: tagIds } },
+    select: { id: true }
+  })
+
+  const existingTagIds = existingTags.map((tag) => tag.id)
+
+  const notFoundTagIds = tagIds.filter(
+    (id) => !existingTagIds.includes(id)
+  )
+
+  if (notFoundTagIds.length > 0) {
+    throw new Error(`标签 ${notFoundTagIds.join(',')} 不存在`)
+  }
+
+  const connectTags = existingTags.map((tag) => ({ id: tag.id }))
 
   const result = await prisma.article.create({
     data: {
@@ -72,7 +89,8 @@ export async function createArticle({
       excerpt,
       status,
       authorId: user.id,
-      categoryId: categoryId || undefined
+      categoryId: categoryId || undefined,
+      tags: { connect: connectTags }
     }
   })
 

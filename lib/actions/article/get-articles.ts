@@ -12,6 +12,11 @@ export async function getArticles() {
         select: {
           name: true
         }
+      },
+      tags: {
+        select: {
+          name: true
+        }
       }
     }
   })

@@ -2,7 +2,9 @@
 
 import {
   Button,
+  Checkbox,
   Input,
+  Label,
   Select,
   SelectContent,
   SelectGroup,
@@ -15,7 +17,7 @@ import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import slugify from 'slugify'
-import { Category } from '@/generated/prisma'
+import { Category, Tag } from '@/generated/prisma'
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), {
   ssr: false
@@ -28,6 +30,7 @@ export default function NewArticlePage() {
   const [content, setContent] = useState<string | undefined>('')
   const [excerpt, setExcerpt] = useState<string | undefined>('')
   const [categoryId, setCategoryId] = useState<number>(0)
+  const [tagIds, setTagIds] = useState<number[]>([])
 
   const { data: categories, isLoading } = useQuery({
     queryKey: ['categories'],
@@ -38,8 +41,21 @@ export default function NewArticlePage() {
         const errorData = await res.json()
         throw new Error(errorData.message)
       } else {
-        const data = await res.json()
-        return data
+        return await res.json()
+      }
+    }
+  })
+
+  const { data: tags } = useQuery({
+    queryKey: ['tags'],
+    queryFn: async () => {
+      const res = await fetch('/api/tags')
+
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.message)
+      } else {
+        return await res.json()
       }
     }
   })
@@ -47,6 +63,14 @@ export default function NewArticlePage() {
   useEffect(() => {
     setSlug(slugify(slugTitle))
   }, [slugTitle, setSlug, slugify])
+
+  const handleTagToggle = (tagId: number) => {
+    if (tagIds.includes(tagId)) {
+      setTagIds(tagIds.filter((id) => id !== tagId))
+    } else {
+      setTagIds([...tagIds, tagId])
+    }
+  }
 
   const handleSave = (draft: boolean) => {
     // TODO: validation
@@ -65,7 +89,8 @@ export default function NewArticlePage() {
           content,
           excerpt,
           draft,
-          categoryId
+          categoryId,
+          tagIds
         }),
         headers: { 'Content-Type': 'application/json' }
       })
@@ -117,7 +142,7 @@ export default function NewArticlePage() {
       </div>
       <MDEditor
         className="mb-4 lg:mb-6"
-        height={800}
+        height={600}
         value={content}
         onChange={setContent}
         textareaProps={{
@@ -132,49 +157,57 @@ export default function NewArticlePage() {
           placeholder: '摘要'
         }}
       ></MDEditor>
-      <div className="flex justify-between">
-        <div className="flex items-center gap-4 lg:gap-6">
-          <span className="text-sm text-muted-foreground">
-            栏目：
-          </span>
-          <Select
-            disabled={isLoading}
-            value={categoryId.toString()}
-            onValueChange={(value) => setCategoryId(Number(value))}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="选择栏目"></SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="0">无</SelectItem>
-                {categories?.map((category: Category) => (
-                  <SelectItem
-                    key={category.id}
-                    value={category.id.toString()}
-                  >
-                    {category.name}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex gap-4 lg:gap-6">
-          <Button
-            className="cursor-pointer"
-            onClick={() => handleSave(false)}
-          >
-            保存并发布
-          </Button>
-          <Button
-            variant="secondary"
-            className="cursor-pointer"
-            onClick={() => handleSave(true)}
-          >
-            保存为草稿
-          </Button>
-        </div>
+      <div className="flex items-center gap-4 lg:gap-6 mb-4 lg:mb-6">
+        <span className="text-sm text-muted-foreground">栏目：</span>
+        <Select
+          disabled={isLoading}
+          value={categoryId.toString()}
+          onValueChange={(value) => setCategoryId(Number(value))}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="选择栏目"></SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="0">无</SelectItem>
+              {categories?.map((category: Category) => (
+                <SelectItem
+                  key={category.id}
+                  value={category.id.toString()}
+                >
+                  {category.name}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="flex items-center gap-4 lg:gap-6 mb-4 lg:mb-6">
+        <span className="text-sm text-muted-foreground">标签：</span>
+        {tags?.map((tag: Tag) => (
+          <div key={tag.id} className="flex items-center gap-2">
+            <Checkbox
+              id={tag.id.toString()}
+              onCheckedChange={() => handleTagToggle(tag.id)}
+            ></Checkbox>
+            <Label htmlFor={tag.id.toString()}>{tag.name}</Label>
+          </div>
+        ))}
+      </div>
+      <div className="flex gap-4 lg:gap-6">
+        <Button
+          className="cursor-pointer"
+          onClick={() => handleSave(false)}
+        >
+          保存并发布
+        </Button>
+        <Button
+          variant="secondary"
+          className="cursor-pointer"
+          onClick={() => handleSave(true)}
+        >
+          保存为草稿
+        </Button>
       </div>
     </div>
   )

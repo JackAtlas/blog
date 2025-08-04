@@ -77,6 +77,8 @@ export default function ArticlesPage() {
     }
   })
 
+  // TODO: soft-delete recover
+  // TODO: use switch component
   const softRemoveArticle = useMutation({
     mutationFn: async ({ id }: { id: string }) => {
       const res = await fetch(`/api/articles/soft-delete`, {
@@ -93,7 +95,7 @@ export default function ArticlesPage() {
       }
     },
     onSuccess: () => {
-      toast.success('文章软删除成功，已放入回收站')
+      toast.success('文章已放入回收站')
       queryClient.invalidateQueries({ queryKey: ['articles'] })
     },
     onError: (error) => {
@@ -105,6 +107,7 @@ export default function ArticlesPage() {
     }
   })
 
+  // TODO: use switch component
   const pinArticle = useMutation({
     mutationFn: async ({ id }: { id: string }) => {
       const res = await fetch(`/api/articles/pin`, {
@@ -141,6 +144,7 @@ export default function ArticlesPage() {
     category?: {
       name: string
     }
+    tags?: { name: string }[]
   }
 
   const columns: ColumnDef<ExtendedArticle>[] = [
@@ -151,6 +155,11 @@ export default function ArticlesPage() {
     {
       header: '栏目',
       cell: ({ row }) => row.original.category?.name
+    },
+    {
+      header: '标签',
+      cell: ({ row }) =>
+        row.original.tags?.map((tag) => tag.name).join(', ')
     },
     {
       header: '状态',
@@ -290,8 +299,8 @@ export default function ArticlesPage() {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
-      <div>
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
+      <div className="col-span-2">
         <div className="flex justify-between">
           <div></div>
           <Button variant="outline" asChild>
@@ -302,10 +311,9 @@ export default function ArticlesPage() {
         </div>
         <div className="py-4 lg:py-6">
           <DataTable columns={columns} data={articles ?? []} />
-          <pre>{JSON.stringify(articles, null, 2)}</pre>
         </div>
       </div>
-      <div className="hidden lg:block">
+      <div className="hidden lg:block lg:col-span-1">
         <MDEditor.Markdown source={previewArticle.content ?? ''} />
       </div>
     </div>
