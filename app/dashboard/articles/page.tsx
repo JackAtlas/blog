@@ -10,7 +10,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
+  Switch
 } from '@/components/ui'
 import { Article } from '@/generated/prisma'
 import {
@@ -23,7 +24,7 @@ import MDEditor from '@uiw/react-md-editor'
 import { format } from 'date-fns'
 import Link from 'next/link'
 import { useState } from 'react'
-import { LuLoaderCircle, LuPlus } from 'react-icons/lu'
+import { LuPlus } from 'react-icons/lu'
 import { toast } from 'sonner'
 
 export default function ArticlesPage() {
@@ -107,7 +108,6 @@ export default function ArticlesPage() {
     }
   })
 
-  // TODO: use switch component
   const pinArticle = useMutation({
     mutationFn: async ({ id }: { id: string }) => {
       const res = await fetch(`/api/articles/pin`, {
@@ -175,7 +175,14 @@ export default function ArticlesPage() {
     },
     {
       header: '置顶',
-      cell: ({ row }) => (row.original.isPinned ? '是' : '')
+      cell: ({ row }) => (
+        <Switch
+          checked={row.original.isPinned}
+          onCheckedChange={() =>
+            pinArticle.mutate({ id: row.original.id })
+          }
+        ></Switch>
+      )
     },
     {
       accessorKey: 'createdAt',
@@ -259,17 +266,6 @@ export default function ArticlesPage() {
               )}
             </DialogTrigger>
           </Dialog>
-          <Button
-            size="sm"
-            className="cursor-pointer"
-            onClick={() => pinArticle.mutate({ id: row.original.id })}
-          >
-            {pinArticle.isPending ? (
-              <LuLoaderCircle className="animate-spin" />
-            ) : (
-              '置顶'
-            )}
-          </Button>
           <Button
             size="sm"
             variant="outline"
