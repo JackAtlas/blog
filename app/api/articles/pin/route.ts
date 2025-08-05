@@ -7,8 +7,8 @@ export async function PATCH(req: Request) {
     if (!body.id) {
       throw new Error('文章 id 不能为空')
     } else {
-      const removedArticle = await toggleArticlePin(body.id)
-      return NextResponse.json(removedArticle)
+      const article = await toggleArticlePin(body.id)
+      return NextResponse.json(article)
     }
   } catch (error) {
     console.error('更改文章置顶失败：', error)
