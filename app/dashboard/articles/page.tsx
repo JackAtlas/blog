@@ -270,8 +270,13 @@ export default function ArticlesPage() {
             size="sm"
             variant="outline"
             className="cursor-pointer"
+            asChild
           >
-            编辑
+            <Link
+              href={`/dashboard/articles/edit/${row.original.id}`}
+            >
+              {`/dashboard/articles/edit/${row.original.id}`}
+            </Link>
           </Button>
           <Button
             size="sm"
