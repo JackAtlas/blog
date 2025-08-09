@@ -165,6 +165,7 @@ export default function ArticleEditor({
         setContent('')
         setExcerpt('')
         setCategoryId(0)
+        setTagIds([])
         if (saveArticle.variables?.draft) {
           toast.success('文章创建成功，存为草稿')
         } else {
