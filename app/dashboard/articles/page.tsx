@@ -140,6 +140,40 @@ export default function ArticlesPage() {
     }
   })
 
+  const toggleStatus = useMutation({
+    mutationFn: async ({ id }: { id: string }) => {
+      const res = await fetch(`/api/articles/status`, {
+        method: 'PATCH',
+        body: JSON.stringify({ id }),
+        headers: { 'Content-Type': 'application/json' }
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(
+          errorData.message || '更改文章状态失败，未知错误'
+        )
+      } else {
+        return await res.json()
+      }
+    },
+    onSuccess: (res) => {
+      const { status } = res.data as Article
+
+      toast.success(
+        status === 'PUBLISHED' ? '文章已发布' : '文章已取消发布'
+      )
+      queryClient.invalidateQueries({ queryKey: ['articles'] })
+    },
+    onError: (error) => {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : '更改文章状态失败，未知错误'
+      )
+    }
+  })
+
   interface ExtendedArticle extends Article {
     category?: {
       name: string
@@ -164,13 +198,16 @@ export default function ArticlesPage() {
     {
       header: '状态',
       cell: ({ row }) => {
-        const { deletedAt, status } = row.original
+        const { id, deletedAt, status } = row.original
 
-        return deletedAt
-          ? '回收站'
-          : status === 'PUBLISHED'
-          ? '已发布'
-          : '未发布'
+        return deletedAt ? (
+          '回收站'
+        ) : (
+          <Switch
+            checked={status === 'PUBLISHED'}
+            onCheckedChange={() => toggleStatus.mutate({ id })}
+          ></Switch>
+        )
       }
     },
     {
