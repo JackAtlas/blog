@@ -18,6 +18,9 @@ export async function getArticles() {
           name: true
         }
       }
+    },
+    orderBy: {
+      createdAt: 'desc'
     }
   })
 
