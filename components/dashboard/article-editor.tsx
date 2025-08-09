@@ -35,8 +35,9 @@ export default function ArticleEditor({
   const [excerpt, setExcerpt] = useState<string>('')
   const [categoryId, setCategoryId] = useState<number>(0)
   const [tagIds, setTagIds] = useState<number[]>([])
+  const [status, setStatus] = useState<'DRAFT' | 'PUBLISHED'>('DRAFT')
 
-  const { data: article } = useQuery({
+  const { data: article, isLoading: isArticleLoading } = useQuery({
     queryKey: ['articles', articleId],
     queryFn: async () => {
       const res = await fetch(`/api/articles/${articleId}`)
@@ -89,6 +90,7 @@ export default function ArticleEditor({
       setExcerpt(article.excerpt)
       setCategoryId(article.categoryId ?? 0)
       setTagIds(article.tags.map((tag: Tag) => tag.id))
+      setStatus(article.status)
     }
   }, [
     article,
@@ -139,7 +141,6 @@ export default function ArticleEditor({
             slug,
             content,
             excerpt,
-            draft,
             categoryId,
             tagIds
           }),
@@ -155,22 +156,28 @@ export default function ArticleEditor({
       }
     },
     onSuccess: () => {
-      setTitle('')
-      setSlug('')
-      setSlugTitle('')
-      setContent('')
-      setExcerpt('')
-      setCategoryId(0)
-      if (saveArticle.variables?.draft) {
-        toast.success('文章创建成功，存为草稿')
+      if (articleId) {
+        toast.success('文章修改成功')
       } else {
-        toast.success('文章创建成功，已经发布')
+        setTitle('')
+        setSlug('')
+        setSlugTitle('')
+        setContent('')
+        setExcerpt('')
+        setCategoryId(0)
+        if (saveArticle.variables?.draft) {
+          toast.success('文章创建成功，存为草稿')
+        } else {
+          toast.success('文章创建成功，已经发布')
+        }
       }
     },
     onError: (error) => {
       toast.error(
         error instanceof Error
           ? error.message
+          : articleId
+          ? '文章修改失败，未知错误'
           : '文章创建失败，未知错误'
       )
     }
@@ -180,6 +187,10 @@ export default function ArticleEditor({
     // TODO: validation
 
     saveArticle.mutate({ draft })
+  }
+
+  if (articleId && isArticleLoading) {
+    return <div>加载中...</div>
   }
 
   return (
@@ -247,6 +258,7 @@ export default function ArticleEditor({
         {tags?.map((tag: Tag) => (
           <div key={tag.id} className="flex items-center gap-2">
             <Checkbox
+              checked={tagIds.includes(tag.id)}
               id={tag.id.toString()}
               onCheckedChange={() => handleTagToggle(tag.id)}
             ></Checkbox>
@@ -254,21 +266,34 @@ export default function ArticleEditor({
           </div>
         ))}
       </div>
-      <div className="flex gap-4 lg:gap-6">
-        <Button
-          className="cursor-pointer"
-          onClick={() => handleSave(false)}
-        >
-          保存并发布
-        </Button>
-        <Button
-          variant="secondary"
-          className="cursor-pointer"
-          onClick={() => handleSave(true)}
-        >
-          保存为草稿
-        </Button>
-      </div>
+      {articleId ? (
+        <div className="flex items-center gap-4 lg:gap-6">
+          <Button
+            className="cursor-pointer"
+            onClick={() => handleSave(true)}
+          >
+            保存
+          </Button>
+          {status === 'DRAFT' && '草稿'}
+          {status === 'PUBLISHED' && '已发布'}
+        </div>
+      ) : (
+        <div className="flex gap-4 lg:gap-6">
+          <Button
+            className="cursor-pointer"
+            onClick={() => handleSave(false)}
+          >
+            保存并发布
+          </Button>
+          <Button
+            variant="secondary"
+            className="cursor-pointer"
+            onClick={() => handleSave(true)}
+          >
+            保存为草稿
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
