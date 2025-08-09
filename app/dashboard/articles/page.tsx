@@ -275,7 +275,7 @@ export default function ArticlesPage() {
             <Link
               href={`/dashboard/articles/edit/${row.original.id}`}
             >
-              {`/dashboard/articles/edit/${row.original.id}`}
+              编辑
             </Link>
           </Button>
           <Button
