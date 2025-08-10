@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma'
+import { addRandomCover } from '@/lib/randomCover'
 
 export async function getArticles() {
   const result = await prisma.article.findMany({
@@ -24,5 +25,5 @@ export async function getArticles() {
     }
   })
 
-  return result ?? []
+  return result.map(addRandomCover) ?? []
 }
