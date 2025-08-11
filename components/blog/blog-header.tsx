@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import { FaGithub } from 'react-icons/fa'
 import { LuSearch } from 'react-icons/lu'
+import { ThemeAndModeSwitcher } from '../theme-and-mode-switcher'
 
 export default function BlogHeader() {
   return (
-    <header className="bg-white shadow shadow-black/5">
+    <header className="shadow shadow-black/5">
       <div className="container min-h-17 flex">
         <div className="flex items-center text-2xl mr-4">
           JackAtlas
@@ -30,7 +31,8 @@ export default function BlogHeader() {
               关于
             </Link>
           </div>
-          <div className="flex">
+          <div className="flex items-center">
+            <ThemeAndModeSwitcher />
             <a
               href="https://github.com/jackatlas"
               className="flex items-center px-5 py-3 hover:bg-[#fafafa] hover:text-[#3273dc]"
@@ -39,13 +41,13 @@ export default function BlogHeader() {
             >
               <FaGithub />
             </a>
-            <a
+            {/* <a
               href="javascript:void(0)"
               className="flex items-center px-5 py-3 hover:bg-[#fafafa] hover:text-[#3273dc]"
               title="搜索"
             >
               <LuSearch />
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
