@@ -126,6 +126,7 @@ export default function ArticleEditor({
             slug,
             content,
             excerpt,
+            status,
             categoryId,
             tagIds
           }),
@@ -140,7 +141,7 @@ export default function ArticleEditor({
             slug,
             content,
             excerpt,
-            draft,
+            status: draft ? 'DRAFT' : 'PUBLISHED',
             categoryId,
             tagIds
           }),
