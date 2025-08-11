@@ -18,7 +18,7 @@ export async function updateArticle({
   slug,
   content,
   excerpt = '',
-  status = 'DRAFT',
+  status,
   categoryId = undefined,
   tagIds = []
 }: ArticleUpdateInput) {
