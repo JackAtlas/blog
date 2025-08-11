@@ -1,7 +1,8 @@
 import prisma from '@/lib/prisma'
+import { addRandomCover } from '@/lib/randomCover'
 
 export async function getArticleBySlug(slug: string) {
-  return prisma.article.findFirst({
+  const result = await prisma.article.findFirst({
     where: {
       slug,
       deletedAt: null,
@@ -13,4 +14,6 @@ export async function getArticleBySlug(slug: string) {
       tags: true
     }
   })
+
+  return result ? addRandomCover(result) : null
 }

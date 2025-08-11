@@ -3,6 +3,8 @@ import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
 import { getArticleBySlug } from '@/lib/actions/article/get-article-by-slug'
+import { formatDistanceToNow } from 'date-fns'
+import MarkdownPreview from '@/components/blog/markdown-preview'
 
 export default async function ArticlePage({
   params
@@ -19,8 +21,8 @@ export default async function ArticlePage({
       <CardHeader>
         <Image
           className="w-full"
-          src="https://picsum.photos/700/300"
-          alt="Getting Started with Icarus"
+          src={article.coverUrl}
+          alt={article.title}
           width={700}
           height={300}
         />
@@ -28,29 +30,42 @@ export default async function ArticlePage({
       <CardContent>
         <article>
           <div className="flex text-xs uppercase text-[#7a7a7a]">
-            <div>posted 5 years ago</div>
-            <div className="ms-3">plugins/comment</div>
-            <div className="ms-3">
-              3 minutes read (about 495 words)
+            <div>
+              {formatDistanceToNow(article.createdAt, {
+                addSuffix: true
+              })}
             </div>
+            <div className="ms-3">{article.category?.name}</div>
           </div>
-          <h1 className="text-3xl mt-2 mb-6 hover:text-[#3273dc]">
-            Getting Started with Icarus
+          <h1 className="text-3xl my-6 hover:text-[#3273dc]">
+            {article.title}
           </h1>
-          <div>
-            <p>
-              Welcome to the Icarus documentation site! Icarus is a
-              simple, delicate, and modern theme for the static site
-              generator Hexo. It strives to be elegant in design while
-              simple and straightforward to use. Its versatile and
-              flexible configuration system enables power users lay
-              out their sites to the finest details. Icarus also
-              offers a wide range of plugins and widgets to meet your
-              various customization and optimization needs. Moreover,
-              its refreshed implementation enables better IDE support
-              and third-party integration, which open to a sea of
-              improvement possibilities.
-            </p>
+          <div className="flex flex-wrap gap-4 my-6">
+            {article.tags.map((tag) => (
+              <a
+                href={`/tag/${tag.name}`}
+                title={tag.name}
+                key={tag.id}
+              >
+                <div className="bg-gray-600 text-xs text-white rounded-l-sm px-2 py-1 whitespace-nowrap">
+                  {tag.name}
+                </div>
+              </a>
+            ))}
+          </div>
+          <MarkdownPreview source={article.content}></MarkdownPreview>
+          <div className="flex flex-wrap gap-4 mt-6">
+            {article.tags.map((tag) => (
+              <a
+                href={`/tag/${tag.name}`}
+                title={tag.name}
+                key={tag.id}
+              >
+                <div className="bg-gray-600 text-xs text-white rounded-l-sm px-2 py-1 whitespace-nowrap">
+                  {tag.name}
+                </div>
+              </a>
+            ))}
           </div>
         </article>
       </CardContent>
