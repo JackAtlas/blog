@@ -73,7 +73,7 @@ export async function updateArticle({
       excerpt,
       status,
       authorId: user.id,
-      categoryId: categoryId || undefined,
+      categoryId: categoryId || null,
       tags: { connect: connectTags }
     }
   })
