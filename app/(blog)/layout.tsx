@@ -1,5 +1,5 @@
-import BlogFooter from '@/components/blog-footer'
-import BlogHeader from '@/components/blog-header'
+import BlogFooter from '@/components/blog/blog-footer'
+import BlogHeader from '@/components/blog/blog-header'
 
 export default function BlogLayout({
   children
