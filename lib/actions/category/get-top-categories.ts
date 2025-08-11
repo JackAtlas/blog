@@ -4,7 +4,12 @@ export async function getTopCategories() {
   return prisma.category.findMany({
     where: { parentId: null },
     include: {
-      children: true
+      articles: true,
+      children: {
+        include: {
+          articles: true
+        }
+      }
     },
     orderBy: { createdAt: 'asc' }
   })
