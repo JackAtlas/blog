@@ -32,7 +32,7 @@ export default async function ArticlesSection() {
                 </div>
               </div>
               <Link
-                href={`/article/${article.slug}`}
+                href={`/articles/${article.slug}`}
                 title={article.title}
               >
                 <h2 className="text-3xl mt-2 mb-6 hover:text-[#3273dc]">
@@ -45,7 +45,7 @@ export default async function ArticlesSection() {
               <Link
                 href={`/article/${article.slug}`}
                 title="read more"
-                className="inline-block rounded-xs text-xs bg-[#f5f5f5] hover:bg-[#eee] h-7 leading-7 px-[1em]"
+                className="inline-block rounded-xs text-xs bg-[#f5f5f5] dark:bg-gray-800 hover:bg-[#eee] dark:hover:bg-gray-700 h-7 leading-7 px-[1em]"
               >
                 Read more
               </Link>

@@ -19,10 +19,10 @@ export default async function TagsSection() {
               title={tag.name}
               key={tag.id}
             >
-              <div className="bg-blue-600 text-xs text-white rounded-l-sm px-2 py-1 whitespace-nowrap">
+              <div className="bg-blue-600 dark:bg-blue-500 text-xs text-white rounded-l-sm px-2 py-1 whitespace-nowrap">
                 {tag.name}
               </div>
-              <div className="bg-gray-100 text-xs rounded-r-sm px-2 py-1">
+              <div className="bg-gray-100 dark:bg-gray-800 text-xs rounded-r-sm px-2 py-1">
                 {tag.articles.length}
               </div>
             </a>
