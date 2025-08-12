@@ -9,8 +9,11 @@ import {
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import { SiGitee } from 'react-icons/si'
+import { getMetaData } from '@/lib/actions/get-meta-data'
+import Link from 'next/link'
 
-export default function ProfileSection() {
+export default async function ProfileSection() {
+  const { articles, categories, tags } = await getMetaData()
   return (
     <Card>
       <CardContent>
@@ -36,15 +39,21 @@ export default function ProfileSection() {
         <div className="flex justify-between mt-6 px-4">
           <div className="flex flex-col items-center">
             <div className="uppercase text-xs">posts</div>
-            <div className="mt-1 text-2xl">43</div>
+            <Link href="/archives">
+              <div className="mt-1 text-2xl">{articles}</div>
+            </Link>
           </div>
           <div className="flex flex-col items-center">
             <div className="uppercase text-xs">categories</div>
-            <div className="mt-1 text-2xl">9</div>
+            <Link href="/categories">
+              <div className="mt-1 text-2xl">{categories}</div>
+            </Link>
           </div>
           <div className="flex flex-col items-center">
             <div className="uppercase text-xs">tags</div>
-            <div className="mt-1 text-2xl">4</div>
+            <Link href="/tags">
+              <div className="mt-1 text-2xl">{tags}</div>
+            </Link>
           </div>
         </div>
         <div className="grid grid-cols-5 mt-6">
