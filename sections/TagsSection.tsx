@@ -8,7 +8,7 @@ export default async function TagsSection() {
   return (
     <Card>
       <CardContent>
-        <div className="mb-2 text-[#7a7a7a] text-xs tracking-widest uppercase">
+        <div className="mb-2 text-muted-foreground text-xs tracking-widest uppercase">
           Tags
         </div>
         <div className="flex flex-wrap gap-4">
@@ -19,10 +19,10 @@ export default async function TagsSection() {
               title={tag.name}
               key={tag.id}
             >
-              <div className="bg-blue-600 dark:bg-blue-500 text-xs text-white rounded-l-sm px-2 py-1 whitespace-nowrap">
+              <div className="bg-primary hover:bg-primary/80 text-primary-foreground text-xs rounded-l-sm px-2 py-1 whitespace-nowrap">
                 {tag.name}
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 text-xs rounded-r-sm px-2 py-1">
+              <div className="bg-muted hover:bg-muted/80 text-muted-foreground text-xs rounded-r-sm px-2 py-1">
                 {tag.articles.length}
               </div>
             </a>

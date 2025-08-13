@@ -29,7 +29,7 @@ export default async function ArticlePage({
       </CardHeader>
       <CardContent>
         <article>
-          <div className="flex text-xs uppercase text-[#7a7a7a]">
+          <div className="flex text-xs uppercase text-muted-foreground">
             <div>
               {formatDistanceToNow(article.createdAt, {
                 addSuffix: true
@@ -37,9 +37,7 @@ export default async function ArticlePage({
             </div>
             <div className="ms-3">{article.category?.name}</div>
           </div>
-          <h1 className="text-3xl my-6 hover:text-[#3273dc]">
-            {article.title}
-          </h1>
+          <h1 className="text-3xl my-6">{article.title}</h1>
           <div className="flex flex-wrap gap-4 my-6">
             {article.tags.map((tag) => (
               <a
@@ -47,7 +45,7 @@ export default async function ArticlePage({
                 title={tag.name}
                 key={tag.id}
               >
-                <div className="bg-gray-600 text-xs text-white rounded-l-sm px-2 py-1 whitespace-nowrap">
+                <div className="bg-primary text-xs text-primary-foreground rounded-l-sm px-2 py-1 whitespace-nowrap">
                   {tag.name}
                 </div>
               </a>

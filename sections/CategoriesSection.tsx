@@ -8,7 +8,7 @@ export default async function CategoriesSection() {
   return (
     <Card>
       <CardContent>
-        <div className="mb-2 text-[#7a7a7a] text-xs tracking-widest uppercase">
+        <div className="mb-2 text-muted-foreground text-xs tracking-widest uppercase">
           Categories
         </div>
         <ul>
@@ -16,10 +16,10 @@ export default async function CategoriesSection() {
             <li key={category.id}>
               <Link
                 href={`/category/${category.name}`}
-                className="flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800 h-9 px-2"
+                className="flex items-center justify-between hover:bg-muted h-9 px-2"
               >
                 <span className="text-sm">{category.name}</span>
-                <span className="h-[2em] flex items-center bg-gray-100 dark:bg-gray-800 text-xs rounded-sm px-[0.75em]">
+                <span className="h-[2em] flex items-center bg-muted text-muted-foreground text-xs rounded-sm px-[0.75em]">
                   {category.articles.length}
                 </span>
               </Link>
@@ -31,10 +31,10 @@ export default async function CategoriesSection() {
                   >
                     <Link
                       href={`/category/${child.name}`}
-                      className="flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800 h-9 px-2"
+                      className="flex items-center justify-between hover:bg-muted h-9 px-2"
                     >
                       <span className="text-sm">{child.name}</span>
-                      <span className="h-[2em] flex items-center bg-gray-100 dark:bg-gray-800 text-xs rounded-sm px-[0.75em]">
+                      <span className="h-[2em] flex items-center bg-muted text-muted-foreground text-xs rounded-sm px-[0.75em]">
                         {child.articles.length}
                       </span>
                     </Link>

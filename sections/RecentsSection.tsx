@@ -10,9 +10,8 @@ export default async function RecentsSection() {
 
   return (
     <Card>
-      {/* <pre>{JSON.stringify(articles, null, 2)}</pre> */}
       <CardContent>
-        <div className="-mb-5 text-[#7a7a7a] text-xs tracking-widest uppercase">
+        <div className="-mb-5 text-muted-foreground text-xs tracking-widest uppercase">
           Recents
         </div>
         {articles.map((article) => (
@@ -30,13 +29,13 @@ export default async function RecentsSection() {
               />
             </Link>
             <div className="flex-1 grid grid-rows-3">
-              <time className="flex items-start text-sm text-[#7a7a7a]">
+              <time className="flex items-start text-sm text-muted-foreground">
                 {format(article.createdAt, 'yyyy-MM-dd')}
               </time>
               <Link
                 href={`/article/${article.slug}`}
                 title={article.title}
-                className="hover:text-[#3273dc] truncate"
+                className="hover:text-primary truncate"
               >
                 {article.title}
               </Link>

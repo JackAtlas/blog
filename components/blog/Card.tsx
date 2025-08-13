@@ -4,7 +4,7 @@ export default function Card({
   children: React.ReactNode
 }) {
   return (
-    <div className="rounded-sm card card-shadow overflow-hidden">
+    <div className="rounded-xl card bg-card text-card-foreground overflow-hidden border shadow-sm">
       {children}
     </div>
   )
