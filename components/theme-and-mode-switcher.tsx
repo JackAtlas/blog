@@ -13,11 +13,11 @@ import {
 import { FaSun } from 'react-icons/fa'
 import { LuMoon } from 'react-icons/lu'
 
-const themes = ['default', 'pastel-dreams'] as const
+const themes = ['bubblegum', 'caffeine', 'pastel-dreams'] as const
 
 export function ThemeAndModeSwitcher() {
   const { theme: mode, setTheme: setMode } = useTheme()
-  const [appTheme, setAppTheme] = useState('default')
+  const [appTheme, setAppTheme] = useState('caffeine')
   const [isMounted, setIsmounted] = useState(false)
 
   useEffect(() => {
@@ -26,6 +26,10 @@ export function ThemeAndModeSwitcher() {
 
   useEffect(() => {
     if (isMounted) {
+      const localTheme = localStorage.getItem('theme-name')
+      if (localTheme) {
+        setAppTheme(localTheme)
+      }
       if (mode === 'dark') {
         document.documentElement.setAttribute(
           'data-color-mode',
@@ -56,8 +60,11 @@ export function ThemeAndModeSwitcher() {
   return (
     <div className="flex gap-2 px-4">
       <Select
-        defaultValue={appTheme}
-        onValueChange={(value) => setAppTheme(value)}
+        value={appTheme}
+        onValueChange={(value) => {
+          localStorage.setItem('theme-name', value)
+          setAppTheme(value)
+        }}
       >
         <SelectTrigger>
           <SelectValue></SelectValue>
