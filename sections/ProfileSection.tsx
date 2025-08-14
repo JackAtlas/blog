@@ -3,14 +3,14 @@ import {
   FaFacebookF,
   FaGithub,
   FaLocationDot,
-  FaRss,
-  FaTwitter
+  FaRss
 } from 'react-icons/fa6'
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import { SiGitee } from 'react-icons/si'
 import { getMetaData } from '@/lib/actions/get-meta-data'
 import Link from 'next/link'
+import { LuMail } from 'react-icons/lu'
 
 export default async function ProfileSection() {
   const { articles, categories, tags } = await getMetaData()
@@ -39,19 +39,19 @@ export default async function ProfileSection() {
         <div className="flex justify-between mt-6 px-4">
           <div className="flex flex-col items-center">
             <div className="uppercase text-xs">posts</div>
-            <Link href="/archives">
+            <Link href="/archives" className="hover:text-primary">
               <div className="mt-1 text-2xl">{articles}</div>
             </Link>
           </div>
           <div className="flex flex-col items-center">
             <div className="uppercase text-xs">categories</div>
-            <Link href="/categories">
+            <Link href="/categories" className="hover:text-primary">
               <div className="mt-1 text-2xl">{categories}</div>
             </Link>
           </div>
           <div className="flex flex-col items-center">
             <div className="uppercase text-xs">tags</div>
-            <Link href="/tags">
+            <Link href="/tags" className="hover:text-primary">
               <div className="mt-1 text-2xl">{tags}</div>
             </Link>
           </div>
@@ -61,20 +61,35 @@ export default async function ProfileSection() {
             href="https://github.com/jackatlas"
             target="_blank"
             title="github"
-            className="flex items-center justify-center h-8"
+            className="flex items-center justify-center h-8 hover:text-primary"
           >
             <FaGithub />
           </a>
-          <a className="flex items-center justify-center h-8">
+          <a
+            href="https://gitee.com/jackatlas8864"
+            target="_blank"
+            title="gitee"
+            className="flex items-center justify-center h-8 hover:text-primary"
+          >
             <SiGitee />
           </a>
-          <a className="flex items-center justify-center h-8">
+          <a
+            title="敬请期待"
+            className="flex items-center justify-center h-8 hover:text-primary"
+          >
             <FaFacebookF />
           </a>
-          <a className="flex items-center justify-center h-8">
-            <FaTwitter />
+          <a
+            href="mailto:jack-atlas@qq.com"
+            title="jack-atlas@qq.com"
+            className="flex items-center justify-center h-8 hover:text-primary"
+          >
+            <LuMail />
           </a>
-          <a className="flex items-center justify-center h-8">
+          <a
+            title="敬请期待"
+            className="flex items-center justify-center h-8 hover:text-primary"
+          >
             <FaRss />
           </a>
         </div>
