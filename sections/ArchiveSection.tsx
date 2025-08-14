@@ -1,12 +1,12 @@
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
-import { getArchivedArticles } from '@/lib/actions/article/get-archived-articles'
+import { getArchivedArticlesByMonth } from '@/lib/actions/article/get-archived-articles-by-month'
 import { format } from 'date-fns'
 import { zhCN } from 'date-fns/locale'
 import Link from 'next/link'
 
 export default async function ArchiveSection() {
-  const archives = await getArchivedArticles()
+  const archives = await getArchivedArticlesByMonth()
 
   return (
     <Card>
