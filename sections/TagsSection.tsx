@@ -14,7 +14,7 @@ export default async function TagsSection() {
         <div className="flex flex-wrap gap-4">
           {tags.map((tag) => (
             <a
-              href={`/tag/${tag.name}`}
+              href={`/tags/${tag.name}`}
               className="flex"
               title={tag.name}
               key={tag.id}
