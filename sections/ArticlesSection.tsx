@@ -11,9 +11,9 @@ import Link from 'next/link'
 export default async function ArticlesSection() {
   const articles = await getArticles()
   return (
-    <ul>
+    <ul className="flex flex-col gap-4 lg:gap-6">
       {articles.map((article) => (
-        <li key={article.id} className="mb-4 lg:mb-6">
+        <li key={article.id}>
           <Card>
             <CardHeader>
               <Image

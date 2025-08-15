@@ -10,28 +10,28 @@ export default function layout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="container">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 py-12 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 py-12 gap-4 lg:gap-6">
         <div className="order-1 lg:order-2 md:col-span-2">
           {children}
         </div>
-        <div className="order-2 lg:hidden flex flex-col gap-6">
-          <div>
+        <div className="order-2 lg:hidden flex flex-col gap-4 lg:gap-6">
+          <div className="flex flex-col gap-4 lg:gap-6">
             <ProfileSection />
             <LinksSection />
             <CategoriesSection />
           </div>
-          <div>
+          <div className="flex flex-col gap-4 lg:gap-6">
             <RecentsSection />
             <ArchiveSection />
             <TagsSection />
           </div>
         </div>
-        <div className="hidden lg:block order-1">
+        <div className="hidden order-1 lg:flex flex-col lg:gap-6">
           <ProfileSection />
           <LinksSection />
           <CategoriesSection />
         </div>
-        <div className="hidden lg:block order-3">
+        <div className="hidden order-3 lg:flex flex-col lg:gap-6">
           <RecentsSection />
           <ArchiveSection />
           <TagsSection />
