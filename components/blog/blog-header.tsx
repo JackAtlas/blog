@@ -35,7 +35,7 @@ export default function BlogHeader() {
             <ThemeAndModeSwitcher />
             <a
               href="https://github.com/jackatlas"
-              className="flex items-center px-5 py-3 hover:bg-[#fafafa] hover:text-[#3273dc]"
+              className="flex items-center px-5 py-3 hover:text-primary"
               target="_blank"
               title="https://github.com/jackatlas"
             >

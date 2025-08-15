@@ -8,12 +8,17 @@ export default function BlogFooter() {
           &copy; 2025 Built with ❤️ by JackAtlas
         </div>
         <div className="flex items-center min-h-14">
-          <a href="https://beian.miit.gov.cn/">粤ICP备2025385262号</a>
+          <a
+            href="https://beian.miit.gov.cn/"
+            className="hover:text-primary"
+          >
+            粤ICP备2025385262号
+          </a>
         </div>
         <div className="flex min-h-14">
           <a
             href="https://github.com/jackatlas"
-            className="flex items-center px-5 py-3"
+            className="flex items-center px-5 py-3 hover:text-primary"
             target="_blank"
             title="https://github.com/jackatlas"
           >
