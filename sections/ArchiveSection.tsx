@@ -1,12 +1,10 @@
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
-import { getArchivedArticlesByMonth } from '@/lib/actions/article/get-archived-articles-by-month'
-import { format } from 'date-fns'
-import { zhCN } from 'date-fns/locale'
+import { getArchivedArticlesByYear } from '@/lib/actions/article/get-archived-articles-by-year'
 import Link from 'next/link'
 
 export default async function ArchiveSection() {
-  const archives = await getArchivedArticlesByMonth()
+  const archives = await getArchivedArticlesByYear()
 
   return (
     <Card>
@@ -16,20 +14,12 @@ export default async function ArchiveSection() {
         </div>
         <ul>
           {archives.map((archive) => (
-            <li key={archive.year + '-' + archive.month}>
+            <li key={archive.year}>
               <Link
-                href={`/archives/${archive.year}/${archive.month}/`}
+                href={`/archives/${archive.year}`}
                 className="flex items-center justify-between hover:bg-muted h-9 px-2"
               >
-                <span className="text-sm">
-                  {format(
-                    new Date(archive.year, archive.month - 1),
-                    'MMMM yyyy',
-                    {
-                      locale: zhCN
-                    }
-                  )}
-                </span>
+                <span className="text-sm">{archive.year}</span>
                 <span className="h-[2em] flex items-center bg-muted text-muted-foreground text-xs rounded-sm px-[0.75em]">
                   {archive.count}
                 </span>
