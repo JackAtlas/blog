@@ -1,9 +1,15 @@
+'use client'
+
 import Link from 'next/link'
 import { FaGithub } from 'react-icons/fa'
 import { LuSearch } from 'react-icons/lu'
 import { ThemeAndModeSwitcher } from '../theme-and-mode-switcher'
+import { usePathname } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 export default function BlogHeader() {
+  const pathname = usePathname()
+
   return (
     <header className="shadow shadow-black/5">
       <div className="container min-h-17 flex">
@@ -12,22 +18,49 @@ export default function BlogHeader() {
         </div>
         <div className="flex justify-between flex-1">
           <div className="flex">
-            <Link className="flex items-center px-3" href="/">
+            <Link
+              className={cn(
+                'flex items-center px-3 hover:text-primary',
+                pathname === '/' ? 'text-primary' : ''
+              )}
+              href="/"
+            >
               首页
             </Link>
             <Link
-              className="flex items-center px-3"
+              className={cn(
+                'flex items-center px-3',
+                pathname.startsWith('/categor') ? 'text-primary' : ''
+              )}
               href="/categories"
             >
               栏目
             </Link>
-            <Link className="flex items-center px-3" href="/tags">
+            <Link
+              className={cn(
+                'flex items-center px-3',
+                pathname.startsWith('/tags') ? 'text-primary' : ''
+              )}
+              href="/tags"
+            >
               标签
             </Link>
-            <Link className="flex items-center px-3" href="/archives">
+            <Link
+              className={cn(
+                'flex items-center px-3',
+                pathname.startsWith('/archives') ? 'text-primary' : ''
+              )}
+              href="/archives"
+            >
               归档
             </Link>
-            <Link className="flex items-center px-3" href="/about">
+            <Link
+              className={cn(
+                'flex items-center px-3',
+                pathname.startsWith('/about') ? 'text-primary' : ''
+              )}
+              href="/about"
+            >
               关于
             </Link>
           </div>
