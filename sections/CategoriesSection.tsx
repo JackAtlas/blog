@@ -15,7 +15,7 @@ export default async function CategoriesSection() {
           {categories.map((category) => (
             <li key={category.id}>
               <Link
-                href={`/category/${category.name}`}
+                href={`/categories/${category.name}`}
                 className="flex items-center justify-between hover:bg-muted h-9 px-2"
               >
                 <span className="text-sm">{category.name}</span>
@@ -30,7 +30,7 @@ export default async function CategoriesSection() {
                     className="pl-2 border-l border-l-gray-300"
                   >
                     <Link
-                      href={`/category/${child.name}`}
+                      href={`/categories/${child.name}`}
                       className="flex items-center justify-between hover:bg-muted h-9 px-2"
                     >
                       <span className="text-sm">{child.name}</span>
