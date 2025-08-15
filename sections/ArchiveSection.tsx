@@ -1,10 +1,10 @@
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
-import { getArchivedArticlesByYear } from '@/lib/actions/article/get-archived-articles-by-year'
+import { getArchivedArticles } from '@/lib/actions/article/get-archived-articles'
 import Link from 'next/link'
 
 export default async function ArchiveSection() {
-  const archives = await getArchivedArticlesByYear()
+  const archives = await getArchivedArticles()
 
   return (
     <Card>

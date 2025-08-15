@@ -1,11 +1,11 @@
 import { Card, CardContent } from '@/components/ui'
-import { getArchivedArticlesByYear } from '@/lib/actions/article/get-archived-articles-by-year'
+import { getArchivedArticles } from '@/lib/actions/article/get-archived-articles'
 import { formatDate } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default async function ArchivesPage() {
-  const archives = await getArchivedArticlesByYear()
+  const archives = await getArchivedArticles()
 
   return (
     <div className="flex flex-col gap-4 lg:gap-6">

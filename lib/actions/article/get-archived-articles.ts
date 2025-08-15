@@ -4,7 +4,7 @@ import {
 } from '@/lib/articleCoverCOS'
 import prisma from '@/lib/prisma'
 
-export async function getArchivedArticlesByYear() {
+export async function getArchivedArticles() {
   const articles = await prisma.article.findMany({
     where: {
       status: 'PUBLISHED',
