@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma'
-import { addRandomCover } from '@/lib/randomCover'
+import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
 
 export async function getArticleBySlug(slug: string) {
   const result = await prisma.article.findFirst({
@@ -15,5 +15,7 @@ export async function getArticleBySlug(slug: string) {
     }
   })
 
-  return result ? addRandomCover(result) : null
+  return result
+    ? articleCoverCOSFixedManager.addCoverUrl(result)
+    : null
 }

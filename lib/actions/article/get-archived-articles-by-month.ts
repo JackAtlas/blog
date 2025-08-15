@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma'
-import { addRandomCover } from '@/lib/randomCover'
+import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
 
 export async function getArchivedArticlesByMonth() {
   const articles = await prisma.article.findMany({
@@ -31,11 +31,13 @@ export async function getArchivedArticlesByMonth() {
         articles: []
       }
     }
-    acc[key].articles.push(addRandomCover(article))
+    acc[key].articles.push(
+      articleCoverCOSFixedManager.getCoverUrl(article)
+    )
     acc[key].count++
 
     return acc
-  }, {} as Record<string, { year: number; month: number; count: number; articles: ReturnType<typeof addRandomCover>[] }>)
+  }, {} as Record<string, { year: number; month: number; count: number; articles: ReturnType<typeof articleCoverCOSFixedManager.getCoverUrl>[] }>)
 
   return Object.values(grouped).sort((a, b) => {
     if (a.year !== b.year) return b.year - a.year

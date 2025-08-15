@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma'
-import { addRandomCover } from '@/lib/randomCover'
+import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
 
 export async function getArticles() {
   const result = await prisma.article.findMany({
@@ -25,5 +25,8 @@ export async function getArticles() {
     }
   })
 
-  return result.map(addRandomCover) ?? []
+  const resultWithCover =
+    await articleCoverCOSFixedManager.addCoverUrls(result)
+
+  return resultWithCover ?? []
 }
