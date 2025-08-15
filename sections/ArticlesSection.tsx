@@ -21,7 +21,7 @@ export default async function ArticlesSection() {
                 alt={article.title}
                 width={700}
                 height={300}
-                className="w-full h-auto"
+                className="aspect-video object-cover"
               />
             </CardHeader>
             <CardContent>

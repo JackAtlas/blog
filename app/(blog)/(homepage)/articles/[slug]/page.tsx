@@ -11,7 +11,7 @@ export default async function ArticlePage({
 }: {
   params: { slug: string }
 }) {
-  const { slug } = params
+  const { slug } = await params
   const article = await getArticleBySlug(slug)
 
   if (!article) return <div>Article not found.</div>
@@ -20,7 +20,7 @@ export default async function ArticlePage({
     <Card>
       <CardHeader>
         <Image
-          className="w-full"
+          className="aspect-video object-cover"
           src={article.coverUrl}
           alt={article.title}
           width={700}
