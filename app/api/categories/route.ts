@@ -2,11 +2,14 @@ import { NextResponse } from 'next/server'
 import { createCategory } from '@/lib/actions/category/create-category'
 import { getTopCategories } from '@/lib/actions/category/get-top-categories'
 import { removeCategory } from '@/lib/actions/category/remove-category'
+import { getCategories } from '@/lib/actions/category/get-categories'
 
-export async function GET() {
-  const categories = await getTopCategories()
-
-  return NextResponse.json(categories)
+export async function GET({ top }: { top?: boolean }) {
+  if (top) {
+    return NextResponse.json(await getTopCategories())
+  } else {
+    return NextResponse.json(await getCategories())
+  }
 }
 
 export async function POST(req: Request) {
