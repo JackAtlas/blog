@@ -2,6 +2,7 @@ import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
 import { getArticlesByTagName } from '@/lib/actions/article/get-articles-by-tag-name'
+import { getTagInfoByName } from '@/lib/actions/tag/get-tag-info-by name'
 import { formatDistanceToNow } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -12,14 +13,33 @@ export default async function TagPage({
   params: { name: string }
 }) {
   const { name } = await params
+  const tag = await getTagInfoByName(decodeURIComponent(name))
+
+  if (!tag) {
+    return (
+      <div className="flex flex-col gap-4 lg:gap-6">
+        <Card>
+          <CardContent>
+            <div className="flex items-center gap-4 h-9 px-2">
+              <div className="text-sm">
+                标签“{decodeURIComponent(name)}”不存在
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
   const articles = await getArticlesByTagName(
     decodeURIComponent(name)
   )
+
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <Card>
         <CardContent>
-          <div className="flex">
+          <div className="flex items-center gap-4 h-9 px-2">
             <div className="flex">
               <div className="bg-primary text-primary-foreground text-xs rounded-l-sm px-2 py-1 whitespace-nowrap">
                 {decodeURIComponent(name)}
@@ -76,6 +96,9 @@ export default async function TagPage({
           </li>
         ))}
       </ul>
+      {articles.length === 0 && (
+        <div className="text-center">暂无文章，敬请期待</div>
+      )}
     </div>
   )
 }
