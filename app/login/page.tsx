@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { login } from '@/lib/actions/auth/login'
 import { useSession } from 'next-auth/react'
+import { ThemeAndModeSwitcher } from '@/components/theme-and-mode-switcher'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -34,7 +35,7 @@ export default function LoginPage() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
-        <div className="flex justify-center gap-2 md:justify-start">
+        <div className="flex gap-2 justify-between">
           <a
             href="https://jackatlas.xyz/"
             className="flex items-center gap-2 font-medium"
@@ -44,6 +45,7 @@ export default function LoginPage() {
             </div>
             JackAtlas
           </a>
+          <ThemeAndModeSwitcher />
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
