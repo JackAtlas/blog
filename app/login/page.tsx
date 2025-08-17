@@ -8,9 +8,11 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { login } from '@/lib/actions/auth/login'
+import { useSession } from 'next-auth/react'
 
 export default function LoginPage() {
   const router = useRouter()
+  const { update } = useSession()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
 
@@ -20,6 +22,7 @@ export default function LoginPage() {
 
       if (!result.error) {
         toast.success('登入成功！')
+        await update()
         router.push(callbackUrl)
       }
 
