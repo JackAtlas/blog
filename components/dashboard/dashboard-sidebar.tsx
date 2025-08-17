@@ -1,7 +1,4 @@
-'use client'
-
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
 import { MdOutlineArticle } from 'react-icons/md'
 import { LuFolder, LuHouse, LuTags, LuTrash2 } from 'react-icons/lu'
 import {
@@ -18,6 +15,7 @@ import {
   SidebarRail
 } from '@/components/ui'
 import NavUser from '@/components/dashboard/nav-user'
+import { auth } from '@/auth'
 
 const items = [
   {
@@ -47,8 +45,8 @@ const items = [
   }
 ]
 
-export default function DashboardSidebar() {
-  const { data: session } = useSession()
+export default async function DashboardSidebar() {
+  const session = await auth()
 
   return (
     <Sidebar collapsible="icon">
@@ -60,13 +58,13 @@ export default function DashboardSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <Link href={item.url}>
-                        <item.icon className="w-5 h-5 mr-3" />
-                        <span>{item.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <Link href={item.url}>
+                      <item.icon className="w-5 h-5 mr-3" />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
