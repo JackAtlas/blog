@@ -11,7 +11,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
@@ -22,6 +21,7 @@ import {
   useSidebar
 } from '@/components/ui/sidebar'
 import { logout } from '@/lib/actions/auth/logout'
+import { useRouter } from 'next/navigation'
 
 export default function NavUser({
   user
@@ -29,6 +29,7 @@ export default function NavUser({
   user: { name: string; email: string }
 }) {
   const { isMobile } = useSidebar()
+  const router = useRouter()
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -62,7 +63,10 @@ export default function NavUser({
             align="end"
             sideOffset={4}
           >
-            <DropdownMenuLabel className="p-0 font-normal">
+            <DropdownMenuItem
+              className="p-0 font-normal"
+              onClick={() => router.push('/dashboard/user/config')}
+            >
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src="/avatar.jpg" alt={user.name} />
@@ -79,7 +83,7 @@ export default function NavUser({
                   </span>
                 </div>
               </div>
-            </DropdownMenuLabel>
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => logout()}>
               <LuLogOut />
