@@ -179,7 +179,7 @@ export default function BlogHeader() {
                       value={`/categories/${category.name}`}
                     >
                       <Link
-                        href={`/articles/${category.name}`}
+                        href={`/categories/${category.name}`}
                         onClick={() => setOpen(false)}
                         className="flex-1 px-4"
                       >
