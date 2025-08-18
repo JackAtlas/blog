@@ -146,14 +146,6 @@ export default function BlogHeader() {
           </div>
           <div className="flex items-center">
             <ThemeAndModeSwitcher />
-            <a
-              href="https://github.com/jackatlas"
-              className="flex items-center px-5 py-3 hover:text-primary"
-              target="_blank"
-              title="https://github.com/jackatlas"
-            >
-              <FaGithub />
-            </a>
             <div
               className="flex items-center px-5 py-3 hover:text-primary cursor-pointer"
               title="搜索"
