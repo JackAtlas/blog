@@ -57,7 +57,7 @@ export async function GET() {
         <pubDate>${pubDate}</pubDate>
         ${
           a.excerpt
-            ? `<desciption><![CDATA[${a.excerpt}]]</description>`
+            ? `<description><![CDATA[${a.excerpt}]]></description>`
             : ''
         }
         ${
