@@ -137,6 +137,15 @@ export default function BlogHeader() {
             <Link
               className={cn(
                 'flex items-center px-3',
+                pathname.startsWith('/project') ? 'text-primary' : ''
+              )}
+              href="/projects"
+            >
+              项目
+            </Link>
+            <Link
+              className={cn(
+                'flex items-center px-3',
                 pathname.startsWith('/about') ? 'text-primary' : ''
               )}
               href="/about"
