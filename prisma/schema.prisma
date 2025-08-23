@@ -97,3 +97,17 @@ enum CommentStatus {
   APPROVED
   REJECTED
 }
+
+model Media {
+  id String @id @default(cuid())
+  title String?
+  filename String
+  mimeType String
+  size Int
+  width Int?
+  height Int?
+  url String
+  cosKey String
+  hash String @unique
+  createdAt DateTime @default(now())
+}
