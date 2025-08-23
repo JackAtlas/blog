@@ -1,5 +1,5 @@
 import { Article } from '@/generated/prisma'
-import { BUCKET, cos, COS_DOMAIN, REGION } from './cosClient'
+import { BUCKET, cos, COS_DOMAIN, REGION } from './cos/cosClient'
 
 interface ExtendedArticle extends Article {
   author: { name: string }
