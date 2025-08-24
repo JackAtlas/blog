@@ -6,16 +6,20 @@ export const runtime = 'nodejs'
 export async function POST(req: Request) {
   try {
     const form = await req.formData()
-    const file = form.get('file') as File | null
-    if (!file)
+    const files = form.getAll('files') as File[]
+    if (!files.length)
       return NextResponse.json(
-        { error: 'file required' },
+        { error: 'files required' },
         { status: 400 }
       )
 
+    const results = []
+    for (const file of files) {
     const { record, reused } = await handleMediaUpload(file)
+      results.push(record)
+    }
 
-    return NextResponse.json({ ok: true, data: record, reused })
+    return NextResponse.json({ ok: true, data: results })
   } catch (error) {
     console.error(error)
     return NextResponse.json(
