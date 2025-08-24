@@ -1,7 +1,7 @@
 import { createHash, randomUUID } from 'crypto'
 import prisma from '@/lib/prisma'
 import sharp from 'sharp'
-import { uploadToCOS } from './cos/cosClient'
+import { uploadToCOS } from '../../cos/cosClient'
 
 export function extFromMime(mime: string) {
   return mime.split('/')[1]

@@ -1,4 +1,5 @@
-import { handleMediaUpload } from '@/lib/media'
+import { getAllMediaData } from '@/lib/actions/media/get-all-media'
+import { handleMediaUpload } from '@/lib/actions/media/media-upload'
 import { NextResponse } from 'next/server'
 
 export const runtime = 'nodejs'
