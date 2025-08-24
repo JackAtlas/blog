@@ -1,6 +1,12 @@
 import Link from 'next/link'
 import { MdOutlineArticle } from 'react-icons/md'
-import { LuFolder, LuHouse, LuTags, LuTrash2 } from 'react-icons/lu'
+import {
+  LuFolder,
+  LuHouse,
+  LuImage,
+  LuTags,
+  LuTrash2
+} from 'react-icons/lu'
 import {
   Sidebar,
   SidebarContent,
@@ -37,6 +43,11 @@ const items = [
     title: '标签',
     url: '/dashboard/tags',
     icon: LuTags
+  },
+  {
+    title: '图库',
+    url: '/dashboard/gallery',
+    icon: LuImage
   },
   {
     title: '回收站',
