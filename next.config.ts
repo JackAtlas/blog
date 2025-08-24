@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
         hostname: `${BUCKET}.cos.${REGION}.myqcloud.com`,
         port: '',
         pathname: '/blog/article-cover/**'
+      },
+      {
+        protocol: 'https',
+        hostname: `${BUCKET}.cos.${REGION}.myqcloud.com`,
+        port: '',
+        pathname: '/blog/figure/**'
       }
     ]
   }
