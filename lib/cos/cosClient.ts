@@ -32,3 +32,16 @@ export async function uploadToCOS(
 
   return `${COS_DOMAIN}/${Key}`
 }
+
+export async function removeFromCOS(Key: string) {
+  return await new Promise<void>((resolve, reject) => {
+    cos.deleteObject(
+      {
+        Bucket: BUCKET,
+        Region: REGION,
+        Key
+      },
+      (err) => (err ? reject(err) : resolve())
+    )
+  })
+}

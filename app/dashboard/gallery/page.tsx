@@ -1,6 +1,15 @@
 'use client'
 
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
   Button,
   Card,
   CardContent,
@@ -20,7 +29,7 @@ import {
   useQueryClient
 } from '@tanstack/react-query'
 import Image from 'next/image'
-import { LuCopy, LuLoaderCircle } from 'react-icons/lu'
+import { LuCopy, LuLoaderCircle, LuX } from 'react-icons/lu'
 import { MdOutlineZoomOutMap } from 'react-icons/md'
 import { toast } from 'sonner'
 
@@ -75,6 +84,39 @@ export default function GalleryPage() {
     }
   })
 
+  const { mutate: deletePic, isPending: isDeletePending } =
+    useMutation({
+      mutationFn: async (pic: Media) => {
+        if (!pic || !pic.cosKey) toast.warning('缺少图片 key')
+
+        const res = await fetch(`/api/media`, {
+          method: 'DELETE',
+          body: JSON.stringify({
+            id: pic.id,
+            key: pic.cosKey
+          })
+        })
+
+        if (!res.ok) {
+          const errorData = await res.json()
+          throw new Error(errorData.message)
+        } else {
+          return true
+        }
+      },
+      onSuccess: () => {
+        toast.success('图片已删除')
+        queryClient.invalidateQueries({ queryKey: ['gallery'] })
+      },
+      onError: (error) => {
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : '图片删除失败，未知错误'
+        )
+      }
+    })
+
   if (isDataLoading) return <div>加载中……</div>
 
   return (
@@ -112,6 +154,36 @@ export default function GalleryPage() {
                   width={pic.width ?? 400}
                   height={pic.height ?? 400}
                 />
+                <div className="hidden group-hover:block absolute top-0 left-0">
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="cursor-pointer"
+                      >
+                        <LuX />
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          确认删除？
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                          此操作不可逆，图片将从数据库及腾讯云对象存储中永久删除。
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>取消</AlertDialogCancel>
+                        <AlertDialogAction
+                          onClick={() => deletePic(pic)}
+                        >
+                          确认
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
                 <div className="hidden group-hover:block absolute top-0 right-0">
                   <Dialog>
                     <DialogTrigger asChild>
