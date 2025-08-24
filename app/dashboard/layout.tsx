@@ -6,15 +6,8 @@ import {
   SidebarTrigger
 } from '@/components/ui/sidebar'
 import { Separator } from '@/components/ui/separator'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
-} from '@/components/ui/breadcrumb'
 import { ThemeAndModeSwitcher } from '@/components/theme-and-mode-switcher'
+import DashboardBreadcrumb from '@/components/dashboard/dashboard-breadcrumb'
 
 export default async function DashboardLayout({
   children
@@ -35,19 +28,7 @@ export default async function DashboardLayout({
                 orientation="vertical"
                 className="mr-2 data-[orientation=vertical]:h-4"
               />
-              <Breadcrumb>
-                <BreadcrumbList>
-                  <BreadcrumbItem className="hidden md:block">
-                    <BreadcrumbLink href="/dashboard">
-                      首页
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator className="hidden md:block" />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>当前页</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
+              <DashboardBreadcrumb />
             </div>
             <ThemeAndModeSwitcher />
           </div>
