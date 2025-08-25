@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { AiOutlineDashboard } from 'react-icons/ai'
 import { LuSearch } from 'react-icons/lu'
 import { ThemeAndModeSwitcher } from '../theme-and-mode-switcher'
 import { usePathname, useRouter } from 'next/navigation'
@@ -17,8 +18,11 @@ import {
   CommandSeparator
 } from '@/components/ui'
 import { Article, Category, Tag } from '@/generated/prisma'
+import { useSession } from 'next-auth/react'
 
 export default function BlogHeader() {
+  const { status } = useSession()
+
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')
 
@@ -161,6 +165,14 @@ export default function BlogHeader() {
             >
               <LuSearch size={20} />
             </div>
+            {status === 'authenticated' && (
+              <Link
+                className="flex items-center p-4 hover:text-primary"
+                href="/dashboard"
+              >
+                <AiOutlineDashboard size={20} />
+              </Link>
+            )}
             <CommandDialog
               open={open}
               onOpenChange={setOpen}
