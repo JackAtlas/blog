@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { FaGithub } from 'react-icons/fa'
 import { LuSearch } from 'react-icons/lu'
 import { ThemeAndModeSwitcher } from '../theme-and-mode-switcher'
 import { usePathname, useRouter } from 'next/navigation'
