@@ -155,11 +155,11 @@ export default function BlogHeader() {
           <div className="flex items-center">
             <ThemeAndModeSwitcher />
             <div
-              className="flex items-center px-5 py-3 hover:text-primary cursor-pointer"
+              className="flex items-center p-4 hover:text-primary cursor-pointer"
               title="搜索"
               onClick={() => setOpen(true)}
             >
-              <LuSearch />
+              <LuSearch size={20} />
             </div>
             <CommandDialog
               open={open}
