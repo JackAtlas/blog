@@ -31,7 +31,7 @@ export default function BlogHeader() {
       if (e.key === 'Enter') {
         e.preventDefault()
         if (search) {
-          router.push(search)
+          router.push(search.split(' ')[0])
           setOpen(false)
           setSearch('')
         }
@@ -211,7 +211,7 @@ export default function BlogHeader() {
                   {articles?.map((article: Article) => (
                     <CommandItem
                       key={article.id}
-                      value={`/articles/${article.slug}`}
+                      value={`/articles/${article.slug} ${article.title}`}
                     >
                       <Link
                         href={`/articles/${article.slug}`}
