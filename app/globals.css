@@ -1,9 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@import '../theme/bubblegum.css';
-@import '../theme/caffeine.css';
-@import '../theme/pastel-dreams.css';
+@import '../themes/*.css';
 
 @custom-variant dark (&:is(.dark *));
 
