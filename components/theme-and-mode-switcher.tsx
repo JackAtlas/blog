@@ -12,10 +12,10 @@ import {
 } from '@/components/ui'
 import { FaSun } from 'react-icons/fa'
 import { LuMoon } from 'react-icons/lu'
-
-const themes = ['bubblegum', 'caffeine', 'pastel-dreams'] as const
+import { useThemeName } from './providers'
 
 export function ThemeAndModeSwitcher() {
+  const themes = useThemeName()
   const { theme: mode, setTheme: setMode } = useTheme()
   const [appTheme, setAppTheme] = useState('caffeine')
   const [isMounted, setIsmounted] = useState(false)
