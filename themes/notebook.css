@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Fira+Code:wght@300..700&display=swap');
 
 :root[data-theme='notebook'] {
   --background: oklch(0.9821 0 0);
@@ -35,7 +35,7 @@
   --sidebar-ring: oklch(0.7058 0 0);
   --font-sans: Architects Daughter, sans-serif;
   --font-serif: 'Times New Roman', Times, serif;
-  --font-mono: 'Courier Prime', Courier, monospace;
+  --font-mono: 'Fira Code', 'Courier Prime', monospace;
   --radius: 0.625rem;
   --shadow-2xs: 1px 4px 5px 0px hsl(0 0% 0% / 0.01);
   --shadow-xs: 1px 4px 5px 0px hsl(0 0% 0% / 0.01);
