@@ -4,7 +4,7 @@ import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
 import { getArticleBySlug } from '@/lib/actions/article/get-article-by-slug'
 import { formatDistanceToNow } from 'date-fns'
-import MarkdownPreview from '@/components/blog/markdown-preview'
+import MarkdownPreview from '@/components/markdown-preview'
 
 export default async function ArticlePage({
   params
@@ -28,7 +28,7 @@ export default async function ArticlePage({
         />
       </CardHeader>
       <CardContent>
-        <article>
+        <div>
           <div className="flex text-xs uppercase text-muted-foreground">
             <div>
               {formatDistanceToNow(article.createdAt, {
@@ -45,13 +45,15 @@ export default async function ArticlePage({
                 title={tag.name}
                 key={tag.id}
               >
-                <div className="bg-primary text-xs text-primary-foreground rounded-l-sm px-2 py-1 whitespace-nowrap">
+                <div className="bg-primary text-xs text-primary-foreground rounded-sm px-2 py-1 whitespace-nowrap">
                   {tag.name}
                 </div>
               </a>
             ))}
           </div>
-          <MarkdownPreview source={article.content}></MarkdownPreview>
+          <MarkdownPreview
+            content={article.content}
+          ></MarkdownPreview>
           <div className="flex flex-wrap gap-4 mt-6">
             {article.tags.map((tag) => (
               <a
@@ -59,13 +61,13 @@ export default async function ArticlePage({
                 title={tag.name}
                 key={tag.id}
               >
-                <div className="bg-gray-600 text-xs text-white rounded-l-sm px-2 py-1 whitespace-nowrap">
+                <div className="bg-gray-600 text-xs text-white rounded-sm px-2 py-1 whitespace-nowrap">
                   {tag.name}
                 </div>
               </a>
             ))}
           </div>
-        </article>
+        </div>
       </CardContent>
     </Card>
   )

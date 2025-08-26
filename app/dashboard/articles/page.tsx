@@ -1,6 +1,7 @@
 'use client'
 
 import DataTable from '@/components/data-table'
+import MarkdownPreviewer from '@/components/markdown-preview'
 import {
   Button,
   Dialog,
@@ -20,7 +21,6 @@ import {
   useQueryClient
 } from '@tanstack/react-query'
 import { ColumnDef } from '@tanstack/react-table'
-import MDEditor from '@uiw/react-md-editor'
 import { format } from 'date-fns'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -338,7 +338,7 @@ export default function ArticlesPage() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
-      <div className="col-span-2">
+      <div className="col-span-1 lg:col-span-2">
         <div className="flex justify-between">
           <div></div>
           <Button variant="outline" asChild>
@@ -351,8 +351,9 @@ export default function ArticlesPage() {
           <DataTable columns={columns} data={articles ?? []} />
         </div>
       </div>
-      <div className="hidden lg:block lg:col-span-1">
-        <MDEditor.Markdown source={previewArticle.content ?? ''} />
+      <div className="hidden lg:flex lg:flex-col lg:gap-6 lg:col-span-1">
+        <h1 className="text-3xl">{previewArticle.title}</h1>
+        <MarkdownPreviewer content={previewArticle.content} />
       </div>
     </div>
   )

@@ -1,8 +1,7 @@
-'use server'
-
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
+import MarkdownPreview from '@/components/markdown-preview'
 import { getArticles } from '@/lib/actions/article/get-articles'
 import { formatDistanceToNow } from 'date-fns'
 import Image from 'next/image'
@@ -41,9 +40,11 @@ export default async function ArticlesSection() {
                   {article.title}
                 </h2>
               </Link>
-              <div className="mb-6">
-                <p className="mt-2">{article.excerpt}</p>
-              </div>
+              {article.excerpt && (
+                <div className="mb-6">
+                  <MarkdownPreview content={article.excerpt} />
+                </div>
+              )}
               <Link
                 href={`/article/${article.slug}`}
                 title="read more"

@@ -8,7 +8,7 @@ import {
   useQuery,
   useQueryClient
 } from '@tanstack/react-query'
-import MDEditor from '@uiw/react-md-editor'
+import MarkdownPreviewer from '@/components/markdown-preview'
 import { useState } from 'react'
 import { LuTrash2 } from 'react-icons/lu'
 import { toast } from 'sonner'
@@ -76,6 +76,7 @@ export default function TagsPage() {
             }
           }}
         />
+        {/* TODO: remove tag */}
         <ul className="mt-4">
           {tags?.map((tag: any) => (
             <li
@@ -128,13 +129,11 @@ export default function TagsPage() {
           ))}
         </ul>
       </div>
-      <div className="col-span-3">
+      <div className="col-span-3 flex flex-col gap-4 lg:gap-6">
         <h2 className="text-2xl font-bold">
           {selectedArticle?.title}
         </h2>
-        <MDEditor.Markdown
-          source={selectedArticle?.content ?? ''}
-        ></MDEditor.Markdown>
+        <MarkdownPreviewer content={selectedArticle?.content ?? ''} />
       </div>
     </div>
   )

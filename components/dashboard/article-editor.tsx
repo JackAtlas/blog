@@ -1,7 +1,6 @@
 'use client'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
-import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import slugify from 'slugify'
 import { toast } from 'sonner'
@@ -15,13 +14,11 @@ import {
   SelectGroup,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
+  Textarea
 } from '@/components/ui'
 import { Category, Tag } from '@/generated/prisma'
-
-const MDEditor = dynamic(() => import('@uiw/react-md-editor'), {
-  ssr: false
-})
+import MarkdownPreviewer from '@/components/markdown-preview'
 
 export default function ArticleEditor({
   articleId = ''
@@ -196,8 +193,8 @@ export default function ArticleEditor({
   }
 
   return (
-    <div className="h-full">
-      <div className="grid grid-cols-3 gap-4 lg:gap-6 mb-4 lg:mb-6">
+    <div className="h-full flex flex-col gap-4">
+      <div className="grid grid-cols-2 gap-4">
         <div>
           <Input
             value={title}
@@ -213,24 +210,24 @@ export default function ArticleEditor({
           />
         </div>
       </div>
-      <MDEditor
-        className="mb-4 lg:mb-6"
-        height={600}
-        value={content}
-        onChange={(value) => setContent(value ? value : '')}
-        textareaProps={{
-          placeholder: '内容'
-        }}
-      ></MDEditor>
-      <MDEditor
-        className="mb-4 lg:mb-6"
-        value={excerpt}
-        onChange={(value) => setExcerpt(value ? value : '')}
-        textareaProps={{
-          placeholder: '摘要'
-        }}
-      ></MDEditor>
-      <div className="flex items-center gap-4 lg:gap-6 mb-4 lg:mb-6">
+      <div className="grid grid-cols-2 gap-4">
+        <Textarea
+          className="min-h-60 lg:text-lg xl:text-xl"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="正文"
+        />
+        <MarkdownPreviewer content={content} />
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <Textarea
+          value={excerpt}
+          onChange={(e) => setExcerpt(e.target.value)}
+          placeholder="摘要"
+        />
+        <MarkdownPreviewer content={excerpt} />
+      </div>
+      <div className="flex items-center gap-4">
         <span className="text-sm text-muted-foreground">栏目：</span>
         <Select
           disabled={isCategoriesLoading}
@@ -255,7 +252,7 @@ export default function ArticleEditor({
           </SelectContent>
         </Select>
       </div>
-      <div className="flex items-center gap-4 lg:gap-6 mb-4 lg:mb-6">
+      <div className="flex items-center gap-4">
         <span className="text-sm text-muted-foreground">标签：</span>
         {tags?.map((tag: Tag) => (
           <div key={tag.id} className="flex items-center gap-2">
@@ -269,7 +266,7 @@ export default function ArticleEditor({
         ))}
       </div>
       {articleId ? (
-        <div className="flex items-center gap-4 lg:gap-6">
+        <div className="flex items-center gap-4">
           <Button
             className="cursor-pointer"
             onClick={() => handleSave(true)}
@@ -280,7 +277,7 @@ export default function ArticleEditor({
           {status === 'PUBLISHED' && '已发布'}
         </div>
       ) : (
-        <div className="flex gap-4 lg:gap-6">
+        <div className="flex gap-4">
           <Button
             className="cursor-pointer"
             onClick={() => handleSave(false)}
