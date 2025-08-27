@@ -22,15 +22,23 @@ import {
 } from '@tanstack/react-query'
 import { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { LuPlus } from 'react-icons/lu'
 import { toast } from 'sonner'
 
+interface ExtendedArticle extends Article {
+  category?: {
+    name: string
+  }
+  tags?: { name: string }[]
+  coverUrl?: string
+}
+
 export default function ArticlesPage() {
-  const [previewArticle, setPreviewArticle] = useState<Article>(
-    {} as Article
-  )
+  const [previewArticle, setPreviewArticle] =
+    useState<ExtendedArticle>({} as ExtendedArticle)
   const queryClient = useQueryClient()
 
   const {
@@ -173,13 +181,6 @@ export default function ArticlesPage() {
       )
     }
   })
-
-  interface ExtendedArticle extends Article {
-    category?: {
-      name: string
-    }
-    tags?: { name: string }[]
-  }
 
   const columns: ColumnDef<ExtendedArticle>[] = [
     {
@@ -352,6 +353,15 @@ export default function ArticlesPage() {
         </div>
       </div>
       <div className="hidden lg:flex lg:flex-col lg:gap-6 lg:col-span-1">
+        {previewArticle?.coverUrl && (
+          <Image
+            src={previewArticle?.coverUrl!}
+            alt={previewArticle.title}
+            width={800}
+            height={800}
+            className="aspect-video object-cover"
+          />
+        )}
         <h1 className="text-3xl">{previewArticle.title}</h1>
         <MarkdownPreviewer content={previewArticle.content} />
       </div>
