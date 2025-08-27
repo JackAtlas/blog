@@ -2,13 +2,13 @@ import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
 import MarkdownPreview from '@/components/markdown-preview'
-import { getArticles } from '@/lib/actions/article/get-articles'
+import { getArticlesPinned } from '@/lib/actions/article/get-articles-pinned'
 import { formatDistanceToNow } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default async function ArticlesSection() {
-  const articles = await getArticles()
+  const articles = await getArticlesPinned()
   return (
     <ul className="flex flex-col gap-4 lg:gap-6">
       {articles.map((article) => (
