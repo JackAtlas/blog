@@ -94,16 +94,15 @@ export default function BlogHeader() {
   const [articles, categories, tags] = data || [[], [], []]
 
   return (
-    <header className="shadow shadow-black/5">
-      <div className="container min-h-17 flex">
-        <div className="flex items-center text-2xl mr-4">
+    <header className="blog-container flex gap-2 md:gap-4 2xl:gap-6 shadow shadow-black/5">
+      <div className="flex items-center text-2xl md:text-3xl 2xl:text-4xl">
           JackAtlas
         </div>
-        <div className="flex justify-between flex-1">
-          <div className="flex">
+      <div className="flex justify-end sm:justify-between flex-1">
+        <div className="hidden sm:flex md:text-lg 2xl:text-xl break-keep">
             <Link
               className={cn(
-                'flex items-center px-3 hover:text-primary',
+              'flex items-center px-2 md:px-4 2xl:px-6 hover:text-primary',
                 pathname === '/' ? 'text-primary' : ''
               )}
               href="/"
@@ -112,7 +111,7 @@ export default function BlogHeader() {
             </Link>
             <Link
               className={cn(
-                'flex items-center px-3',
+              'flex items-center px-2 md:px-4 2xl:px-6 hover:text-primary',
                 pathname.startsWith('/categor') ? 'text-primary' : ''
               )}
               href="/categories"
@@ -121,7 +120,7 @@ export default function BlogHeader() {
             </Link>
             <Link
               className={cn(
-                'flex items-center px-3',
+              'flex items-center px-2 md:px-4 2xl:px-6 hover:text-primary',
                 pathname.startsWith('/tags') ? 'text-primary' : ''
               )}
               href="/tags"
@@ -130,7 +129,7 @@ export default function BlogHeader() {
             </Link>
             <Link
               className={cn(
-                'flex items-center px-3',
+              'flex items-center px-2 md:px-4 2xl:px-6 hover:text-primary',
                 pathname.startsWith('/archives') ? 'text-primary' : ''
               )}
               href="/archives"
@@ -139,7 +138,7 @@ export default function BlogHeader() {
             </Link>
             <Link
               className={cn(
-                'flex items-center px-3',
+              'flex items-center px-2 md:px-4 2xl:px-6 hover:text-primary',
                 pathname.startsWith('/project') ? 'text-primary' : ''
               )}
               href="/projects"
@@ -148,7 +147,7 @@ export default function BlogHeader() {
             </Link>
             <Link
               className={cn(
-                'flex items-center px-3',
+              'flex items-center px-2 md:px-4 2xl:px-6 hover:text-primary',
                 pathname.startsWith('/about') ? 'text-primary' : ''
               )}
               href="/about"
@@ -157,9 +156,10 @@ export default function BlogHeader() {
             </Link>
           </div>
           <div className="flex items-center">
-            <ThemeAndModeSwitcher />
+          <ThemeAndModeSwitcher className="mr-2 md:mr-4" />
+          <div>
             <div
-              className="flex items-center p-4 hover:text-primary cursor-pointer"
+              className="flex items-center p-2 md:p-4 2xl:p-6 hover:text-primary cursor-pointer"
               title="搜索"
               onClick={() => setOpen(true)}
             >
@@ -167,7 +167,7 @@ export default function BlogHeader() {
             </div>
             {status === 'authenticated' && (
               <Link
-                className="flex items-center p-4 hover:text-primary"
+              className="hidden sm:flex items-center p-2 md:p-4 2xl:p-6 hover:text-primary"
                 href="/dashboard"
               >
                 <AiOutlineDashboard size={20} />
