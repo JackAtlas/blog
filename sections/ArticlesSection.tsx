@@ -10,7 +10,7 @@ import Link from 'next/link'
 export default async function ArticlesSection() {
   const articles = await getArticlesPinned()
   return (
-    <ul className="flex flex-col gap-4 lg:gap-6">
+    <ul className="flex flex-col gap-2 md:gap-4 2xl:gap-6 lg:grid lg:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4">
       {articles.map((article) => (
         <li key={article.id}>
           <Card>
@@ -20,11 +20,11 @@ export default async function ArticlesSection() {
                 alt={article.title}
                 width={700}
                 height={300}
-                className="aspect-video object-cover"
+                className="aspect-video object-cover mx-auto"
               />
             </CardHeader>
             <CardContent>
-              <div className="flex text-xs uppercase text-muted-foreground">
+              <div className="flex text-xs md:text-sm 2xl:text-base uppercase text-muted-foreground">
                 <div>
                   {formatDistanceToNow(article.createdAt, {
                     addSuffix: true
@@ -36,19 +36,19 @@ export default async function ArticlesSection() {
                 href={`/articles/${article.slug}`}
                 title={article.title}
               >
-                <h2 className="text-3xl my-6 hover:text-primary">
+                <h2 className="text-xl md:text-2xl 2xl:text-3xl my-2 md:my-4 2xl:my-6 hover:text-primary">
                   {article.title}
                 </h2>
               </Link>
               {article.excerpt && (
-                <div className="mb-6">
+                <div className="mb-2 md:mb-4 2xl:mb-6">
                   <MarkdownPreview content={article.excerpt} />
                 </div>
               )}
               <Link
                 href={`/article/${article.slug}`}
                 title="read more"
-                className="inline-block rounded-xs text-xs bg-accent hover:bg-accent/60 text-accent-foreground h-7 leading-7 px-[1em]"
+                className="inline-block rounded-xs text-xs md:text-base bg-accent hover:bg-accent/60 text-accent-foreground h-7 leading-7 px-[1em]"
               >
                 Read more
               </Link>
