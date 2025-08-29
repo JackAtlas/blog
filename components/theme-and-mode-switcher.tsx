@@ -13,8 +13,13 @@ import {
 import { FaSun } from 'react-icons/fa'
 import { LuMoon } from 'react-icons/lu'
 import { useThemeName } from './providers'
+import { cn } from '@/lib/utils'
 
-export function ThemeAndModeSwitcher() {
+export function ThemeAndModeSwitcher({
+  className
+}: {
+  className?: string
+}) {
   const themes = useThemeName()
   const { theme: mode, setTheme: setMode } = useTheme()
   const [appTheme, setAppTheme] = useState('caffeine')
@@ -58,7 +63,7 @@ export function ThemeAndModeSwitcher() {
   }
 
   return (
-    <div className="flex gap-2 px-4">
+    <div className={cn('flex gap-2', className)}>
       <Select
         value={appTheme}
         onValueChange={(value) => {
