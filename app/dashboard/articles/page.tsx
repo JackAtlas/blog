@@ -1,5 +1,7 @@
 'use client'
 
+import ErrorDisplay from '@/components/dashboard/error-display'
+import Loader from '@/components/dashboard/loader'
 import DataTable from '@/components/data-table'
 import MarkdownPreviewer from '@/components/markdown-preview'
 import {
@@ -229,12 +231,6 @@ export default function ArticlesPage() {
         format(row.getValue<Date>('createdAt'), 'yyyy-MM-dd hh:mm:ss')
     },
     {
-      accessorKey: 'updatedAt',
-      header: '更新时间',
-      cell: ({ row }) =>
-        format(row.getValue<Date>('updatedAt'), 'yyyy-MM-dd hh:mm:ss')
-    },
-    {
       header: '操作',
       cell: ({ row }) => (
         <div className="flex gap-4">
@@ -330,11 +326,11 @@ export default function ArticlesPage() {
   ]
 
   if (isLoading) {
-    return <div>加载中</div>
+    return <Loader />
   }
 
   if (error) {
-    return <div>加载失败</div>
+    return <ErrorDisplay error={error} />
   }
 
   return (
