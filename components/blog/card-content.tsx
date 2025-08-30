@@ -1,7 +1,11 @@
+import { cn } from '@/lib/utils'
+
 export default function CardContent({
-  children
+  children,
+  className
 }: {
   children: React.ReactNode
+  className?: string
 }) {
-  return <div className="p-6">{children}</div>
+  return <div className={cn('p-6', className)}>{children}</div>
 }
