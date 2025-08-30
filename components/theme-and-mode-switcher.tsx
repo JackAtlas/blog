@@ -71,12 +71,16 @@ export function ThemeAndModeSwitcher({
           setAppTheme(value)
         }}
       >
-        <SelectTrigger>
+        <SelectTrigger className="md:text-base 2xl:text-lg">
           <SelectValue></SelectValue>
         </SelectTrigger>
         <SelectContent>
           {themes.map((t) => (
-            <SelectItem key={t} value={t}>
+            <SelectItem
+              key={t}
+              value={t}
+              className="md:text-base 2xl:text-lg"
+            >
               {t}
             </SelectItem>
           ))}

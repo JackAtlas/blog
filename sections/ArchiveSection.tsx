@@ -9,7 +9,7 @@ export default async function ArchiveSection() {
   return (
     <Card>
       <CardContent>
-        <div className="mb-2 text-muted-foreground text-xs tracking-widest uppercase">
+        <div className="mb-2 text-muted-foreground text-xs md:text-sm 2xl:text-base tracking-widest uppercase">
           Archives
         </div>
         <ul>
@@ -17,10 +17,12 @@ export default async function ArchiveSection() {
             <li key={archive.year}>
               <Link
                 href={`/archives/${archive.year}`}
-                className="flex items-center justify-between hover:bg-muted h-9 px-2"
+                className="flex items-center justify-between hover:bg-muted p-2"
               >
-                <span className="text-sm">{archive.year}</span>
-                <span className="h-[2em] flex items-center bg-muted text-muted-foreground text-xs rounded-sm px-[0.75em]">
+                <span className="text-sm md:text-base 2xl:text-lg font-mono">
+                  {archive.year}
+                </span>
+                <span className="h-[2em] flex items-center bg-muted text-muted-foreground text-xs md:text-sm 2xl:text-base font-mono rounded-sm px-[0.75em]">
                   {archive.count}
                 </span>
               </Link>

@@ -42,13 +42,20 @@ export default function DashboardBreadcrumb() {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem className="hidden md:block">
-          <BreadcrumbLink href="/dashboard">首页</BreadcrumbLink>
+          <BreadcrumbLink
+            href="/dashboard"
+            className="md:text-base 2xl:text-lg"
+          >
+            首页
+          </BreadcrumbLink>
         </BreadcrumbItem>
         {second !== '' && (
           <>
-            <BreadcrumbSeparator className="hidden md:block" />
+            <BreadcrumbSeparator className="hidden md:block md:[&>svg]:size-4 2xl:[&>svg]:size-4.5" />
             <BreadcrumbItem>
-              <BreadcrumbPage>{second}</BreadcrumbPage>
+              <BreadcrumbPage className="md:text-base 2xl:text-lg">
+                {second}
+              </BreadcrumbPage>
             </BreadcrumbItem>
           </>
         )}

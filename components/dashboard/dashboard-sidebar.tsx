@@ -64,15 +64,22 @@ export default async function DashboardSidebar() {
       <SidebarHeader />
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Blog</SidebarGroupLabel>
+          <SidebarGroupLabel className="md:text-sm 2xl:text-base">
+            Blog
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <Link href={item.url}>
-                      <item.icon className="w-5 h-5 mr-3" />
-                      <span>{item.title}</span>
+                    <Link
+                      href={item.url}
+                      className="h-auto [&>svg]:md:size-5 [&>svg]:2xl:size-6 gap-2 md:gap-4 2xl:gap-6"
+                    >
+                      <item.icon />
+                      <div className="text-sm md:text-base 2xl:text-lg leading-[1] pt-1">
+                        {item.title}
+                      </div>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

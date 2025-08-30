@@ -11,7 +11,7 @@ export default async function RecentsSection() {
   return (
     <Card>
       <CardContent>
-        <div className="-mb-5 text-muted-foreground text-xs tracking-widest uppercase">
+        <div className="-mb-5 text-muted-foreground text-xs md:text-sm 2xl:text-base tracking-widest uppercase">
           Recents
         </div>
         {articles.map((article) => (
@@ -19,25 +19,33 @@ export default async function RecentsSection() {
             <Link
               href={`/article/${article.slug}`}
               title={article.title}
-              className="mr-4"
+              className="mr-2 md:mr-4"
             >
               <Image
                 src={article.thumbnail}
                 alt={article.title}
-                width={64}
-                height={64}
+                width={80}
+                height={80}
+                className="size-16 md:size-20"
               />
             </Link>
             <div className="flex-1 grid grid-rows-3">
-              <time className="flex items-start text-sm text-muted-foreground">
+              <time className="flex items-start text-sm md:text-base text-muted-foreground">
                 {format(article.createdAt, 'yyyy-MM-dd')}
               </time>
               <Link
                 href={`/article/${article.slug}`}
                 title={article.title}
-                className="hover:text-primary truncate"
+                className="md:text-lg hover:text-primary truncate"
               >
                 {article.title}
+              </Link>
+              <Link
+                href={`/article/${article.category?.name}`}
+                title={article.category?.name}
+                className="text-sm md:text-base text-muted-foreground hover:text-muted-foreground/50 truncate"
+              >
+                {article.category?.name}
               </Link>
             </div>
           </div>

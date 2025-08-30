@@ -39,17 +39,17 @@ export default function NavUser({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
+              <Avatar className="rounded-lg md:size-10 2xl:size-12">
                 <AvatarImage src="/avatar.jpg" alt={user.name} />
                 <AvatarFallback className="rounded-lg">
                   JA
                 </AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">
+              <div className="grid flex-1 text-left leading-tight">
+                <span className="truncate font-medium text-sm md:text-base 2xl:text-lg">
                   {user.name}
                 </span>
-                <span className="text-muted-foreground truncate text-xs">
+                <span className="text-muted-foreground truncate text-xs md:text-sm 2xl:text-base">
                   {user.email}
                 </span>
               </div>
@@ -67,25 +67,31 @@ export default function NavUser({
               className="p-0 font-normal"
               onClick={() => router.push('/dashboard/user/config')}
             >
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
+              <div className="flex items-center gap-2 px-1 py-1.5 text-left">
+                <Avatar className="rounded-lg md:size-10 2xl:size-12">
                   <AvatarImage src="/avatar.jpg" alt={user.name} />
                   <AvatarFallback className="rounded-lg">
                     JA
                   </AvatarFallback>
                 </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">
+                <div className="grid flex-1 text-left leading-tight">
+                  <span className="truncate font-medium text-sm md:text-base 2xl:text-lg">
                     {user.name}
                   </span>
-                  <span className="text-muted-foreground truncate text-xs">
+                  <span
+                    className="text-muted-foreground truncate text-xs md:text-sm 2xl:text-base"
+                    title={user.email}
+                  >
                     {user.email}
                   </span>
                 </div>
               </div>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => logout()}>
+            <DropdownMenuItem
+              onClick={() => logout()}
+              className="md:text-base 2xl:text-lg"
+            >
               <LuLogOut />
               Log out
             </DropdownMenuItem>

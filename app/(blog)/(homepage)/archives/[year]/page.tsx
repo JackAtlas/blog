@@ -15,11 +15,13 @@ export default async function ArchivePage({
   const { year } = await params
   const articles = await getArchivedArticlesByYear(year)
   return (
-    <div className="flex flex-col gap-4 lg:gap-6">
+    <div className="flex flex-col gap-2 md:gap-4 2xl:gap-6">
       <Card>
-        <CardContent>{year}</CardContent>
+        <CardContent className="md:text-lg 2xl:text-xl">
+          {year}
+        </CardContent>
       </Card>
-      <ul className="flex flex-col gap-4 lg:gap-6">
+      <ul className="flex flex-col gap-2 md:gap-4 2xl:gap-6 lg:grid lg:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4">
         {articles.map((article) => (
           <li key={article.id}>
             <Card>

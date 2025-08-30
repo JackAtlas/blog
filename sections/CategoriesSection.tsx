@@ -8,7 +8,7 @@ export default async function CategoriesSection() {
   return (
     <Card>
       <CardContent>
-        <div className="mb-2 text-muted-foreground text-xs tracking-widest uppercase">
+        <div className="mb-2 text-muted-foreground text-xs md:text-sm 2xl:text-base tracking-widest uppercase">
           Categories
         </div>
         <ul>
@@ -16,10 +16,12 @@ export default async function CategoriesSection() {
             <li key={category.id}>
               <Link
                 href={`/categories/${category.name}`}
-                className="flex items-center justify-between hover:bg-muted h-9 px-2"
+                className="flex items-center justify-between hover:bg-muted p-2"
               >
-                <span className="text-sm">{category.name}</span>
-                <span className="h-[2em] flex items-center bg-muted text-muted-foreground text-xs rounded-sm px-[0.75em]">
+                <span className="text-sm md:text-base 2xl:text-lg">
+                  {category.name}
+                </span>
+                <span className="h-[2em] flex items-center bg-muted text-muted-foreground text-xs md:text-sm 2xl:text-base font-mono rounded-sm px-[0.75em]">
                   {category.articles.length}
                 </span>
               </Link>
@@ -31,10 +33,12 @@ export default async function CategoriesSection() {
                   >
                     <Link
                       href={`/categories/${child.name}`}
-                      className="flex items-center justify-between hover:bg-muted h-9 px-2"
+                      className="flex items-center justify-between hover:bg-muted p-2"
                     >
-                      <span className="text-sm">{child.name}</span>
-                      <span className="h-[2em] flex items-center bg-muted text-muted-foreground text-xs rounded-sm px-[0.75em]">
+                      <span className="text-sm md:text-base 2xl:text-lg">
+                        {child.name}
+                      </span>
+                      <span className="h-[2em] flex items-center bg-muted text-muted-foreground text-xs md:text-sm 2xl:text-base font-mono rounded-sm px-[0.75em]">
                         {child.articles.length}
                       </span>
                     </Link>

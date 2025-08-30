@@ -13,7 +13,7 @@ export default async function ArchivesPage() {
         <Card key={`${archive.year}`}>
           <CardContent>
             <div className="flex">
-              <h2 className="bg-muted text-muted-foreground p-2 text-xs font-bold rounded-lg">
+              <h2 className="bg-muted text-muted-foreground p-2 text-xs md:text-sm 2xl:text-base font-bold rounded-lg">
                 {archive.year}
               </h2>
             </div>
@@ -21,7 +21,7 @@ export default async function ArchivesPage() {
               {archive.articles.map((article) => (
                 <li
                   key={article.id}
-                  className="relative ps-10 flex gap-4 before:absolute before:top-2 before:left-2 before:w-4 before:h-4 before:bg-accent before:rounded-full"
+                  className="relative ps-10 flex gap-4 before:absolute before:top-2 md:before:top-4 2xl:before:top-6 before:left-2 before:w-4 before:h-4 before:bg-accent before:rounded-full"
                 >
                   <Link
                     href={`/article/${article.id}`}
@@ -30,23 +30,24 @@ export default async function ArchivesPage() {
                     <Image
                       src={article.thumbnail}
                       alt={article.title}
-                      width={64}
-                      height={64}
+                      width={128}
+                      height={128}
+                      className="size-16 md:size-20 2xl:size-24"
                     />
                   </Link>
-                  <div className="flex flex-col gap-1">
-                    <div className="text-muted-foreground text-xs">
+                  <div className="flex flex-col justify-between">
+                    <div className="text-muted-foreground text-xs md:text-sm 2xl:text-base">
                       {formatDate(article.createdAt, 'yyyy-MM-dd')}
                     </div>
                     <Link
                       href={`/article/${article.id}`}
-                      className="hover:text-primary text-sm"
+                      className="hover:text-primary text-sm md:text-base 2xl:text-lg"
                     >
                       {article.title}
                     </Link>
                     <Link
                       href={`/category/${article.category?.name}`}
-                      className="text-muted-foreground text-xs"
+                      className="text-muted-foreground text-xs md:text-sm 2xl:text-base"
                     >
                       {article.category?.name}
                     </Link>

@@ -25,12 +25,12 @@ export default function layout({
           <TagsSection />
         </div>
       </div>
-      <div className="hidden order-1 2xl:flex 2xl:w-full 2xl:max-w-80 flex-col 2xl:gap-6">
+      <div className="hidden order-1 2xl:flex 2xl:w-full 2xl:max-w-96 flex-col 2xl:gap-6">
         <ProfileSection />
         <LinksSection />
         <CategoriesSection />
       </div>
-      <div className="hidden order-3 2xl:flex 2xl:w-full 2xl:max-w-80 flex-col 2xl:gap-6">
+      <div className="hidden order-3 2xl:flex 2xl:w-full 2xl:max-w-96 flex-col 2xl:gap-6">
         <RecentsSection />
         <ArchiveSection />
         <TagsSection />
