@@ -212,20 +212,20 @@ export default function ArticleEditor({
       </div>
       <div className="grid grid-cols-2 gap-4">
         <Textarea
+          value={excerpt}
+          onChange={(e) => setExcerpt(e.target.value)}
+          placeholder="摘要"
+        />
+        <MarkdownPreviewer content={excerpt} />
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <Textarea
           className="min-h-60 lg:text-lg xl:text-xl"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="正文"
         />
         <MarkdownPreviewer content={content} />
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <Textarea
-          value={excerpt}
-          onChange={(e) => setExcerpt(e.target.value)}
-          placeholder="摘要"
-        />
-        <MarkdownPreviewer content={excerpt} />
       </div>
       <div className="flex items-center gap-4">
         <span className="text-sm text-muted-foreground">栏目：</span>
