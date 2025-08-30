@@ -1,7 +1,7 @@
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
-import MarkdownPreview from '@/components/blog/markdown-preview'
+import MarkdownPreviewer from '@/components/markdown-preview'
 import { getArchivedArticlesByYear } from '@/lib/actions/article/get-archived-articles-by-year'
 import { formatDistanceToNow } from 'date-fns/formatDistanceToNow'
 import Image from 'next/image'
@@ -51,9 +51,9 @@ export default async function ArchivePage({
                 </Link>
                 {article.excerpt && (
                   <div className="mb-6">
-                    <MarkdownPreview
-                      source={article.excerpt}
-                    ></MarkdownPreview>
+                    <MarkdownPreviewer
+                      content={article.excerpt}
+                    ></MarkdownPreviewer>
                   </div>
                 )}
                 <Link
