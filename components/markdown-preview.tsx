@@ -37,7 +37,7 @@ export default function MarkdownPreviewer({
               return <code className={className}>{children}</code>
             }
             return (
-              <code className="rounded bg-muted px-1.5 py-0.5 text-sm">
+              <code className="rounded bg-muted px-1.5 py-0.5 text-sm after:content-none before:content-none">
                 {children}
               </code>
             )
