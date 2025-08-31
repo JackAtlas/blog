@@ -334,19 +334,16 @@ export default function ArticlesPage() {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
-      <div className="col-span-1 lg:col-span-2">
-        <div className="flex justify-between">
-          <div></div>
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 md:gap-4 2xl:gap-6">
+      <div className="flex flex-col gap-2 md:gap-4 2xl:gap-6 col-span-1 lg:col-span-2">
+        <div>
           <Button variant="outline" asChild>
             <Link href="/dashboard/articles/new">
               <LuPlus /> 添加文章
             </Link>
           </Button>
         </div>
-        <div className="py-4 lg:py-6">
-          <DataTable columns={columns} data={articles ?? []} />
-        </div>
+        <DataTable columns={columns} data={articles ?? []} />
       </div>
       <div className="hidden lg:flex lg:flex-col lg:gap-6 lg:col-span-1">
         {previewArticle?.coverUrl && (
