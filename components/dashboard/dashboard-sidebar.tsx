@@ -51,7 +51,7 @@ const items = [
   },
   {
     title: '回收站',
-    url: '#',
+    url: '/dashboard/bin',
     icon: LuTrash2
   }
 ]

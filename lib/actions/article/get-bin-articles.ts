@@ -1,10 +1,12 @@
-import prisma from '@/lib/prisma'
 import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
+import prisma from '@/lib/prisma'
 
-export async function getArticles() {
+export async function getBinArticles() {
   const result = await prisma.article.findMany({
     where: {
-      deletedAt: null
+      deletedAt: {
+        not: null
+      }
     },
     include: {
       author: {

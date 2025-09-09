@@ -19,6 +19,7 @@ import {
 } from '@/components/ui'
 import { Category, Tag } from '@/generated/prisma'
 import MarkdownPreviewer from '@/components/markdown-preview'
+import Loader from '@/components/dashboard/loader'
 
 export default function ArticleEditor({
   articleId = ''
@@ -189,7 +190,7 @@ export default function ArticleEditor({
   }
 
   if (articleId && isArticleLoading) {
-    return <div>加载中...</div>
+    return <Loader />
   }
 
   return (
