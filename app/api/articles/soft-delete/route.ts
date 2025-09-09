@@ -20,7 +20,7 @@ export async function PATCH(req: Request) {
             ? error.message
             : '文章软删除失败，未知错误'
       },
-      { status: 400 }
+      { status: 500 }
     )
   }
 }
