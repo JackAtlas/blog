@@ -4,9 +4,23 @@ import { removeArticle } from '@/lib/actions/article/remove-article'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const articles = await getArticles()
+  try {
+    const articles = await getArticles()
 
-  return NextResponse.json(articles)
+    return NextResponse.json(articles)
+  } catch (error) {
+    console.error('文章获取失败：', error)
+
+    return NextResponse.json(
+      {
+        message:
+          error instanceof Error
+            ? error.message
+            : '文章获取失败，未知错误'
+      },
+      { status: 500 }
+    )
+  }
 }
 
 export async function POST(req: Request) {
