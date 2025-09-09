@@ -88,8 +88,6 @@ export default function ArticlesPage() {
     }
   })
 
-  // TODO: soft-delete recover
-  // TODO: use switch component
   const softRemoveArticle = useMutation({
     mutationFn: async ({ id }: { id: string }) => {
       const res = await fetch(`/api/articles/soft-delete`, {
@@ -276,30 +274,16 @@ export default function ArticlesPage() {
               </DialogFooter>
             </DialogContent>
           </Dialog>
-          <Dialog>
-            <DialogTrigger asChild>
-              {row.original.deletedAt ? (
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  className="cursor-pointer"
-                >
-                  恢复
-                </Button>
-              ) : (
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  className="cursor-pointer"
-                  onClick={() =>
-                    softRemoveArticle.mutate({ id: row.original.id })
-                  }
-                >
-                  回收站
-                </Button>
-              )}
-            </DialogTrigger>
-          </Dialog>
+          <Button
+            size="sm"
+            variant="secondary"
+            className="cursor-pointer"
+            onClick={() =>
+              softRemoveArticle.mutate({ id: row.original.id })
+            }
+          >
+            回收站
+          </Button>
           <Button
             size="sm"
             variant="outline"
