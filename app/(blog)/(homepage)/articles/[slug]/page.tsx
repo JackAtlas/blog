@@ -61,7 +61,7 @@ export default async function ArticlePage({
                 title={tag.name}
                 key={tag.id}
               >
-                <div className="bg-gray-600 text-xs text-white rounded-sm px-2 py-1 whitespace-nowrap">
+                <div className="bg-primary text-xs text-primary-foreground rounded-sm px-2 py-1 whitespace-nowrap">
                   {tag.name}
                 </div>
               </a>
