@@ -3,6 +3,9 @@ import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
 
 export async function getArticlesPinned() {
   const result = await prisma.article.findMany({
+    where: {
+      status: 'PUBLISHED'
+    },
     include: {
       author: {
         select: {
