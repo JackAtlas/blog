@@ -1,6 +1,6 @@
 'use client'
 
-import { LuCopy } from 'react-icons/lu'
+import { LuCopy, LuExternalLink } from 'react-icons/lu'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeSlug from 'rehype-slug'
@@ -22,7 +22,7 @@ export default function MarkdownPreviewer({
   return (
     <article
       className={cn(
-        'prose lg:prose-lg xl:prose-xl prose-h2:underline prose-a:text-primary prose-a:hover:text-primary/80 prose-blockquote:bg-accent prose-blockquote:text-accent-foreground prose-blockquote:border-primary/50 prose-blockquote:marker:text-primary/50 prose-ol:marker:text-primary/50 prose-ul:marker:text-primary/50 dark:prose-invert max-w-none',
+        'prose lg:prose-lg xl:prose-xl prose-h2:underline prose-h2:underline-offset-6 prose-a:text-primary prose-a:hover:text-primary/80 prose-ol:marker:text-primary/50 prose-ul:marker:text-primary/50 dark:prose-invert max-w-none',
         className
       )}
     >
@@ -30,6 +30,28 @@ export default function MarkdownPreviewer({
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeHighlight, rehypeSlug]}
         components={{
+          a({ children, href }) {
+            return (
+              <>
+                <a
+                  className="underline underline-offset-4"
+                  href={href || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {children}
+                  <LuExternalLink className="inline-block ml-1" />
+                </a>
+              </>
+            )
+          },
+          blockquote({ children }) {
+            return (
+              <blockquote className="not-prose pl-4 border-l-4 md:border-l-5 2xl:border-l-6 border-primary/50 bg-accent text-accent-foreground">
+                {children}
+              </blockquote>
+            )
+          },
           code({ children, className }) {
             const match = /language-(\w+)/.exec(className || '')
 

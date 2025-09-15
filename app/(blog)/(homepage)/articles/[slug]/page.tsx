@@ -20,7 +20,7 @@ export default async function ArticlePage({
     <Card>
       <CardHeader>
         <Image
-          className="aspect-video object-cover"
+          className="aspect-video object-cover mx-auto"
           src={article.coverUrl}
           alt={article.title}
           width={700}
@@ -29,7 +29,7 @@ export default async function ArticlePage({
       </CardHeader>
       <CardContent>
         <div>
-          <div className="flex text-xs uppercase text-muted-foreground">
+          <div className="flex text-xs md:text-sm 2xl:text-base uppercase text-muted-foreground">
             <div>
               {formatDistanceToNow(article.createdAt, {
                 addSuffix: true
@@ -37,7 +37,9 @@ export default async function ArticlePage({
             </div>
             <div className="ms-3">{article.category?.name}</div>
           </div>
-          <h1 className="text-3xl my-6">{article.title}</h1>
+          <h1 className="text-3xl md:text-4xl 2xl:text-5xl my-6">
+            {article.title}
+          </h1>
           <div className="flex flex-wrap gap-4 my-6">
             {article.tags.map((tag) => (
               <a
@@ -45,7 +47,7 @@ export default async function ArticlePage({
                 title={tag.name}
                 key={tag.id}
               >
-                <div className="bg-primary text-xs text-primary-foreground rounded-sm px-2 py-1 whitespace-nowrap">
+                <div className="bg-primary hover:bg-primary/80 text-primary-foreground text-xs md:text-sm 2xl:text-base rounded-sm px-2 py-1 whitespace-nowrap">
                   {tag.name}
                 </div>
               </a>
@@ -61,7 +63,7 @@ export default async function ArticlePage({
                 title={tag.name}
                 key={tag.id}
               >
-                <div className="bg-primary text-xs text-primary-foreground rounded-sm px-2 py-1 whitespace-nowrap">
+                <div className="bg-primary hover:bg-primary/80 text-primary-foreground text-xs md:text-sm 2xl:text-base rounded-sm px-2 py-1 whitespace-nowrap">
                   {tag.name}
                 </div>
               </a>
