@@ -4,10 +4,19 @@ import { LuCopy, LuExternalLink } from 'react-icons/lu'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeSlug from 'rehype-slug'
+import { MermaidBlock } from 'react-markdown-mermaid'
 import remarkGfm from 'remark-gfm'
 import { Button } from './ui'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+
+const mermaidConfig = {
+  theme: 'default',
+  flowChart: {
+    useMaxWidth: true,
+    htmlLabels: true
+  }
+}
 
 export default function MarkdownPreviewer({
   className,
@@ -53,6 +62,15 @@ export default function MarkdownPreviewer({
             )
           },
           code({ children, className }) {
+            if (/language-mermaid/.test(className || '')) {
+              return (
+                <MermaidBlock
+                  code={String(children)}
+                  mermaidConfig={mermaidConfig}
+                ></MermaidBlock>
+              )
+            }
+
             const match = /language-(\w+)/.exec(className || '')
 
             if (match) {
