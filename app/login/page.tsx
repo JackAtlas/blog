@@ -4,18 +4,19 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useActionState } from 'react'
 import { LuGalleryVerticalEnd, LuLoaderCircle } from 'react-icons/lu'
 import { toast } from 'sonner'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { Button, Input, Label } from '@/components/ui'
 import { login } from '@/lib/actions/auth/login'
 import { useSession } from 'next-auth/react'
 import { ThemeAndModeSwitcher } from '@/components/theme-and-mode-switcher'
 
-export default function LoginPage() {
+export default function LoginPage({
+  searchParams
+}: {
+  searchParams?: { callbackUrl?: string }
+}) {
   const router = useRouter()
   const { update } = useSession()
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
+  const callbackUrl = searchParams?.callbackUrl || '/dashboard'
 
   const [formState, formAction, isPending] = useActionState(
     async (_: any, formData: FormData) => {
@@ -71,7 +72,7 @@ export default function LoginPage() {
                   <div className="flex items-center">
                     <Label htmlFor="password">密码</Label>
                     <a
-                      href="#"
+                      href="/reset-password"
                       className="ml-auto text-sm underline-offset-4 hover:underline"
                     >
                       忘记密码？

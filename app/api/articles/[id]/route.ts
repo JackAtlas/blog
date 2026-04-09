@@ -2,10 +2,15 @@ import { getArticleById } from '@/lib/actions/article/get-article-by-id'
 import { updateArticle } from '@/lib/actions/article/update-article'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET(context: {
-  params: Promise<{ id: string }>
-}) {
-  const { id } = await context.params
+export async function GET(
+  request: NextRequest,
+  {
+    params
+  }: {
+    params: Promise<{ id: string }>
+  }
+) {
+  const { id } = await params
   try {
     const article = await getArticleById(id)
 
@@ -31,9 +36,9 @@ export async function GET(context: {
 
 export async function PUT(
   request: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await context.params
+  const { id } = await params
   const body = await request.json()
 
   try {

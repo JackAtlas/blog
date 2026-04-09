@@ -4,7 +4,9 @@ import { getTopCategories } from '@/lib/actions/category/get-top-categories'
 import { removeCategory } from '@/lib/actions/category/remove-category'
 import { getCategories } from '@/lib/actions/category/get-categories'
 
-export async function GET({ top }: { top?: boolean }) {
+export async function GET(request: NextRequest) {
+  const { searchParams } = request.nextUrl
+  const top = searchParams.get('top')
   if (top) {
     return NextResponse.json(await getTopCategories())
   } else {
