@@ -1,0 +1,70 @@
+name: Deploy to Tencent Cloud
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 拉取代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. 安装 pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      # 3. Node 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      # 4. 安装依赖
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 5. Prisma 检查
+      - name: Run Prisma migrate (CI check)
+        run: pnpm dlx prisma migrate deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      # 6. 构建项目
+      - name: Build the project
+        run: npm run build
+
+      # 7. SSH 部署
+      - name: Deploy to server via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            set -e
+
+            cd /root/www/blog
+
+            echo "Pull latest code"
+            git pull origin main
+
+            echo "Install deps"
+            pnpm install
+
+            echo "Run migrations"
+            pnpm dlx prisma migrate deploy
+
+            echo "Build project"
+            pnpm run build
+
+            echo "Restart app"
+            pm2 restart blog || pm2 start pnpm --name "blog" -- start
