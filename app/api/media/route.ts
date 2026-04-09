@@ -1,7 +1,7 @@
 import { deleteMedia } from '@/lib/actions/media/delete-media'
 import { getAllMediaData } from '@/lib/actions/media/get-all-media'
 import { handleMediaUpload } from '@/lib/actions/media/media-upload'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 export const runtime = 'nodejs'
 
@@ -23,7 +23,7 @@ export async function GET() {
   }
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const form = await req.formData()
     const file = form.get('file') as File
@@ -51,7 +51,7 @@ export async function POST(req: Request) {
   }
 }
 
-export async function DELETE(req: Request) {
+export async function DELETE(req: NextRequest) {
   try {
     const body = await req.json()
 

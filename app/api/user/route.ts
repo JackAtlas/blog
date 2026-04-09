@@ -1,7 +1,7 @@
 import updateUserName from '@/lib/actions/user/update-user-name'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   try {
     const body = await req.formData()
 

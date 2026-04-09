@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { createCategory } from '@/lib/actions/category/create-category'
 import { getTopCategories } from '@/lib/actions/category/get-top-categories'
 import { removeCategory } from '@/lib/actions/category/remove-category'
@@ -12,7 +12,7 @@ export async function GET({ top }: { top?: boolean }) {
   }
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
 
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
   }
 }
 
-export async function DELETE(req: Request) {
+export async function DELETE(req: NextRequest) {
   try {
     const body = await req.json()
     if (!body.id || isNaN(body.id)) {
