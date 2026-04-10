@@ -28,15 +28,15 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
 
+      # 4. 安装依赖
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Debug versions
         run: |
           node -v
           pnpm -v
           pnpm list typescript
-
-      # 4. 安装依赖
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
 
       # 5. 构建项目
       - name: Build the project
