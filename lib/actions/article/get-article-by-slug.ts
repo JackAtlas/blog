@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
 
 export async function getArticleBySlug(slug: string) {

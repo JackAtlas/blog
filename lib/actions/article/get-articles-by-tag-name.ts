@@ -1,5 +1,5 @@
 import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 export async function getArticlesByTagName(name: string) {
   const tag = await prisma.tag.findFirst({

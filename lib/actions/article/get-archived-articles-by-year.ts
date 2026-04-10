@@ -1,5 +1,5 @@
 import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 export async function getArchivedArticlesByYear(year: string) {
   const articles = await prisma.article.findMany({

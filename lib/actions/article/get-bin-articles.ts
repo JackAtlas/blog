@@ -1,5 +1,5 @@
 import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 export async function getBinArticles() {
   const result = await prisma.article.findMany({

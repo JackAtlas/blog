@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 export async function getCategoryInfoByName(name: string) {
   const result = await prisma.category.findFirst({
