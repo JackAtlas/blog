@@ -1,10 +1,22 @@
+'use client'
+
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
-import { getTopCategories } from '@/lib/actions/category/get-top-categories'
 import Link from 'next/link'
+import { useQuery } from '@tanstack/react-query'
+import type { TopCategory } from '@/lib/actions/category/get-top-categories'
 
-export default async function CategoriesSection() {
-  const categories = await getTopCategories()
+async function fetchCategories(): Promise<TopCategory[]> {
+  const res = await fetch('/api/categories?top=1')
+
+  return res.json()
+}
+
+export default function CategoriesSection() {
+  const { data: categories = [] } = useQuery({
+    queryKey: ['top-categories'],
+    queryFn: fetchCategories
+  })
   return (
     <Card>
       <CardContent>
@@ -22,7 +34,7 @@ export default async function CategoriesSection() {
                   {category.name}
                 </span>
                 <span className="h-[2em] flex items-center bg-muted text-muted-foreground text-xs md:text-sm 2xl:text-base font-mono rounded-sm px-[0.75em]">
-                  {category.articles.length}
+                  {category._count?.articles ?? 0}
                 </span>
               </Link>
               <ul className="py-2 pl-2">
@@ -39,7 +51,7 @@ export default async function CategoriesSection() {
                         {child.name}
                       </span>
                       <span className="h-[2em] flex items-center bg-muted text-muted-foreground text-xs md:text-sm 2xl:text-base font-mono rounded-sm px-[0.75em]">
-                        {child.articles.length}
+                        {child._count?.articles ?? 0}
                       </span>
                     </Link>
                   </li>
