@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 
 export async function getTopCategories() {
-  return await prisma.category.findMany({
+  return prisma.category.findMany({
     where: { parentId: null },
     include: {
       articles: true,

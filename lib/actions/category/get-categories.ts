@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 
 export async function getCategories() {
-  return await prisma.category.findMany({
+  return prisma.category.findMany({
     orderBy: { createdAt: 'desc' }
   })
 }
