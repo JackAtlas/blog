@@ -33,38 +33,56 @@ jobs:
 
       # 5. Prisma 检查
       - name: Run Prisma migrate (CI check)
-        run: pnpm dlx prisma migrate deploy
+        run: pnpm prisma migrate deploy
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       # 6. 构建项目
       - name: Build the project
-        run: npm run build
+        run: pnpm build
 
-      # 7. SSH 部署
-      - name: Deploy to server via SSH
-        uses: appleboy/ssh-action@master
+      # 7. 打包需要的文件
+      - name: Package files
+        run: |
+          tar -czf release.tar.gz \
+            .next \
+            public \
+            package.json \
+            pnpm-lock.yaml \
+            prisma
+
+      # 8. 上传到服务器
+      - name: Upload to server via SSH
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
+          source: 'release.tar.gz'
+          target: '/root/www/blog'
+
+      # 9. SSH 部署
+      - name: Deploy on Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             set -e
-
             cd /root/www/blog
 
-            echo "Pull latest code"
-            git pull origin main
+            echo "解压"
+            tar -xzf release.tar.gz
 
-            echo "Install deps"
-            pnpm install
+            echo "安装依赖（仅生产）"
+            pnpm install --frozen-lockfile --prod
 
-            echo "Run migrations"
-            pnpm dlx prisma migrate deploy
+            echo "执行数据库迁移"
+            pnpm prisma migrate deploy
 
-            echo "Build project"
-            pnpm run build
-
-            echo "Restart app"
+            echo "重启服务"
             pm2 restart blog || pm2 start pnpm --name "blog" -- start
+
+            echo "清理临时文件"
+            rm release.tar.gz
