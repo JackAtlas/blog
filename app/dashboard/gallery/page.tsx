@@ -22,7 +22,7 @@ import {
   Input,
   Label
 } from '@/components/ui'
-import { Media } from '@/generated/prisma'
+import { Media } from '@prisma/client'
 import {
   useMutation,
   useQuery,

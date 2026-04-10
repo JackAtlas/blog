@@ -15,7 +15,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui'
-import { Article } from '@/generated/prisma'
+import { Article } from '@prisma/client'
 import {
   useMutation,
   useQuery,

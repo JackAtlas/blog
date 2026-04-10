@@ -17,7 +17,7 @@ import {
   SelectValue,
   Textarea
 } from '@/components/ui'
-import { Category, Tag } from '@/generated/prisma'
+import { Category, Tag } from '@prisma/client'
 import MarkdownPreviewer from '@/components/markdown-preview'
 import Loader from '@/components/dashboard/loader'
 
@@ -177,8 +177,8 @@ export default function ArticleEditor({
         error instanceof Error
           ? error.message
           : articleId
-          ? '文章修改失败，未知错误'
-          : '文章创建失败，未知错误'
+            ? '文章修改失败，未知错误'
+            : '文章创建失败，未知错误'
       )
     }
   })

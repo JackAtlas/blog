@@ -1,7 +1,7 @@
 'use client'
 
 import { Button, Input } from '@/components/ui'
-import { Article, Tag } from '@/generated/prisma'
+import { Article, Tag } from '@prisma/client'
 import { cn } from '@/lib/utils'
 import {
   useMutation,

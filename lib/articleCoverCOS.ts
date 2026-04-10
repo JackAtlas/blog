@@ -1,4 +1,4 @@
-import { Article } from '@/generated/prisma'
+import { Article } from '@prisma/client'
 import { BUCKET, cos, COS_DOMAIN, REGION } from './cos/cosClient'
 
 // interface ExtendedArticle extends Article {

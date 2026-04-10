@@ -22,7 +22,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui'
-import { Article, Category, Tag } from '@/generated/prisma'
+import { Article, Category, Tag } from '@prisma/client'
 import { useSession } from 'next-auth/react'
 
 export default function BlogHeader() {
