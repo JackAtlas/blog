@@ -14,6 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # test
+      - name: Debug
+        run: |
+          echo "ROOT:"
+          ls -R | head -200
+
+          echo "COMPONENTS:"
+          ls -R components || true
+
+          echo "BLOG:"
+          ls -R components/blog || true
+
       # 2. 安装 pnpm
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
