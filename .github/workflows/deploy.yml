@@ -32,13 +32,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # 5. 构建项目
+      # 5. 生成 Prisma 客户端
+      - name: Generate Prisma Client
+        run: pnpm prisma generate
+
+      # 6. 构建项目
       - name: Build the project
         run: pnpm build
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
-      # 6. 打包需要的文件
+      # 7. 打包需要的文件
       - name: Package files
         run: |
           tar -czf release.tar.gz \
@@ -48,7 +50,7 @@ jobs:
             pnpm-lock.yaml \
             prisma
 
-      # 7. 上传到服务器
+      # 8. 上传到服务器
       - name: Upload to server via SSH
         uses: appleboy/scp-action@v0.1.7
         with:
