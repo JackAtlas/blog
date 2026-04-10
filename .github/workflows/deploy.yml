@@ -32,15 +32,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Debug versions
-        run: |
-          node -v
-          pnpm -v
-          pnpm list typescript
-
       # 5. 构建项目
       - name: Build the project
         run: pnpm build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       # 6. 打包需要的文件
       - name: Package files
