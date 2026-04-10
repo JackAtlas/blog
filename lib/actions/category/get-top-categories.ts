@@ -4,13 +4,21 @@ export async function getTopCategories() {
   return prisma.category.findMany({
     where: { parentId: null },
     include: {
-      articles: true,
+      _count: {
+        select: { articles: true }
+      },
       children: {
         include: {
-          articles: true
+          _count: {
+            select: { articles: true }
+          }
         }
       }
     },
     orderBy: { createdAt: 'asc' }
   })
 }
+
+export type TopCategory = Awaited<
+  ReturnType<typeof getTopCategories>
+>[number]
