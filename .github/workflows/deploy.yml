@@ -34,9 +34,7 @@ jobs:
 
       # 5. 生成 Prisma 客户端
       - name: Generate Prisma Client
-        run: rm -rf node_modules/.prisma
-
-      - run: pnpm prisma generate
+        run: pnpm prisma generate
 
       # 6. 构建项目
       - name: Build the project
