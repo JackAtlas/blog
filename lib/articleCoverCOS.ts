@@ -1,13 +1,19 @@
 import { Article } from '@/generated/prisma'
 import { BUCKET, cos, COS_DOMAIN, REGION } from './cos/cosClient'
 
-interface ExtendedArticle extends Article {
+// interface ExtendedArticle extends Article {
+//   author: { name: string }
+//   category: { name: string; id?: number } | null
+//   tags: { name: string; id?: number }[]
+// }
+
+type ExtendedArticle = Article & {
   author: { name: string }
   category: { name: string; id?: number } | null
   tags: { name: string; id?: number }[]
 }
 
-export interface ExtendedArticleWithCovers extends ExtendedArticle {
+export type ExtendedArticleWithCovers = ExtendedArticle & {
   coverUrl: string
   thumbnail: string
 }
