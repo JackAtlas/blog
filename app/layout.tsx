@@ -1,5 +1,3 @@
-import fs from 'fs'
-import path from 'path'
 import type { Metadata } from 'next'
 import { SessionProvider } from 'next-auth/react'
 import './globals.css'
@@ -8,6 +6,7 @@ import {
   AppProviders,
   ThemeNameProvider
 } from '@/components/providers'
+import { getThemes } from '@/lib/themes'
 
 export const metadata: Metadata = {
   title: 'JackAtlas',
@@ -19,9 +18,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const dirPath = path.join(process.cwd(), 'themes')
-  const files = fs.readdirSync(dirPath)
-  const themes = files.map((file) => file.replace('.css', ''))
+  const themes = getThemes()
   return (
     <SessionProvider>
       <html lang="zh-cmn-Hans" suppressHydrationWarning>
