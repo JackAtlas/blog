@@ -1,11 +1,23 @@
+'use client'
+
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
-import { getArchivedArticles } from '@/lib/actions/article/get-archived-articles'
+import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
+import type { Archive } from '@/types/archive'
 
-export default async function ArchiveSection() {
-  const archives = await getArchivedArticles()
+async function fetchArchives(): Promise<Archive[]> {
+  const res = await fetch('/api/articles/archive')
 
+  return res.json()
+}
+
+export default function ArchiveSection() {
+  const { data: archives = [] } = useQuery({
+    queryKey: ['archives'],
+    queryFn: fetchArchives,
+    staleTime: 1000 * 60 * 10
+  })
   return (
     <Card>
       <CardContent>
