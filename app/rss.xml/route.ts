@@ -1,8 +1,7 @@
 import { prisma } from '@/lib/prisma'
-import { format } from 'date-fns'
 import { NextResponse } from 'next/server'
 
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 const SITE =
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://jackatlas.xyz'
@@ -15,6 +14,12 @@ function esc(s: string) {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}
+
+function cdata(s: string) {
+  return `<![CDATA[${s.replace(/]]>/g, ']]]]><![CDATA[>')}]]>`
 }
 
 export async function GET() {
@@ -24,14 +29,18 @@ export async function GET() {
       deletedAt: null
     },
     orderBy: { createdAt: 'desc' },
-    take: 50,
-    include: {
-      tags: {
+    take: 20,
+    select: {
+      title: true,
+      slug: true,
+      createdAt: true,
+      excerpt: true,
+      category: {
         select: {
           name: true
         }
       },
-      category: {
+      tags: {
         select: {
           name: true
         }
@@ -44,27 +53,29 @@ export async function GET() {
   const items = articles
     .map((a) => {
       const url = `${SITE}/articles/${a.slug}`
-      const pubDate = format(
-        a.createdAt,
-        'EEE, dd MMM yyyy HH:mm:ss xx'
-      )
+      const pubDate = a.createdAt.toUTCString()
+
+      const categories = new Set<string>()
+      if (a.category) {
+        categories.add(a.category.name)
+      }
+      a.tags.forEach((t) => categories.add(t.name))
+      const categoryXml = Array.from(categories)
+        .map((name) => `<category>${esc(name)}</category>`)
+        .join('')
 
       return `
       <item>
         <title>${esc(a.title)}</title>
         <link>${url}</link>
-        <guid isPermaLink="true">${url}</guid>
+        <guid>${url}</guid>
         <pubDate>${pubDate}</pubDate>
         ${
           a.excerpt
-            ? `<description><![CDATA[${a.excerpt}]]></description>`
+            ? `<description>${cdata(String(a.excerpt))}</description>`
             : ''
         }
-        ${
-          a.category
-            ? `<category>${esc(a.category.name)}</category>`
-            : ''
-        }
+        ${categoryXml}
       </item>
     `.trim()
     })
@@ -72,16 +83,14 @@ export async function GET() {
 
   const xml = `
     <?xml version="1.0" encoding="UTF-8"?>
-    <rss version="2.0">
+    <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
       <channel>
+        <atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml" />
         <title>${esc(SITE_TITLE)}</title>
         <link>${SITE}</link>
         <description>${esc(SITE_DESC)}</description>
         <language>${SITE_LANG}</language>
-        <lastBuildDate>${format(
-          lastBuildDate,
-          'EEE, dd MMM yyyy HH:mm:ss xx'
-        )}</lastBuildDate>
+        <lastBuildDate>${lastBuildDate.toUTCString()}</lastBuildDate>
         ${items}
       </channel>
     </rss>
