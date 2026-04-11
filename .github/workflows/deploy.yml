@@ -74,6 +74,14 @@ jobs:
             echo "解压"
             tar -xzf release.tar.gz
 
+            echo "加载环境变量"
+            set -a
+            source .env
+            set +a
+
+            echo "检查 DATABASE_URL"
+            echo $DATABASE_URL
+
             echo "安装依赖"
             pnpm install --frozen-lockfile
 
