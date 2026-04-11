@@ -74,8 +74,8 @@ jobs:
             echo "解压"
             tar -xzf release.tar.gz
 
-            echo "安装依赖（仅生产）"
-            pnpm install --frozen-lockfile --prod
+            echo "安装依赖"
+            pnpm install --frozen-lockfile
 
             echo "执行数据库迁移"
             pnpm prisma migrate deploy
