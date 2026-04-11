@@ -48,7 +48,8 @@ jobs:
             public \
             package.json \
             pnpm-lock.yaml \
-            prisma
+            prisma \
+            prisma.config.ts
 
       # 8. 上传到服务器
       - name: Upload to server via SSH
