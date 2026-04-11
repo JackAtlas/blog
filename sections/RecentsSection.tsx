@@ -1,12 +1,24 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
-import { getArticles } from '@/lib/actions/article/get-articles'
 import { format } from 'date-fns'
+import { ExtendedArticleWithCovers } from '@/lib/articleCoverCOS'
+import { useQuery } from '@tanstack/react-query'
 
-export default async function RecentsSection() {
-  const articles = (await getArticles()).slice(0, 5)
+async function fetchArticles(): Promise<ExtendedArticleWithCovers[]> {
+  const res = await fetch('/api/articles/pin')
+
+  return res.json()
+}
+
+export default function RecentsSection() {
+  const { data: articles = [] } = useQuery({
+    queryKey: ['pinned-articles'],
+    queryFn: fetchArticles
+  })
 
   return (
     <Card>
@@ -14,7 +26,7 @@ export default async function RecentsSection() {
         <div className="-mb-5 text-muted-foreground text-xs md:text-sm 2xl:text-base tracking-widest uppercase">
           Recents
         </div>
-        {articles.map((article) => (
+        {articles.slice(0, 5).map((article) => (
           <div className="flex mt-7" key={article.id}>
             <Link
               href={`/article/${article.slug}`}
