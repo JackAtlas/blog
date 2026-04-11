@@ -83,7 +83,7 @@ jobs:
             echo $DATABASE_URL
 
             echo "安装依赖"
-            pnpm install --frozen-lockfile
+            pnpm install --frozen-lockfile --ignore-scripts=false
 
             echo "执行数据库迁移"
             pnpm prisma migrate deploy
