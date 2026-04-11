@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getTags } from '@/lib/actions/tag/get-tags'
 import { createTag } from '@/lib/actions/tag/create-tag'
-import { getTagsPublic } from '@/lib/actions/tag/get-tags-pulic'
 
 export async function GET() {
-  const tags = await getTagsPublic()
+  const tags = await getTags()
 
   return NextResponse.json(tags)
 }
