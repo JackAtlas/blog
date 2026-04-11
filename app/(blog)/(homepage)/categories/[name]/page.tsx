@@ -1,8 +1,9 @@
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
-import { getArticlesByCategoryName } from '@/lib/actions/article/get-articles-by-category-name'
+// import { getArticlesByCategoryName } from '@/lib/actions/article/get-articles-by-category-name'
 import { getCategoryInfoByName } from '@/lib/actions/category/get-category-info-by-name'
+import { ExtendedArticleWithCovers } from '@/lib/articleCoverCOS'
 import { formatDistanceToNow } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -33,9 +34,11 @@ export default async function CategoryPage({
     )
   }
 
-  const articles = await getArticlesByCategoryName(
-    decodeURIComponent(name)
-  )
+  const articles: ExtendedArticleWithCovers[] = []
+
+  // const articles = await getArticlesByCategoryName(
+  //   decodeURIComponent(name)
+  // )
 
   return (
     <div className="flex flex-col gap-4 lg:gap-6">

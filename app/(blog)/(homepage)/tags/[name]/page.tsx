@@ -1,8 +1,9 @@
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
-import { getArticlesByTagName } from '@/lib/actions/article/get-articles-by-tag-name'
+// import { getArticlesByTagName } from '@/lib/actions/article/get-articles-by-tag-name'
 import { getTagInfoByName } from '@/lib/actions/tag/get-tag-info-by name'
+import { ExtendedArticleWithCovers } from '@/lib/articleCoverCOS'
 import { formatDistanceToNow } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -31,9 +32,11 @@ export default async function TagPage({
     )
   }
 
-  const articles = await getArticlesByTagName(
-    decodeURIComponent(name)
-  )
+  const articles: ExtendedArticleWithCovers[] = []
+
+  // const articles = await getArticlesByTagName(
+  //   decodeURIComponent(name)
+  // )
 
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
