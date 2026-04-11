@@ -1,10 +1,21 @@
+'use client'
+
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
-import { getTags } from '@/lib/actions/tag/get-tags'
+import { TagPublicDTO } from '@/types/tag'
+import { useQuery } from '@tanstack/react-query'
 
-export default async function TagsSection() {
-  const tags = await getTags()
+async function fetchTags(): Promise<TagPublicDTO[]> {
+  const res = await fetch('/api/tags')
 
+  return res.json()
+}
+
+export default function TagsSection() {
+  const { data: tags = [] } = useQuery({
+    queryKey: ['tags'],
+    queryFn: fetchTags
+  })
   return (
     <Card>
       <CardContent>
@@ -23,7 +34,7 @@ export default async function TagsSection() {
                 {tag.name}
               </div>
               <div className="bg-muted hover:bg-muted/80 text-muted-foreground text-xs md:text-sm 2xl:text-base rounded-r-sm px-2 py-1">
-                {tag.articles.length}
+                {tag._count.articles}
               </div>
             </a>
           ))}
