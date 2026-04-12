@@ -1,13 +1,15 @@
+import { getMetaData } from '@/lib/actions/get-meta-data'
 import {
   CategoriesSection,
   LinksSection,
   ProfileSection
 } from '@/sections'
 
-export default function HomepageSidebarLeft() {
+export default async function HomepageSidebarLeft() {
+  const metaData = await getMetaData()
   return (
     <>
-      <ProfileSection />
+      <ProfileSection metaData={metaData} />
       <LinksSection />
       <CategoriesSection />
     </>

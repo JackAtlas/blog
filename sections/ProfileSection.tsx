@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import {
   FaFacebookF,
@@ -12,26 +10,15 @@ import CardContent from '@/components/blog/card-content'
 import { SiGitee } from 'react-icons/si'
 import Link from 'next/link'
 import { LuMail } from 'react-icons/lu'
-import { useQuery } from '@tanstack/react-query'
 
-async function fetchMetaData(): Promise<{
-  articles: number
-  categories: number
-  tags: number
-}> {
-  const res = await fetch('/api/stats')
-
-  return res.json()
-}
-
-export default function ProfileSection() {
-  const { data: stats } = useQuery({
-    queryKey: ['stats'],
-    queryFn: fetchMetaData
-  })
-  const articles = stats?.articles ?? 0
-  const categories = stats?.categories ?? 0
-  const tags = stats?.tags ?? 0
+export default function ProfileSection({
+  metaData
+}: {
+  metaData: { articles: number; categories: number; tags: number }
+}) {
+  const articles = metaData?.articles ?? 0
+  const categories = metaData?.categories ?? 0
+  const tags = metaData?.tags ?? 0
   return (
     <Card>
       <CardContent>
