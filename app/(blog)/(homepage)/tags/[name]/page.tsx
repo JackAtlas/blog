@@ -20,9 +20,7 @@ export default async function TagPage({
         <Card>
           <CardContent>
             <div className="flex items-center gap-4 h-9 px-2">
-              <div className="text-sm">
-                标签“{decodeURIComponent(name)}”不存在
-              </div>
+              <div className="text-sm">标签“{tagName}”不存在</div>
             </div>
           </CardContent>
         </Card>
