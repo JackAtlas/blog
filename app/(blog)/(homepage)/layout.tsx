@@ -1,9 +1,7 @@
-import ArchiveSection from '@/sections/ArchiveSection'
-import CategoriesSection from '@/sections/CategoriesSection'
-import LinksSection from '@/sections/LinksSection'
-import ProfileSection from '@/sections/ProfileSection'
-import RecentsSection from '@/sections/RecentsSection'
-import TagsSection from '@/sections/TagsSection'
+import HomepageSidebarLeft from '@/components/blog/homepage-sidebar-left'
+import HomePageSidebarRight from '@/components/blog/homepage-sidebar-right'
+
+export const dynamic = 'force-dynamic'
 
 export default function layout({
   children
@@ -15,25 +13,17 @@ export default function layout({
       </div>
       <div className="order-2 2xl:hidden flex flex-col gap-2 md:gap-4">
         <div className="flex flex-col gap-4 lg:gap-6">
-          <ProfileSection />
-          <LinksSection />
-          <CategoriesSection />
+          <HomepageSidebarLeft />
         </div>
         <div className="flex flex-col gap-4 2xl:gap-6">
-          <RecentsSection />
-          <ArchiveSection />
-          <TagsSection />
+          <HomePageSidebarRight />
         </div>
       </div>
       <div className="hidden order-1 2xl:flex 2xl:w-full 2xl:max-w-96 flex-col 2xl:gap-6">
-        <ProfileSection />
-        <LinksSection />
-        <CategoriesSection />
+        <HomepageSidebarLeft />
       </div>
       <div className="hidden order-3 2xl:flex 2xl:w-full 2xl:max-w-96 flex-col 2xl:gap-6">
-        <RecentsSection />
-        <ArchiveSection />
-        <TagsSection />
+        <HomePageSidebarRight />
       </div>
     </div>
   )
