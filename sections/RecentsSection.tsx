@@ -1,24 +1,15 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import { format } from 'date-fns'
 import { ExtendedArticleWithCovers } from '@/lib/articleCoverCOS'
-import { useQuery } from '@tanstack/react-query'
+import { getArticlesPinned } from '@/lib/actions/article/get-articles-pinned'
 
-async function fetchArticles(): Promise<ExtendedArticleWithCovers[]> {
-  const res = await fetch('/api/articles/pin')
+export const dynamic = 'force-dynamic'
 
-  return res.json()
-}
-
-export default function RecentsSection() {
-  const { data: articles = [] } = useQuery({
-    queryKey: ['pinned-articles'],
-    queryFn: fetchArticles
-  })
+export default async function RecentsSection() {
+  const articles = await getArticlesPinned()
 
   return (
     <Card>
