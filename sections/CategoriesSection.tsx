@@ -3,20 +3,13 @@
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import Link from 'next/link'
-import { useQuery } from '@tanstack/react-query'
 import type { TopCategory } from '@/lib/actions/category/get-top-categories'
 
-async function fetchCategories(): Promise<TopCategory[]> {
-  const res = await fetch('/api/categories?top=1')
-
-  return res.json()
-}
-
-export default function CategoriesSection() {
-  const { data: categories = [] } = useQuery({
-    queryKey: ['top-categories'],
-    queryFn: fetchCategories
-  })
+export default function CategoriesSection({
+  topCategories
+}: {
+  topCategories: TopCategory[]
+}) {
   return (
     <Card>
       <CardContent>
@@ -24,7 +17,7 @@ export default function CategoriesSection() {
           Categories
         </div>
         <ul>
-          {categories.map((category) => (
+          {topCategories.map((category) => (
             <li key={category.id}>
               <Link
                 href={`/categories/${category.name}`}

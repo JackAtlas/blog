@@ -1,3 +1,4 @@
+import { getTopCategories } from '@/lib/actions/category/get-top-categories'
 import { getMetaData } from '@/lib/actions/get-meta-data'
 import {
   CategoriesSection,
@@ -7,11 +8,12 @@ import {
 
 export default async function HomepageSidebarLeft() {
   const metaData = await getMetaData()
+  const topCategories = await getTopCategories()
   return (
     <>
       <ProfileSection metaData={metaData} />
       <LinksSection />
-      <CategoriesSection />
+      <CategoriesSection topCategories={topCategories} />
     </>
   )
 }
