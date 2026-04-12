@@ -1,5 +1,3 @@
-'use client'
-
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import Link from 'next/link'
