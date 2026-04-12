@@ -1,21 +1,12 @@
-'use client'
-
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import { TagPublicDTO } from '@/types/tag'
-import { useQuery } from '@tanstack/react-query'
 
-async function fetchTags(): Promise<TagPublicDTO[]> {
-  const res = await fetch('/api/tags')
-
-  return res.json()
-}
-
-export default function TagsSection() {
-  const { data: tags = [] } = useQuery({
-    queryKey: ['tags'],
-    queryFn: fetchTags
-  })
+export default function TagsSection({
+  tags
+}: {
+  tags: TagPublicDTO[]
+}) {
   return (
     <Card>
       <CardContent>
