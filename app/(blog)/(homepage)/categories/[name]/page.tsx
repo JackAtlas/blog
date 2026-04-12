@@ -1,10 +1,7 @@
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
-import CardHeader from '@/components/blog/card-header'
 import { getArticlesByCategoryName } from '@/lib/actions/article/get-articles-by-category-name'
-import { getCategoryInfoByName } from '@/lib/actions/category/get-category-info-by-name'
-import { formatDistanceToNow } from 'date-fns'
-import Image from 'next/image'
+import { ArticlesSection } from '@/sections'
 import Link from 'next/link'
 
 export default async function CategoryPage({
@@ -13,9 +10,10 @@ export default async function CategoryPage({
   params: { name: string }
 }) {
   const { name } = await params
-  const category = await getCategoryInfoByName(
-    decodeURIComponent(name)
-  )
+  const categoryName = decodeURIComponent(name)
+
+  const { articles, category } =
+    await getArticlesByCategoryName(categoryName)
 
   if (!category) {
     return (
@@ -24,7 +22,7 @@ export default async function CategoryPage({
           <CardContent>
             <div className="flex items-center gap-4 h-9 px-2">
               <div className="text-sm">
-                栏目“{decodeURIComponent(name)}”不存在
+                栏目“{categoryName}”不存在
               </div>
             </div>
           </CardContent>
@@ -32,10 +30,6 @@ export default async function CategoryPage({
       </div>
     )
   }
-
-  const articles = await getArticlesByCategoryName(
-    decodeURIComponent(name)
-  )
 
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
@@ -48,7 +42,7 @@ export default async function CategoryPage({
                 <div>&gt;</div>
               </>
             )}
-            <div>{decodeURIComponent(name)}</div>
+            <div>{categoryName}</div>
           </div>
           {category?.children?.length !== 0 && (
             <ul className="py-2 pl-2">
@@ -74,7 +68,7 @@ export default async function CategoryPage({
       </Card>
       {category?.children.length === 0 && (
         <>
-          <ul className="flex flex-col gap-4 lg:gap-6">
+          {/* <ul className="flex flex-col gap-4 lg:gap-6">
             {articles.map((article) => (
               <li key={article.id}>
                 <Card>
@@ -120,7 +114,8 @@ export default async function CategoryPage({
                 </Card>
               </li>
             ))}
-          </ul>
+          </ul> */}
+          <ArticlesSection articles={articles} />
           {articles.length === 0 && (
             <div className="text-center">暂无文章，敬请期待</div>
           )}

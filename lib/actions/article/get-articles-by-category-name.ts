@@ -3,35 +3,27 @@ import { prisma } from '@/lib/prisma'
 
 export async function getArticlesByCategoryName(name: string) {
   const category = await prisma.category.findFirst({
-    where: {
-      name
+    where: { name },
+    include: {
+      children: {
+        include: {
+          articles: true
+        }
+      },
+      parent: true
     }
   })
 
-  if (!category) {
-    throw new Error(`栏目 ${name} 不存在`)
-  }
+  if (!category) return { category: null, articles: [] }
 
   const result = await prisma.article.findMany({
     where: {
       categoryId: category.id
     },
     include: {
-      author: {
-        select: {
-          name: true
-        }
-      },
-      category: {
-        select: {
-          name: true
-        }
-      },
-      tags: {
-        select: {
-          name: true
-        }
-      }
+      author: { select: { name: true } },
+      category: { select: { name: true } },
+      tags: { select: { name: true } }
     },
     orderBy: {
       createdAt: 'desc'
@@ -41,5 +33,5 @@ export async function getArticlesByCategoryName(name: string) {
   const resultWithCover =
     await articleCoverCOSFixedManager.addCoverUrls(result)
 
-  return resultWithCover ?? []
+  return { category, articles: resultWithCover ?? [] }
 }
