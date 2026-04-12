@@ -1,6 +1,7 @@
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import { TagPublicDTO } from '@/types/tag'
+import Link from 'next/link'
 
 export default function TagsSection({
   tags
@@ -15,7 +16,7 @@ export default function TagsSection({
         </div>
         <div className="flex flex-wrap gap-4">
           {tags.map((tag) => (
-            <a
+            <Link
               href={`/tags/${tag.name}`}
               className="flex"
               title={tag.name}
@@ -25,9 +26,9 @@ export default function TagsSection({
                 {tag.name}
               </div>
               <div className="bg-muted hover:bg-muted/80 text-muted-foreground text-xs md:text-sm 2xl:text-base rounded-r-sm px-2 py-1">
-                {tag._count.articles}
+                {tag._count?.articles ?? 0}
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </CardContent>
