@@ -78,6 +78,9 @@ jobs:
             echo "安装依赖"
             pnpm install --frozen-lockfile
 
+            echo "生成 Prisma 客户端"
+            pnpm prisma generate
+
             echo "执行数据库迁移"
             pnpm prisma migrate deploy
 
