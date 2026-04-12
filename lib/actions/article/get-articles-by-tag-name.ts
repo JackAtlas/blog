@@ -2,48 +2,28 @@ import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
 import { prisma } from '@/lib/prisma'
 
 export async function getArticlesByTagName(name: string) {
-  const tag = await prisma.tag.findFirst({
-    where: {
-      name
-    }
+  const tag = await prisma.tag.findUnique({
+    where: { name }
   })
 
-  if (!tag) {
-    throw new Error(`标签 ${name} 不存在`)
-  }
+  if (!tag) return { tag: null, articles: [] }
 
-  const result = await prisma.article.findMany({
+  const articles = await prisma.article.findMany({
     where: {
       tags: {
-        some: {
-          name
-        }
+        some: { name }
       }
     },
     include: {
-      author: {
-        select: {
-          name: true
-        }
-      },
-      category: {
-        select: {
-          name: true
-        }
-      },
-      tags: {
-        select: {
-          name: true
-        }
-      }
+      author: { select: { name: true } },
+      category: { select: { name: true } },
+      tags: { select: { name: true } }
     },
-    orderBy: {
-      createdAt: 'desc'
-    }
+    orderBy: { createdAt: 'desc' }
   })
 
   const resultWithCover =
-    await articleCoverCOSFixedManager.addCoverUrls(result)
+    await articleCoverCOSFixedManager.addCoverUrls(articles)
 
-  return resultWithCover ?? []
+  return { tag, articles: resultWithCover ?? [] }
 }

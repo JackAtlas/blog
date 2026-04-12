@@ -1,12 +1,7 @@
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
-import CardHeader from '@/components/blog/card-header'
-// import { getArticlesByTagName } from '@/lib/actions/article/get-articles-by-tag-name'
-import { getTagInfoByName } from '@/lib/actions/tag/get-tag-info-by name'
-import { ExtendedArticleWithCovers } from '@/lib/articleCoverCOS'
-import { formatDistanceToNow } from 'date-fns'
-import Image from 'next/image'
-import Link from 'next/link'
+import { getArticlesByTagName } from '@/lib/actions/article/get-articles-by-tag-name'
+import { ArticlesSection } from '@/sections'
 
 export default async function TagPage({
   params
@@ -14,7 +9,10 @@ export default async function TagPage({
   params: { name: string }
 }) {
   const { name } = await params
-  const tag = await getTagInfoByName(decodeURIComponent(name))
+
+  const tagName = decodeURIComponent(name)
+
+  const { tag, articles } = await getArticlesByTagName(tagName)
 
   if (!tag) {
     return (
@@ -32,12 +30,6 @@ export default async function TagPage({
     )
   }
 
-  const articles: ExtendedArticleWithCovers[] = []
-
-  // const articles = await getArticlesByTagName(
-  //   decodeURIComponent(name)
-  // )
-
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <Card>
@@ -45,7 +37,7 @@ export default async function TagPage({
           <div className="flex items-center gap-4 h-9 px-2">
             <div className="flex">
               <div className="bg-primary text-primary-foreground text-xs rounded-l-sm px-2 py-1 whitespace-nowrap">
-                {decodeURIComponent(name)}
+                {tagName}
               </div>
               <div className="bg-muted text-muted-foreground text-xs rounded-r-sm px-2 py-1">
                 {articles.length}
@@ -54,51 +46,7 @@ export default async function TagPage({
           </div>
         </CardContent>
       </Card>
-      <ul className="flex flex-col gap-4 lg:gap-6">
-        {articles.map((article) => (
-          <li key={article.id}>
-            <Card>
-              <CardHeader>
-                <Image
-                  src={article.coverUrl}
-                  alt={article.title}
-                  width={700}
-                  height={300}
-                  className="aspect-video object-cover"
-                />
-              </CardHeader>
-              <CardContent>
-                <div className="flex text-xs uppercase text-muted-foreground">
-                  <div>
-                    {formatDistanceToNow(article.createdAt, {
-                      addSuffix: true
-                    })}
-                  </div>
-                  <div className="ms-3">{article.category?.name}</div>
-                </div>
-                <Link
-                  href={`/articles/${article.slug}`}
-                  title={article.title}
-                >
-                  <h2 className="text-3xl my-6 hover:text-primary">
-                    {article.title}
-                  </h2>
-                </Link>
-                <div className="mb-6">
-                  <p className="mt-2">{article.excerpt}</p>
-                </div>
-                <Link
-                  href={`/article/${article.slug}`}
-                  title="read more"
-                  className="inline-block rounded-xs text-xs bg-accent hover:bg-accent/60 text-accent-foreground h-7 leading-7 px-[1em]"
-                >
-                  Read more
-                </Link>
-              </CardContent>
-            </Card>
-          </li>
-        ))}
-      </ul>
+      <ArticlesSection articles={articles} />
       {articles.length === 0 && (
         <div className="text-center">暂无文章，敬请期待</div>
       )}
