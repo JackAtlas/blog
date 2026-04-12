@@ -42,6 +42,7 @@ export default function ProfileSection() {
             alt="avatar"
             width={192}
             height={192}
+            priority
           />
         </div>
         <div className="flex items-center justify-center text-xl md:text-2xl 2xl:text-3xl uppercase mt-2">
