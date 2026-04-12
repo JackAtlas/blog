@@ -5,22 +5,15 @@ import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
 import MarkdownPreview from '@/components/markdown-preview'
 import { ExtendedArticleWithCovers } from '@/lib/articleCoverCOS'
-import { useQuery } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
 
-async function fetchArticles(): Promise<ExtendedArticleWithCovers[]> {
-  const res = await fetch('/api/articles/pin')
-
-  return res.json()
-}
-
-export default function ArticlesSection() {
-  const { data: articles = [] } = useQuery({
-    queryKey: ['pinned-articles'],
-    queryFn: fetchArticles
-  })
+export default function ArticlesSection({
+  articles
+}: {
+  articles: ExtendedArticleWithCovers[]
+}) {
   return (
     <ul className="flex flex-col gap-2 md:gap-4 2xl:gap-6 lg:grid lg:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4">
       {articles.map((article) => (
