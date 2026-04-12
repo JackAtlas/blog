@@ -1,23 +1,13 @@
-'use client'
-
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
-import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import type { Archive } from '@/types/archive'
 
-async function fetchArchives(): Promise<Archive[]> {
-  const res = await fetch('/api/articles/archive')
-
-  return res.json()
-}
-
-export default function ArchiveSection() {
-  const { data: archives = [] } = useQuery({
-    queryKey: ['archives'],
-    queryFn: fetchArchives,
-    staleTime: 1000 * 60 * 10
-  })
+export default function ArchiveSection({
+  archiveStats
+}: {
+  archiveStats: Archive[]
+}) {
   return (
     <Card>
       <CardContent>
@@ -25,7 +15,7 @@ export default function ArchiveSection() {
           Archives
         </div>
         <ul>
-          {archives.map((archive) => (
+          {archiveStats.map((archive) => (
             <li key={archive.year}>
               <Link
                 href={`/archives/${archive.year}`}
