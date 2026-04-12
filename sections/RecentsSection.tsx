@@ -4,13 +4,12 @@ import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import { format } from 'date-fns'
 import { ExtendedArticleWithCovers } from '@/lib/articleCoverCOS'
-import { getArticlesPinned } from '@/lib/actions/article/get-articles-pinned'
 
-export const dynamic = 'force-dynamic'
-
-export default async function RecentsSection() {
-  const articles = await getArticlesPinned()
-
+export default function RecentsSection({
+  articles
+}: {
+  articles: ExtendedArticleWithCovers[]
+}) {
   return (
     <Card>
       <CardContent>
