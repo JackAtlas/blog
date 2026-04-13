@@ -1,37 +1,27 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useActionState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { LuGalleryVerticalEnd, LuLoaderCircle } from 'react-icons/lu'
-import { toast } from 'sonner'
 import { Button, Input, Label } from '@/components/ui'
-import { login } from '@/lib/actions/auth/login'
-import { useSession } from 'next-auth/react'
 import { ThemeAndModeSwitcher } from '@/components/theme-and-mode-switcher'
+import Link from 'next/link'
+import { useLoginAction } from '@/hooks/use-login-action'
+import { useEffect } from 'react'
+import { toast } from 'sonner'
+import { safeCallback } from '@/lib/utils'
 
-export default function LoginPage({
-  searchParams
-}: {
-  searchParams?: { callbackUrl?: string }
-}) {
-  const router = useRouter()
-  const { update } = useSession()
-  const callbackUrl = searchParams?.callbackUrl || '/dashboard'
+export default function LoginPage() {
+  const searchParams = useSearchParams()
+  const callbackUrl = safeCallback(searchParams.get('callbackUrl'))
 
-  const [formState, formAction, isPending] = useActionState(
-    async (_: any, formData: FormData) => {
-      const result = await login(formData)
+  const { state, action, pending } = useLoginAction()
 
-      if (!result.error) {
-        toast.success('登入成功！')
-        await update()
-        router.push(callbackUrl)
-      }
-
-      return result
-    },
-    { error: null }
-  )
+  useEffect(() => {
+    if (!pending && state && state.error) {
+      toast.success('登入成功！')
+      window.location.href = callbackUrl
+    }
+  }, [state, pending])
 
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
@@ -50,10 +40,10 @@ export default function LoginPage({
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <form action={formAction} className="flex flex-col gap-6">
+            <form action={action} className="flex flex-col gap-6">
               <div className="flex flex-col items-center gap-2 text-center">
                 <h1 className="text-2xl font-bold">登入账号</h1>
-                <p className="text-muted-foreground text-sm text-nowrap">
+                <p className="text-muted-foreground text-sm text-balance">
                   输入邮箱和密码登入您的账号
                 </p>
               </div>
@@ -65,35 +55,39 @@ export default function LoginPage({
                     name="email"
                     type="email"
                     placeholder="请输入邮箱"
+                    autoComplete="email"
                     required
                   />
                 </div>
                 <div className="grid gap-3">
                   <div className="flex items-center">
                     <Label htmlFor="password">密码</Label>
-                    <a
+                    <Link
                       href="/reset-password"
                       className="ml-auto text-sm underline-offset-4 hover:underline"
                     >
                       忘记密码？
-                    </a>
+                    </Link>
                   </div>
                   <Input
                     id="password"
                     name="password"
                     type="password"
                     placeholder="请输入密码"
+                    autoComplete="current-password"
                     required
                   />
                 </div>
               </div>
-              {formState?.error && (
-                <p className="text-sm text-red-500">
-                  {formState.error}
-                </p>
+              {state?.error && (
+                <p className="text-sm text-red-500">{state.error}</p>
               )}
-              <Button type="submit" className="w-full cursor-pointer">
-                {isPending ? (
+              <Button
+                type="submit"
+                className="w-full cursor-pointer"
+                disabled={pending}
+              >
+                {pending ? (
                   <LuLoaderCircle className="animate-spin" />
                 ) : (
                   '登入'
