@@ -6,22 +6,24 @@ import { Button, Input, Label } from '@/components/ui'
 import { ThemeAndModeSwitcher } from '@/components/theme-and-mode-switcher'
 import Link from 'next/link'
 import { useLoginAction } from '@/hooks/use-login-action'
-import { useEffect } from 'react'
-import { toast } from 'sonner'
 import { safeCallback } from '@/lib/utils'
+import { useEffect, useState } from 'react'
 
 export default function LoginPage() {
   const searchParams = useSearchParams()
-  const callbackUrl = safeCallback(searchParams.get('callbackUrl'))
+  const callbackUrl = safeCallback(
+    searchParams.get('callback') || '/dashboard'
+  )
 
   const { state, action, pending } = useLoginAction()
 
+  const [showError, setShowError] = useState(false)
+
   useEffect(() => {
-    if (!pending && state && state.error) {
-      toast.success('登入成功！')
-      window.location.href = callbackUrl
+    if (state?.error) {
+      setShowError(true)
     }
-  }, [state, pending])
+  }, [state])
 
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
@@ -57,6 +59,7 @@ export default function LoginPage() {
                     placeholder="请输入邮箱"
                     autoComplete="email"
                     required
+                    onChange={() => setShowError(false)}
                   />
                 </div>
                 <div className="grid gap-3">
@@ -76,10 +79,16 @@ export default function LoginPage() {
                     placeholder="请输入密码"
                     autoComplete="current-password"
                     required
+                    onChange={() => setShowError(false)}
                   />
                 </div>
+                <input
+                  type="hidden"
+                  name="callbackUrl"
+                  value={callbackUrl}
+                />
               </div>
-              {state?.error && (
+              {showError && state?.error && (
                 <p className="text-sm text-red-500">{state.error}</p>
               )}
               <Button
