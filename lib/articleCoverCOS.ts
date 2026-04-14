@@ -1,11 +1,6 @@
+import crypto from 'crypto'
 import { Article } from '@prisma/client'
 import { BUCKET, cos, COS_DOMAIN, REGION } from './cos/cosClient'
-
-// interface ExtendedArticle extends Article {
-//   author: { name: string }
-//   category: { name: string; id?: number } | null
-//   tags: { name: string; id?: number }[]
-// }
 
 type ExtendedArticle = Article & {
   author: { name: string }
@@ -21,17 +16,6 @@ export type ExtendedArticleWithCovers = ExtendedArticle & {
 type Options = {
   width?: number
   height?: number
-}
-
-async function checkCOSExists(filename: string): Promise<boolean> {
-  return new Promise((resolve) => {
-    cos.headObject(
-      { Bucket: BUCKET, Region: REGION, Key: filename },
-      (err) => {
-        resolve(!err)
-      }
-    )
-  })
 }
 
 async function uploadToCOS(buffer: Buffer, filename: string) {
@@ -81,12 +65,13 @@ export class ArticleCoverCOSFixedManager {
   ): Promise<string> {
     const width = options?.width || 800
     const height = options?.height || 800
-    const filename = `blog/article-cover/${article.id}.jpg`
-
-    const exists = await checkCOSExists(filename)
-    if (exists) return `${COS_DOMAIN}/${filename}`
-
     const buffer = await getRandomImage(width, height)
+    const hash = crypto
+      .createHash('md5')
+      .update(buffer)
+      .digest('hex')
+      .slice(0, 5)
+    const filename = `blog/article-cover/${article.id}.${hash}.jpg`
 
     return (await uploadToCOS(buffer, filename)) as string
   }
@@ -95,10 +80,11 @@ export class ArticleCoverCOSFixedManager {
     article: ExtendedArticle,
     options?: Options
   ): Promise<ExtendedArticleWithCovers> {
+    const coverUrl = await this.getCoverUrl(article, options)
     return {
       ...article,
-      coverUrl: await this.getCoverUrl(article, options),
-      thumbnail: await this.getCoverUrl(article, options)
+      coverUrl,
+      thumbnail: coverUrl
     }
   }
 
@@ -107,11 +93,14 @@ export class ArticleCoverCOSFixedManager {
     options?: Options
   ): Promise<ExtendedArticleWithCovers[]> {
     return Promise.all(
-      articles.map(async (article) => ({
-        ...article,
-        coverUrl: await this.getCoverUrl(article, options),
-        thumbnail: await this.getCoverUrl(article, options)
-      }))
+      articles.map(async (article) => {
+        const coverUrl = await this.getCoverUrl(article, options)
+        return {
+          ...article,
+          coverUrl,
+          thumbnail: coverUrl
+        }
+      })
     )
   }
 }
