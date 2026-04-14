@@ -23,8 +23,11 @@ export async function uploadToCOS(
         Region: REGION,
         Key,
         Body,
-        ContentType: options?.contentType,
-        ACL: 'public-read'
+        ContentType:
+          options?.contentType || 'application/octet-stream',
+        ACL: 'public-read',
+        CacheControl: 'public, max-age=31536000, immutable',
+        Expires: new Date(Date.now() + 31536000000).toUTCString()
       },
       (err) => (err ? reject(err) : resolve())
     )
