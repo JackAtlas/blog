@@ -15,7 +15,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui'
-import { Article } from '@prisma/client'
+import { ExtendedArticle } from '@/types/article'
 import {
   useMutation,
   useQuery,
@@ -27,14 +27,6 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { LuLoader } from 'react-icons/lu'
 import { toast } from 'sonner'
-
-interface ExtendedArticle extends Article {
-  category?: {
-    name: string
-  }
-  tags?: { name: string }[]
-  coverUrl?: string
-}
 
 export default function BinPage() {
   const [previewArticle, setPreviewArticle] =
