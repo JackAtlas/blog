@@ -130,6 +130,13 @@ export default function ArticleEditor({
           }),
           headers: { 'Content-Type': 'application/json' }
         })
+
+        if (!res.ok) {
+          const errorData = await res.json()
+          throw new Error(
+            errorData.message || '文章修改失败，未知错误'
+          )
+        }
       } else {
         const res = await fetch('/api/articles', {
           method: 'POST',

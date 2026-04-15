@@ -42,13 +42,7 @@ export async function PUT(
   const body = await request.json()
 
   try {
-    const article = await getArticleById(id)
-
-    if (!article) {
-      return NextResponse.json('文章不存在', { status: 404 })
-    }
-
-    const result = updateArticle(body)
+    const result = updateArticle(id, body)
 
     return NextResponse.json(result)
   } catch (error) {

@@ -12,16 +12,19 @@ interface ArticleUpdateInput {
   tagIds: number[]
 }
 
-export async function updateArticle({
-  title,
-  slugTitle,
-  slug,
-  content,
-  excerpt = '',
-  status,
-  categoryId = undefined,
-  tagIds = []
-}: ArticleUpdateInput) {
+export async function updateArticle(
+  id: string,
+  {
+    title,
+    slugTitle,
+    slug,
+    content,
+    excerpt = '',
+    status,
+    categoryId = undefined,
+    tagIds = []
+  }: ArticleUpdateInput
+) {
   const session = await auth()
 
   if (!session || !session.user || !session.user.email) {
@@ -38,7 +41,7 @@ export async function updateArticle({
 
   const article = await prisma.article.findFirst({
     where: {
-      slug
+      id
     }
   })
 
