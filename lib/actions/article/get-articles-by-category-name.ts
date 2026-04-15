@@ -1,4 +1,3 @@
-import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
 import { prisma } from '@/lib/prisma'
 
 export async function getArticlesByCategoryName(name: string) {
@@ -16,7 +15,7 @@ export async function getArticlesByCategoryName(name: string) {
 
   if (!category) return { category: null, articles: [] }
 
-  const result = await prisma.article.findMany({
+  const articles = await prisma.article.findMany({
     where: {
       categoryId: category.id
     },
@@ -30,8 +29,5 @@ export async function getArticlesByCategoryName(name: string) {
     }
   })
 
-  const resultWithCover =
-    await articleCoverCOSFixedManager.addCoverUrls(result)
-
-  return { category, articles: resultWithCover ?? [] }
+  return { category, articles }
 }

@@ -1,8 +1,5 @@
-import {
-  articleCoverCOSFixedManager,
-  ExtendedArticleWithCovers
-} from '@/lib/articleCoverCOS'
 import { prisma } from '@/lib/prisma'
+import { Article } from '@prisma/client'
 
 export async function getArchivedArticlesGrouped() {
   const articles = await prisma.article.findMany({
@@ -20,10 +17,7 @@ export async function getArchivedArticlesGrouped() {
     }
   })
 
-  const articlesWithCover =
-    await articleCoverCOSFixedManager.addCoverUrls(articles)
-
-  const grouped = articlesWithCover.reduce(
+  const grouped = articles.reduce(
     (acc, article) => {
       const date = new Date(article.createdAt)
       const year = date.getFullYear()
@@ -45,7 +39,7 @@ export async function getArchivedArticlesGrouped() {
       {
         year: number
         count: number
-        articles: ExtendedArticleWithCovers[]
+        articles: Article[]
       }
     >
   )

@@ -1,8 +1,7 @@
 import { prisma } from '@/lib/prisma'
-import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
 
 export async function getArticleBySlug(slug: string) {
-  const result = await prisma.article.findFirst({
+  return await prisma.article.findFirst({
     where: {
       slug,
       deletedAt: null,
@@ -14,8 +13,4 @@ export async function getArticleBySlug(slug: string) {
       tags: true
     }
   })
-
-  return result
-    ? articleCoverCOSFixedManager.addCoverUrl(result)
-    : null
 }

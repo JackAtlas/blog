@@ -1,8 +1,7 @@
 import { prisma } from '@/lib/prisma'
-import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
 
 export async function getArticlesPinned() {
-  const result = await prisma.article.findMany({
+  return await prisma.article.findMany({
     where: {
       status: 'PUBLISHED'
     },
@@ -25,9 +24,4 @@ export async function getArticlesPinned() {
     },
     orderBy: [{ isPinned: 'desc' }, { createdAt: 'desc' }]
   })
-
-  const resultWithCover =
-    await articleCoverCOSFixedManager.addCoverUrls(result)
-
-  return resultWithCover ?? []
 }

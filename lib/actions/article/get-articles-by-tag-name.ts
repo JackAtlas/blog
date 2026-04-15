@@ -1,4 +1,3 @@
-import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
 import { prisma } from '@/lib/prisma'
 
 export async function getArticlesByTagName(name: string) {
@@ -22,8 +21,5 @@ export async function getArticlesByTagName(name: string) {
     orderBy: { createdAt: 'desc' }
   })
 
-  const resultWithCover =
-    await articleCoverCOSFixedManager.addCoverUrls(articles)
-
-  return { tag, articles: resultWithCover ?? [] }
+  return { tag, articles }
 }

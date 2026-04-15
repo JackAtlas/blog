@@ -1,8 +1,7 @@
-import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
 import { prisma } from '@/lib/prisma'
 
 export async function getArchivedArticlesByYear(year: string) {
-  const articles = await prisma.article.findMany({
+  return await prisma.article.findMany({
     where: {
       status: 'PUBLISHED',
       createdAt: {
@@ -28,6 +27,4 @@ export async function getArchivedArticlesByYear(year: string) {
       }
     }
   })
-
-  return await articleCoverCOSFixedManager.addCoverUrls(articles)
 }

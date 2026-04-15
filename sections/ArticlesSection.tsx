@@ -5,7 +5,7 @@ import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
 import MarkdownPreview from '@/components/markdown-preview'
 import useMasonry from '@/hooks/useMasonry'
-import { ExtendedArticleWithCovers } from '@/lib/articleCoverCOS'
+import { ExtendedArticle } from '@/types/article'
 import { formatDistanceToNow } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,7 +13,7 @@ import Link from 'next/link'
 export default function ArticlesSection({
   articles
 }: {
-  articles: ExtendedArticleWithCovers[]
+  articles: ExtendedArticle[]
 }) {
   const masonryContainer = useMasonry()
   return (

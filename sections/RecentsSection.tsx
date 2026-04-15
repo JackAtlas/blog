@@ -3,12 +3,12 @@ import Link from 'next/link'
 import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import { format } from 'date-fns'
-import { ExtendedArticleWithCovers } from '@/lib/articleCoverCOS'
+import { ExtendedArticle } from '@/types/article'
 
 export default function RecentsSection({
   articles
 }: {
-  articles: ExtendedArticleWithCovers[]
+  articles: ExtendedArticle[]
 }) {
   return (
     <Card>
@@ -24,7 +24,7 @@ export default function RecentsSection({
               className="mr-2 md:mr-4"
             >
               <Image
-                src={article.thumbnail}
+                src={article.thumbnailUrl}
                 alt={article.title}
                 width={80}
                 height={80}

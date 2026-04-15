@@ -2,6 +2,7 @@
 
 import { prisma } from '@/lib/prisma'
 import { auth } from '@/auth'
+import { articleCoverCOSFixedManager } from '@/lib/article-cover-cos'
 
 interface ArticleCreateInput {
   title: string
@@ -95,7 +96,24 @@ export async function createArticle({
   })
 
   if (result) {
-    return { data: result }
+    const coverUrl = await articleCoverCOSFixedManager.generateCover(
+      result.id
+    )
+
+    if (coverUrl) {
+      const updatedResult = await prisma.article.update({
+        where: {
+          id: result.id
+        },
+        data: {
+          coverUrl,
+          thumbnailUrl: coverUrl
+        }
+      })
+      return { data: updatedResult }
+    } else {
+      return { data: result }
+    }
   } else {
     throw new Error('文章创建失败，未知错误')
   }

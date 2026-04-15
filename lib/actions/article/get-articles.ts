@@ -1,8 +1,7 @@
 import { prisma } from '@/lib/prisma'
-import { articleCoverCOSFixedManager } from '@/lib/articleCoverCOS'
 
 export async function getArticles() {
-  const result = await prisma.article.findMany({
+  return await prisma.article.findMany({
     where: {
       deletedAt: null
     },
@@ -27,9 +26,4 @@ export async function getArticles() {
       createdAt: 'desc'
     }
   })
-
-  const resultWithCover =
-    await articleCoverCOSFixedManager.addCoverUrls(result)
-
-  return resultWithCover ?? []
 }

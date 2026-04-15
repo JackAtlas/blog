@@ -1,4 +1,4 @@
-import { removeFromCOS } from '@/lib/cos/cosClient'
+import { removeFromCOS } from '@/lib/cos/cos-client'
 import { prisma } from '@/lib/prisma'
 
 export async function deleteMedia({

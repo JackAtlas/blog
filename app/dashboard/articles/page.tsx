@@ -16,6 +16,7 @@ import {
   DialogTrigger,
   Switch
 } from '@/components/ui'
+import { ExtendedArticle } from '@/types/article'
 import { Article } from '@prisma/client'
 import {
   useMutation,
@@ -27,16 +28,8 @@ import { format } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { LuPlus } from 'react-icons/lu'
+import { LuLoaderCircle, LuPlus } from 'react-icons/lu'
 import { toast } from 'sonner'
-
-interface ExtendedArticle extends Article {
-  category?: {
-    name: string
-  }
-  tags?: { name: string }[]
-  coverUrl?: string
-}
 
 export default function ArticlesPage() {
   const [previewArticle, setPreviewArticle] =
@@ -112,6 +105,51 @@ export default function ArticlesPage() {
         error instanceof Error
           ? error.message
           : '文章软删除失败，未知错误'
+      )
+    }
+  })
+
+  const generateCover = useMutation({
+    mutationFn: async () => {
+      if (!previewArticle.id) {
+        throw new Error('articleId 不存在')
+      }
+
+      const res = await fetch(`/api/admin/articles/generate-cover`, {
+        method: 'POST',
+        body: JSON.stringify({ articleId: previewArticle?.id }),
+        headers: { 'Content-Type': 'application/json' }
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.message || '生成题图失败，未知原因')
+      } else {
+        return await res.json()
+      }
+    },
+    onSuccess: (res) => {
+      const coverUrl = res.data
+      queryClient.setQueryData(
+        ['articles'],
+        (old: ExtendedArticle[] = []) => {
+          old.map((article) => {
+            article.id === previewArticle.id
+              ? { ...article, coverUrl, thumbnailUrl: coverUrl }
+              : article
+          })
+        }
+      )
+      setPreviewArticle((prev) => ({
+        ...prev,
+        coverUrl
+      }))
+    },
+    onError: (error) => {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : '生成题图失败，未知原因'
       )
     }
   })
@@ -329,18 +367,36 @@ export default function ArticlesPage() {
         </div>
         <DataTable columns={columns} data={articles ?? []} />
       </div>
-      <div className="hidden lg:flex lg:flex-col lg:gap-6 lg:col-span-1">
-        {previewArticle?.coverUrl && (
-          <Image
-            src={previewArticle?.coverUrl!}
-            alt={previewArticle.title}
-            width={800}
-            height={800}
-            className="aspect-video object-cover"
-          />
+      <div className="hidden lg:flex lg:col-span-1">
+        {previewArticle.id && (
+          <div className="flex flex-col gap-6">
+            {previewArticle.coverUrl ? (
+              <Image
+                src={previewArticle?.coverUrl!}
+                alt={previewArticle.title}
+                width={800}
+                height={800}
+                className="aspect-video object-cover"
+              />
+            ) : (
+              <div>
+                <Button
+                  className="cursor-pointer"
+                  disabled={generateCover.isPending}
+                  onClick={() => generateCover.mutate()}
+                >
+                  {generateCover.isPending ? (
+                    <LuLoaderCircle className="animate-spin" />
+                  ) : (
+                    '生成随机题图'
+                  )}
+                </Button>
+              </div>
+            )}
+            <h1 className="text-3xl">{previewArticle.title}</h1>
+            <MarkdownPreviewer content={previewArticle.content} />
+          </div>
         )}
-        <h1 className="text-3xl">{previewArticle.title}</h1>
-        <MarkdownPreviewer content={previewArticle.content} />
       </div>
     </div>
   )

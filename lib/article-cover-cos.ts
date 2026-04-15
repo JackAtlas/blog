@@ -1,17 +1,5 @@
 import crypto from 'crypto'
-import { Article } from '@prisma/client'
-import { BUCKET, cos, COS_DOMAIN, REGION } from './cos/cosClient'
-
-type ExtendedArticle = Article & {
-  author: { name: string }
-  category: { name: string; id?: number } | null
-  tags: { name: string; id?: number }[]
-}
-
-export type ExtendedArticleWithCovers = ExtendedArticle & {
-  coverUrl: string
-  thumbnail: string
-}
+import { BUCKET, cos, COS_DOMAIN, REGION } from '@/lib/cos/cos-client'
 
 type Options = {
   width?: number
@@ -59,10 +47,7 @@ async function getRandomImage(
 }
 
 export class ArticleCoverCOSFixedManager {
-  public async getCoverUrl(
-    article: ExtendedArticle,
-    options?: Options
-  ): Promise<string> {
+  public async generateCover(articleId: string, options?: Options) {
     const width = options?.width || 800
     const height = options?.height || 800
     const buffer = await getRandomImage(width, height)
@@ -71,37 +56,9 @@ export class ArticleCoverCOSFixedManager {
       .update(buffer)
       .digest('hex')
       .slice(0, 5)
-    const filename = `blog/article-cover/${article.id}.${hash}.jpg`
+    const filename = `blog/article-cover/${articleId}.${hash}.jpg`
 
     return (await uploadToCOS(buffer, filename)) as string
-  }
-
-  public async addCoverUrl(
-    article: ExtendedArticle,
-    options?: Options
-  ): Promise<ExtendedArticleWithCovers> {
-    const coverUrl = await this.getCoverUrl(article, options)
-    return {
-      ...article,
-      coverUrl,
-      thumbnail: coverUrl
-    }
-  }
-
-  public async addCoverUrls(
-    articles: ExtendedArticle[],
-    options?: Options
-  ): Promise<ExtendedArticleWithCovers[]> {
-    return Promise.all(
-      articles.map(async (article) => {
-        const coverUrl = await this.getCoverUrl(article, options)
-        return {
-          ...article,
-          coverUrl,
-          thumbnail: coverUrl
-        }
-      })
-    )
   }
 }
 
