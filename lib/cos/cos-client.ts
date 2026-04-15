@@ -26,8 +26,9 @@ export async function uploadToCOS(
         ContentType:
           options?.contentType || 'application/octet-stream',
         ACL: 'public-read',
-        CacheControl: 'public, max-age=31536000, immutable',
-        Expires: new Date(Date.now() + 31536000000).toUTCString()
+        Headers: {
+          'Cache-Control': 'public, max-age=31536000, immutable'
+        }
       },
       (err) => (err ? reject(err) : resolve())
     )
