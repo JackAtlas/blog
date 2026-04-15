@@ -29,7 +29,7 @@ export default function TagsPage() {
   const { data: tags } = useQuery({
     queryKey: ['tags'],
     queryFn: async () => {
-      const res = await fetch('/api/tags')
+      const res = await fetch('/api/admin/tags')
       const data = await res.json()
 
       return data
@@ -38,7 +38,7 @@ export default function TagsPage() {
 
   const createCategoryMutation = useMutation({
     mutationFn: async (name: string) => {
-      const res = await fetch('/api/tags', {
+      const res = await fetch('/api/admin/tags', {
         method: 'POST',
         body: JSON.stringify({ name }),
         headers: { 'Content-Type': 'application/json' }
