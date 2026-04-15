@@ -57,5 +57,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       }
       return session
     }
+  },
+  logger: {
+    error(error) {
+      if (error?.name?.includes('CredentialsSignin')) return
+
+      console.error('[auth][error]', error)
+    }
   }
 })
