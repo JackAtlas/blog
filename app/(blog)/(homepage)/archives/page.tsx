@@ -30,7 +30,7 @@ export default async function ArchivesPage() {
                     title={article.title}
                   >
                     <Image
-                      src={article.thumbnail}
+                      src={article.thumbnailUrl}
                       alt={article.title}
                       width={128}
                       height={128}

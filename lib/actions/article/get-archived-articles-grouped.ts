@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import { Article } from '@prisma/client'
+import { ExtendedArticle } from '@/types/article'
 
 export async function getArchivedArticlesGrouped() {
   const articles = await prisma.article.findMany({
@@ -39,7 +39,7 @@ export async function getArchivedArticlesGrouped() {
       {
         year: number
         count: number
-        articles: Article[]
+        articles: ExtendedArticle[]
       }
     >
   )
