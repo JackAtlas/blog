@@ -4,6 +4,7 @@ import Card from '@/components/blog/card'
 import CardContent from '@/components/blog/card-content'
 import { format } from 'date-fns'
 import { ExtendedArticle } from '@/types/article'
+import { imgUrlPrefix } from '@/lib/img-url'
 
 export default function RecentsSection({
   articles
@@ -24,7 +25,7 @@ export default function RecentsSection({
               className="mr-2 md:mr-4"
             >
               <Image
-                src={article.thumbnailUrl}
+                src={imgUrlPrefix(article.thumbnailUrl)}
                 alt={article.title}
                 width={80}
                 height={80}

@@ -5,6 +5,7 @@ import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
 import MarkdownPreview from '@/components/markdown-preview'
 import useMasonry from '@/hooks/useMasonry'
+import { imgUrlPrefix } from '@/lib/img-url'
 import { ExtendedArticle } from '@/types/article'
 import { formatDistanceToNow } from 'date-fns'
 import Image from 'next/image'
@@ -26,7 +27,7 @@ export default function ArticlesSection({
           <Card>
             <CardHeader>
               <Image
-                src={article.coverUrl}
+                src={imgUrlPrefix(article.coverUrl)}
                 alt={article.title}
                 width={700}
                 height={300}

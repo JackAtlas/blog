@@ -19,7 +19,7 @@ async function uploadToCOS(buffer: Buffer, filename: string) {
         if (err) {
           reject(err)
         } else {
-          resolve(`${COS_DOMAIN}/${filename}`)
+          resolve(`/${filename}`)
         }
       }
     )

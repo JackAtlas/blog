@@ -1,5 +1,6 @@
 import { Card, CardContent } from '@/components/ui'
 import { getArchivedArticlesGrouped } from '@/lib/actions/article/get-archived-articles-grouped'
+import { imgUrlPrefix } from '@/lib/img-url'
 import { formatDate } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -30,7 +31,7 @@ export default async function ArchivesPage() {
                     title={article.title}
                   >
                     <Image
-                      src={article.thumbnailUrl}
+                      src={imgUrlPrefix(article.thumbnailUrl)}
                       alt={article.title}
                       width={128}
                       height={128}

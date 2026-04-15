@@ -16,6 +16,7 @@ import {
   DialogTrigger,
   Switch
 } from '@/components/ui'
+import { imgUrlPrefix } from '@/lib/img-url'
 import { ExtendedArticle } from '@/types/article'
 import { Article } from '@prisma/client'
 import {
@@ -370,29 +371,28 @@ export default function ArticlesPage() {
       <div className="hidden lg:flex lg:col-span-1">
         {previewArticle.id && (
           <div className="flex flex-col gap-6">
-            {previewArticle.coverUrl ? (
+            {previewArticle.coverUrl && (
               <Image
-                src={previewArticle?.coverUrl!}
+                src={imgUrlPrefix(previewArticle?.coverUrl)}
                 alt={previewArticle.title}
                 width={800}
                 height={800}
                 className="aspect-video object-cover"
               />
-            ) : (
-              <div>
-                <Button
-                  className="cursor-pointer"
-                  disabled={generateCover.isPending}
-                  onClick={() => generateCover.mutate()}
-                >
-                  {generateCover.isPending ? (
-                    <LuLoaderCircle className="animate-spin" />
-                  ) : (
-                    '生成随机题图'
-                  )}
-                </Button>
-              </div>
             )}
+            <div>
+              <Button
+                className="cursor-pointer"
+                disabled={generateCover.isPending}
+                onClick={() => generateCover.mutate()}
+              >
+                {generateCover.isPending ? (
+                  <LuLoaderCircle className="animate-spin" />
+                ) : (
+                  '生成随机题图'
+                )}
+              </Button>
+            </div>
             <h1 className="text-3xl">{previewArticle.title}</h1>
             <MarkdownPreviewer content={previewArticle.content} />
           </div>

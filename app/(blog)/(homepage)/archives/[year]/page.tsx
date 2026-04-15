@@ -3,6 +3,7 @@ import CardContent from '@/components/blog/card-content'
 import CardHeader from '@/components/blog/card-header'
 import MarkdownPreviewer from '@/components/markdown-preview'
 import { getArchivedArticlesByYear } from '@/lib/actions/article/get-archived-articles-by-year'
+import { imgUrlPrefix } from '@/lib/img-url'
 import { formatDistanceToNow } from 'date-fns/formatDistanceToNow'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -27,7 +28,7 @@ export default async function ArchivePage({
             <Card>
               <CardHeader>
                 <Image
-                  src={article.coverUrl}
+                  src={imgUrlPrefix(article.coverUrl)}
                   alt={article.title}
                   width={700}
                   height={300}

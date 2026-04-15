@@ -12,6 +12,8 @@ import MarkdownPreviewer from '@/components/markdown-preview'
 import { useState } from 'react'
 import { LuTrash2 } from 'react-icons/lu'
 import { toast } from 'sonner'
+import Image from 'next/image'
+import { imgUrlPrefix } from '@/lib/img-url'
 
 interface ExtendedTag extends Tag {
   articles: Article[]
@@ -130,6 +132,15 @@ export default function TagsPage() {
         </ul>
       </div>
       <div className="col-span-3 flex flex-col gap-4 lg:gap-6">
+        {selectedArticle && (
+          <Image
+            src={imgUrlPrefix(selectedArticle.coverUrl)}
+            alt={selectedArticle.title}
+            width={800}
+            height={800}
+            className="aspect-video object-cover"
+          />
+        )}
         <h2 className="text-2xl font-bold">
           {selectedArticle?.title}
         </h2>
