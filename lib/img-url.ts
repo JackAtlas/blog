@@ -1,6 +1,6 @@
 const CDN_DOMAIN = process.env.NEXT_PUBLIC_CDN_DOMAIN || '//'
 
-console.log(process.env.NEXT_PUBLIC_CDN_DOMAIN)
+console.log('CDN_DOMAIN', process.env.NEXT_PUBLIC_CDN_DOMAIN)
 
 export function imgUrlPrefix(path?: string | null) {
   if (!path) return ''
