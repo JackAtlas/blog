@@ -370,7 +370,7 @@ export default function ArticlesPage() {
       </div>
       <div className="hidden lg:flex lg:col-span-1">
         {previewArticle.id && (
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 w-full">
             {previewArticle.coverUrl && (
               <Image
                 src={imgUrlPrefix(previewArticle?.coverUrl)}
