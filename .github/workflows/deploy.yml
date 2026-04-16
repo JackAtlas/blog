@@ -39,6 +39,8 @@ jobs:
       # 6. 构建项目
       - name: Build the project
         run: pnpm build
+        env:
+          NEXT_PUBLIC_CDN_DOMAIN: ${{ secrets.NEXT_PUBLIC_CDN_DOMAIN }}
 
       # 7. 打包需要的文件
       - name: Package files
