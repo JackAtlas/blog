@@ -7,3 +7,12 @@ export function imgUrlPrefix(path?: string | null) {
 
   return `${CDN_DOMAIN}/${path.replace(/^\/+/, '')}`
 }
+
+export function imgUrlDomainReplace(
+  url?: string,
+  replacement?: string
+) {
+  if (!url) return ''
+
+  return url.replace(/^(https?:\/\/)[^\/]+/, replacement ?? '')
+}

@@ -22,6 +22,7 @@ import {
   Input,
   Label
 } from '@/components/ui'
+import { imgUrlDomainReplace } from '@/lib/img-url'
 import { Media } from '@prisma/client'
 import {
   useMutation,
@@ -34,6 +35,7 @@ import { MdOutlineZoomOutMap } from 'react-icons/md'
 import { toast } from 'sonner'
 
 export default function GalleryPage() {
+  const CDN_DOMAIN = process.env.NEXT_PUBLIC_CDN_DOMAIN
   const queryClient = useQueryClient()
 
   const { data, isLoading: isDataLoading } = useQuery({
@@ -144,96 +146,102 @@ export default function GalleryPage() {
         </Button>
       </div>
       <div className="grid grid-cols-4 gap-4">
-        {data.map((pic: Media) => (
-          <Card key={pic.hash}>
-            <CardContent>
-              <div className="relative group">
-                <Image
-                  src={pic.url}
-                  alt={pic.hash}
-                  width={pic.width ?? 400}
-                  height={pic.height ?? 400}
-                />
-                <div className="hidden group-hover:block absolute top-0 left-0">
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className="cursor-pointer"
-                      >
-                        <LuX />
-                      </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>
-                          确认删除？
-                        </AlertDialogTitle>
-                        <AlertDialogDescription>
-                          此操作不可逆，图片将从数据库及腾讯云对象存储中永久删除。
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>取消</AlertDialogCancel>
-                        <AlertDialogAction
-                          onClick={() => deletePic(pic)}
+        {data.map((pic: Media) => {
+          const url = imgUrlDomainReplace(pic.url, CDN_DOMAIN)
+          return (
+            <Card key={pic.hash}>
+              <CardContent>
+                <div className="relative group flex justify-center">
+                  <Image
+                    src={url}
+                    alt={pic.hash}
+                    width={pic.width ?? 400}
+                    height={pic.height ?? 400}
+                  />
+                  <div className="hidden group-hover:block absolute top-0 left-0">
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className="cursor-pointer"
                         >
-                          确认
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
+                          <LuX />
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>
+                            确认删除？
+                          </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            此操作不可逆，图片将从数据库及腾讯云对象存储中永久删除。
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>取消</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={() => deletePic(pic)}
+                          >
+                            确认
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
+                  <div className="hidden group-hover:block absolute top-0 right-0">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className="cursor-pointer"
+                        >
+                          <MdOutlineZoomOutMap />
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogTitle>图片预览</DialogTitle>
+                        <DialogDescription>
+                          {pic.filename}
+                        </DialogDescription>
+                        <Image
+                          src={url}
+                          alt={pic.hash}
+                          width={pic.width ?? 400}
+                          height={pic.height ?? 400}
+                        />
+                      </DialogContent>
+                    </Dialog>
+                  </div>
                 </div>
-                <div className="hidden group-hover:block absolute top-0 right-0">
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className="cursor-pointer"
-                      >
-                        <MdOutlineZoomOutMap />
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogTitle>图片预览</DialogTitle>
-                      <DialogDescription>
-                        {pic.filename}
-                      </DialogDescription>
-                      <Image
-                        src={pic.url}
-                        alt={pic.hash}
-                        width={pic.width ?? 400}
-                        height={pic.height ?? 400}
-                      />
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter className="gap-2">
-              <Label htmlFor={`pic-${pic.hash}`} className="sr-only">
-                Link of {pic.filename}
-              </Label>
-              <Input
-                id={`pic-${pic.hash}`}
-                defaultValue={pic.url}
-                readOnly
-              />
-              <Button
-                variant="outline"
-                className="cursor-pointer"
-                onClick={() =>
-                  navigator.clipboard
-                    .writeText(pic.url)
-                    .then(() => toast.success('已复制图片地址'))
-                    .catch(() => toast.error('失败，请手动复制'))
-                }
-              >
-                <LuCopy />
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
+              </CardContent>
+              <CardFooter className="gap-2">
+                <Label
+                  htmlFor={`pic-${pic.hash}`}
+                  className="sr-only"
+                >
+                  Link of {pic.filename}
+                </Label>
+                <Input
+                  id={`pic-${pic.hash}`}
+                  defaultValue={url}
+                  readOnly
+                />
+                <Button
+                  variant="outline"
+                  className="cursor-pointer"
+                  onClick={() =>
+                    navigator.clipboard
+                      .writeText(url)
+                      .then(() => toast.success('已复制图片地址'))
+                      .catch(() => toast.error('失败，请手动复制'))
+                  }
+                >
+                  <LuCopy />
+                </Button>
+              </CardFooter>
+            </Card>
+          )
+        })}
       </div>
     </div>
   )
