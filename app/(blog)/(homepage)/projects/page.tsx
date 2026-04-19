@@ -1,15 +1,15 @@
 import { Button, Card, CardContent, Separator } from '@/components/ui'
 import Link from 'next/link'
 import { LuExternalLink, LuGithub } from 'react-icons/lu'
-import { projects } from './projects'
+import { projects } from './_data/projects'
 
 export default async function ProjectsPage() {
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <Card>
         <CardContent>
-          <div className="text-muted-foreground text-xs tracking-widest uppercase">
-            项目 projects
+          <div className="text-muted-foreground text-xs md:text-sm 2xl:text-base tracking-widest uppercase">
+            projects
           </div>
         </CardContent>
       </Card>
@@ -27,7 +27,9 @@ export default async function ProjectsPage() {
               </Link>
               <Separator className="my-4" />
               <div className="flex items-center justify-between">
-                <p>{project.name}</p>
+                <p className="text-xs md:text-sm 2xl:text-base 3xl:text-lg">
+                  {project.name}
+                </p>
                 <div className="flex gap-2">
                   <Button asChild>
                     <Link

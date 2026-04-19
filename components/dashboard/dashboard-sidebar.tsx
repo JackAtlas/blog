@@ -77,7 +77,7 @@ export default async function DashboardSidebar() {
                       className="h-auto [&>svg]:md:size-5 [&>svg]:2xl:size-6 gap-2 md:gap-4 2xl:gap-6"
                     >
                       <item.icon />
-                      <div className="text-sm md:text-base 2xl:text-lg leading-[1] pt-1">
+                      <div className="text-sm md:text-base 2xl:text-lg leading-none pt-1">
                         {item.title}
                       </div>
                     </Link>
