@@ -112,7 +112,7 @@ export default function BlogHeader() {
             )}
             href="/"
           >
-            首页
+            首页 | Home
           </Link>
           <Link
             className={cn(
@@ -121,7 +121,7 @@ export default function BlogHeader() {
             )}
             href="/categories"
           >
-            栏目
+            栏目 | Categories
           </Link>
           <Link
             className={cn(
@@ -130,7 +130,7 @@ export default function BlogHeader() {
             )}
             href="/tags"
           >
-            标签
+            标签 | Tags
           </Link>
           <Link
             className={cn(
@@ -139,7 +139,7 @@ export default function BlogHeader() {
             )}
             href="/archives"
           >
-            归档
+            归档 | Archives
           </Link>
           <Link
             className={cn(
@@ -148,7 +148,16 @@ export default function BlogHeader() {
             )}
             href="/projects"
           >
-            项目
+            项目 | Projects
+          </Link>
+          <Link
+            className={cn(
+              'flex items-center px-2 md:px-4 2xl:px-6 hover:text-primary',
+              pathname.startsWith('/example') ? 'text-primary' : ''
+            )}
+            href="/examples"
+          >
+            案例 | Examples
           </Link>
           <Link
             className={cn(
@@ -157,7 +166,7 @@ export default function BlogHeader() {
             )}
             href="/about"
           >
-            关于
+            关于 | About
           </Link>
         </div>
         <div className="flex items-center">
