@@ -25,7 +25,7 @@ export default function ProfileSection({
         <div className="flex justify-center">
           <Image
             className="rounded-full size-32 md:size-40 2xl:size-48"
-            src="/avatar.jpg"
+            src="//img.jackatlas.xyz/blog/avatar.png"
             alt="avatar"
             width={192}
             height={192}
@@ -75,41 +75,45 @@ export default function ProfileSection({
           </div>
         </div>
         <div className="grid grid-cols-5 mt-2 md:mt-4 2xl:mt-6">
-          <a
+          <Link
             href="https://github.com/jackatlas"
             target="_blank"
+            referrerPolicy="no-referrer"
             title="github"
             className="flex items-center justify-center h-8 hover:text-primary"
           >
             <FaGithub className="md:size-5 2xl:size-6" />
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://gitee.com/jackatlas8864"
             target="_blank"
+            referrerPolicy="no-referrer"
             title="gitee"
             className="flex items-center justify-center h-8 hover:text-primary"
           >
             <SiGitee className="md:size-5 2xl:size-6" />
-          </a>
+          </Link>
           <a
             title="敬请期待"
             className="flex items-center justify-center h-8 hover:text-primary"
           >
             <FaFacebookF className="md:size-5 2xl:size-6" />
           </a>
-          <a
+          <Link
             href="mailto:jack-atlas@qq.com"
+            referrerPolicy="no-referrer"
             title="jack-atlas@qq.com"
             className="flex items-center justify-center h-8 hover:text-primary"
           >
             <LuMail className="md:size-5 2xl:size-6" />
-          </a>
-          <a
-            title="敬请期待"
+          </Link>
+          <Link
+            href="/rss.xml"
+            title="RSS"
             className="flex items-center justify-center h-8 hover:text-primary"
           >
             <FaRss className="md:size-5 2xl:size-6" />
-          </a>
+          </Link>
         </div>
       </CardContent>
     </Card>
