@@ -14,5 +14,19 @@ export const examples = [
         height={360}
       />
     )
+  },
+  {
+    name: 'necromancer',
+    link: 'https://jackatlas.xyz/games/necromancer/',
+    code: 'https://gitee.com/jackatlas/necromancer',
+    description: '',
+    render: () => (
+      <Image
+        src="/necromancer-screenshot.png"
+        alt="necromancer"
+        width={657}
+        height={348}
+      />
+    )
   }
 ]
