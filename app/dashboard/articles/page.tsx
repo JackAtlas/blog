@@ -14,10 +14,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
   Switch
 } from '@/components/ui'
 import { imgUrlPrefix } from '@/lib/img-url'
+import { AdminArticleListResponse } from '@/types/admin/article.api'
 import { ExtendedArticle } from '@/types/article'
+import { PaginationResponse } from '@/types/shared/pagination'
 import { Article } from '@prisma/client'
 import {
   useMutation,
@@ -35,24 +43,27 @@ import { toast } from 'sonner'
 export default function ArticlesPage() {
   const [previewArticle, setPreviewArticle] =
     useState<ExtendedArticle>({} as ExtendedArticle)
+  const [page, setPage] = useState(1)
+  const pageSize = 20
   const queryClient = useQueryClient()
 
   const {
     data: articles,
     isLoading,
     error
-  } = useQuery({
-    queryKey: ['articles'],
+  } = useQuery<AdminArticleListResponse>({
+    queryKey: ['articles', page],
     queryFn: async () => {
-      const res = await fetch('/api/articles')
+      const res = await fetch(
+        `/api/admin/articles?page=${page}&pageSize=${pageSize}`
+      )
 
       if (!res.ok) {
         const errorData = await res.json()
         throw new Error(errorData.message)
-      } else {
-        const data = await res.json()
-        return data
       }
+
+      return await res.json()
     }
   })
 
@@ -356,6 +367,8 @@ export default function ArticlesPage() {
     return <ErrorDisplay error={error} />
   }
 
+  const totalPages = articles?.pagination?.totalPages ?? 1
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 md:gap-4 2xl:gap-6">
       <div className="flex flex-col gap-2 md:gap-4 2xl:gap-6 col-span-1 lg:col-span-2">
@@ -366,7 +379,49 @@ export default function ArticlesPage() {
             </Link>
           </Button>
         </div>
-        <DataTable columns={columns} data={articles ?? []} />
+        <DataTable columns={columns} data={articles?.data ?? []} />
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                className={page === 1 ? '' : 'cursor-pointer'}
+                onClick={(e) => {
+                  e.preventDefault()
+                  if (page > 1) setPage(page - 1)
+                }}
+              ></PaginationPrevious>
+            </PaginationItem>
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+              (item) => (
+                <PaginationItem key={item}>
+                  <PaginationLink
+                    className={page === item ? '' : 'cursor-pointer'}
+                    isActive={page === item}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setPage(item)
+                    }}
+                  >
+                    {item}
+                  </PaginationLink>
+                </PaginationItem>
+              )
+            )}
+
+            <PaginationItem>
+              <PaginationNext
+                className={
+                  page === totalPages ? '' : 'cursor-pointer'
+                }
+                onClick={(e) => {
+                  e.preventDefault()
+                  if (page < totalPages) setPage(page + 1)
+                }}
+              ></PaginationNext>
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
       <div className="hidden lg:flex lg:col-span-1">
         {previewArticle.id && (
