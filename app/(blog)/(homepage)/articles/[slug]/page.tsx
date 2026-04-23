@@ -5,6 +5,7 @@ import CardHeader from '@/components/blog/card-header'
 import { getArticleBySlug } from '@/lib/actions/article/get-article-by-slug'
 import { formatDistanceToNow } from 'date-fns'
 import MarkdownPreview from '@/components/markdown-preview'
+import { imgUrlPrefix } from '@/lib/img-url'
 
 export default async function ArticlePage({
   params
@@ -21,7 +22,7 @@ export default async function ArticlePage({
       <CardHeader>
         <Image
           className="aspect-video object-cover mx-auto"
-          src={article.coverUrl}
+          src={imgUrlPrefix(article.coverUrl)}
           alt={article.title}
           width={700}
           height={300}
