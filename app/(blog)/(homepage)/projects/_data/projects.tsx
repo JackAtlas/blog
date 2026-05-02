@@ -1,33 +1,33 @@
 import { LuSquareDashedMousePointer } from 'react-icons/lu'
 
 export const projects = [
-  {
-    name: 'chi-flow',
-    link: 'https://chiflow.jackatlas.xyz',
-    code: 'https://github.com/JackAtlas/chi-flow',
-    description: '',
-    render: () => (
-      <div className="text-2xl font-extrabold flex items-center gap-2">
-        <div className="rounded-xl bg-linear-to-r from-violet-500 to-violet-600 p-2">
-          <LuSquareDashedMousePointer
-            size={20}
-            className="stroke-white"
-          />
-        </div>
-        <div className="flex items-center">
-          <span className="bg-linear-to-r from-violet-500 to-violet-600 bg-clip-text text-transparent">
-            Chi
-          </span>
-          <span className="text-stone-700 dark:text-stone-300">
-            Flow
-          </span>
-        </div>
-      </div>
-    )
-  },
+  // {
+  //   name: 'chi-flow',
+  //   link: 'https://chiflow.jackatlas.xyz',
+  //   code: 'https://github.com/JackAtlas/chi-flow',
+  //   description: '',
+  //   render: () => (
+  //     <div className="text-2xl font-extrabold flex items-center gap-2">
+  //       <div className="rounded-xl bg-linear-to-r from-violet-500 to-violet-600 p-2">
+  //         <LuSquareDashedMousePointer
+  //           size={20}
+  //           className="stroke-white"
+  //         />
+  //       </div>
+  //       <div className="flex items-center">
+  //         <span className="bg-linear-to-r from-violet-500 to-violet-600 bg-clip-text text-transparent">
+  //           Chi
+  //         </span>
+  //         <span className="text-stone-700 dark:text-stone-300">
+  //           Flow
+  //         </span>
+  //       </div>
+  //     </div>
+  //   )
+  // },
   {
     name: 'chi-form',
-    link: 'https://chiform.jackatlas.xyz',
+    link: 'https://chi-form.jackatlas.xyz',
     code: 'https://github.com/JackAtlas/chi-form',
     description: '',
     render: () => (
