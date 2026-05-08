@@ -23,7 +23,7 @@ export default function ArticlesSection({
       className="grid items-start gap-2 md:gap-4 2xl:gap-6 lg:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4"
     >
       {articles.map((article) => (
-        <li key={article.id}>
+        <li key={article.id} className="min-w-0">
           <Card>
             <CardHeader>
               <Image
