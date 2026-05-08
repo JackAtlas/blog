@@ -1,7 +1,6 @@
 export default function CardHeader({
-  children
-}: {
-  children: React.ReactNode
-}) {
-  return <div>{children}</div>
+  className,
+  ...props
+}: React.ComponentProps<'div'>) {
+  return <div className={className} {...props}></div>
 }
