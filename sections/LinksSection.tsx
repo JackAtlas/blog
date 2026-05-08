@@ -11,7 +11,7 @@ export default function LinksSection() {
         <ul>
           <li>
             <a
-              href="https://chiflow.jackatlas.xyz/"
+              href="https://chi-flow.jackatlas.xyz/"
               className="flex items-center justify-between hover:bg-muted p-2"
               title="Chi-Flow"
             >
@@ -25,7 +25,7 @@ export default function LinksSection() {
           </li>
           <li>
             <a
-              href="https://chiform.jackatlas.xyz/"
+              href="https://chi-form.jackatlas.xyz/"
               className="flex items-center justify-between hover:bg-muted p-2"
               title="Chi-Form"
             >
