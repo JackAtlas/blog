@@ -57,7 +57,7 @@ export default function ArticlesSection({
                 </div>
               )}
               <Link
-                href={`/article/${article.slug}`}
+                href={`/articles/${article.slug}`}
                 title="read more"
                 className="inline-block rounded-xs text-xs md:text-base bg-accent hover:bg-accent/60 text-accent-foreground h-7 leading-7 px-[1em]"
               >
