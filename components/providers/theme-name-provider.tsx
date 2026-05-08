@@ -1,16 +1,27 @@
 'use client'
 
-import { createContext, ReactNode, useContext } from 'react'
+import { getThemes } from '@/lib/themes'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState
+} from 'react'
 
 const ThemeNameContext = createContext<string[] | null>(null)
 
 export function ThemeNameProvider({
-  children,
-  themes
+  children
 }: {
   children: ReactNode
-  themes: string[]
 }) {
+  const [themes, setThemes] = useState<string[]>([])
+
+  useEffect(() => {
+    getThemes().then(setThemes)
+  }, [])
+
   return (
     <ThemeNameContext.Provider value={themes}>
       {children}

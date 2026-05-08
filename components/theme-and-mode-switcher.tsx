@@ -14,6 +14,7 @@ import { FaSun } from 'react-icons/fa'
 import { LuMoon } from 'react-icons/lu'
 import { useThemeName } from './providers'
 import { cn } from '@/lib/utils'
+import { applyTheme } from '@/lib/themes'
 
 export function ThemeAndModeSwitcher({
   className
@@ -22,44 +23,29 @@ export function ThemeAndModeSwitcher({
 }) {
   const themes = useThemeName()
   const { theme: mode, setTheme: setMode } = useTheme()
+
   const [appTheme, setAppTheme] = useState('caffeine')
-  const [isMounted, setIsmounted] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setIsmounted(true)
+    setMounted(true)
+
+    const saved = localStorage.getItem('theme-name') || 'caffeine'
+    setAppTheme(saved)
+    applyTheme(saved)
   }, [])
 
   useEffect(() => {
-    if (isMounted) {
-      const localTheme = localStorage.getItem('theme-name')
-      if (localTheme) {
-        setAppTheme(localTheme)
-      }
-      if (mode === 'dark') {
-        document.documentElement.setAttribute(
-          'data-color-mode',
-          'dark'
-        )
-      } else {
-        document.documentElement.setAttribute(
-          'data-color-mode',
-          'light'
-        )
-      }
-      document.documentElement.setAttribute('data-theme', appTheme)
-    }
-  }, [mode, appTheme, isMounted])
+    if (!mounted) return
+
+    document.documentElement.setAttribute(
+      'data-color-mode',
+      mode === 'dark' ? 'dark' : 'light'
+    )
+  }, [mode, mounted])
 
   const toggleMode = () => {
     setMode(mode === 'light' ? 'dark' : 'light')
-    if (mode === 'light') {
-      document.documentElement.setAttribute('data-color-mode', 'dark')
-    } else {
-      document.documentElement.setAttribute(
-        'data-color-mode',
-        'light'
-      )
-    }
   }
 
   return (
@@ -67,8 +53,9 @@ export function ThemeAndModeSwitcher({
       <Select
         value={appTheme}
         onValueChange={(value) => {
-          localStorage.setItem('theme-name', value)
           setAppTheme(value)
+          localStorage.setItem('theme-name', value)
+          applyTheme(value)
         }}
       >
         <SelectTrigger className="md:text-base 2xl:text-lg">
@@ -86,11 +73,8 @@ export function ThemeAndModeSwitcher({
           ))}
         </SelectContent>
       </Select>
-      {isMounted && (
-        <Button
-          onClick={() => toggleMode()}
-          className="cursor-pointer"
-        >
+      {mounted && (
+        <Button onClick={toggleMode} className="cursor-pointer">
           {mode === 'light' ? <LuMoon /> : <FaSun />}
         </Button>
       )}

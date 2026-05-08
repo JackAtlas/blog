@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Oxanium:wght@200..800&display=swap');
+@import url('https://fonts.font.im/css?family=Merriweather');
 
 :root[data-theme='solar-dusk'] {
   --background: oklch(0.9885 0.0057 84.5659);
@@ -39,15 +39,20 @@
   --radius: 0.3rem;
   --shadow-2xs: 0px 2px 3px 0px hsl(28 18% 25% / 0.09);
   --shadow-xs: 0px 2px 3px 0px hsl(28 18% 25% / 0.09);
-  --shadow-sm: 0px 2px 3px 0px hsl(28 18% 25% / 0.18),
+  --shadow-sm:
+    0px 2px 3px 0px hsl(28 18% 25% / 0.18),
     0px 1px 2px -1px hsl(28 18% 25% / 0.18);
-  --shadow: 0px 2px 3px 0px hsl(28 18% 25% / 0.18),
+  --shadow:
+    0px 2px 3px 0px hsl(28 18% 25% / 0.18),
     0px 1px 2px -1px hsl(28 18% 25% / 0.18);
-  --shadow-md: 0px 2px 3px 0px hsl(28 18% 25% / 0.18),
+  --shadow-md:
+    0px 2px 3px 0px hsl(28 18% 25% / 0.18),
     0px 2px 4px -1px hsl(28 18% 25% / 0.18);
-  --shadow-lg: 0px 2px 3px 0px hsl(28 18% 25% / 0.18),
+  --shadow-lg:
+    0px 2px 3px 0px hsl(28 18% 25% / 0.18),
     0px 4px 6px -1px hsl(28 18% 25% / 0.18);
-  --shadow-xl: 0px 2px 3px 0px hsl(28 18% 25% / 0.18),
+  --shadow-xl:
+    0px 2px 3px 0px hsl(28 18% 25% / 0.18),
     0px 8px 10px -1px hsl(28 18% 25% / 0.18);
   --shadow-2xl: 0px 2px 3px 0px hsl(28 18% 25% / 0.45);
   --tracking-normal: 0em;
@@ -93,15 +98,20 @@
   --radius: 0.3rem;
   --shadow-2xs: 0px 2px 3px 0px hsl(0 0% 5% / 0.09);
   --shadow-xs: 0px 2px 3px 0px hsl(0 0% 5% / 0.09);
-  --shadow-sm: 0px 2px 3px 0px hsl(0 0% 5% / 0.18),
+  --shadow-sm:
+    0px 2px 3px 0px hsl(0 0% 5% / 0.18),
     0px 1px 2px -1px hsl(0 0% 5% / 0.18);
-  --shadow: 0px 2px 3px 0px hsl(0 0% 5% / 0.18),
+  --shadow:
+    0px 2px 3px 0px hsl(0 0% 5% / 0.18),
     0px 1px 2px -1px hsl(0 0% 5% / 0.18);
-  --shadow-md: 0px 2px 3px 0px hsl(0 0% 5% / 0.18),
+  --shadow-md:
+    0px 2px 3px 0px hsl(0 0% 5% / 0.18),
     0px 2px 4px -1px hsl(0 0% 5% / 0.18);
-  --shadow-lg: 0px 2px 3px 0px hsl(0 0% 5% / 0.18),
+  --shadow-lg:
+    0px 2px 3px 0px hsl(0 0% 5% / 0.18),
     0px 4px 6px -1px hsl(0 0% 5% / 0.18);
-  --shadow-xl: 0px 2px 3px 0px hsl(0 0% 5% / 0.18),
+  --shadow-xl:
+    0px 2px 3px 0px hsl(0 0% 5% / 0.18),
     0px 8px 10px -1px hsl(0 0% 5% / 0.18);
   --shadow-2xl: 0px 2px 3px 0px hsl(0 0% 5% / 0.45);
 }

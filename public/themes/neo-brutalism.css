@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.font.im/css?family=Space+Mono');
 
 :root[data-theme='neo-brutalism'] {
   --background: oklch(1 0 0);
@@ -34,8 +34,8 @@
   --sidebar-border: oklch(0 0 0);
   --sidebar-ring: oklch(0.6489 0.237 26.9728);
   --font-sans: DM Sans, sans-serif;
-  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times,
-    serif;
+  --font-serif:
+    ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-mono: Space Mono, monospace;
   --radius: 0px;
   --shadow-x: 4px;
@@ -46,15 +46,20 @@
   --shadow-color: hsl(0 0% 0%);
   --shadow-2xs: 4px 4px 0px 0px hsl(0 0% 0% / 0.5);
   --shadow-xs: 4px 4px 0px 0px hsl(0 0% 0% / 0.5);
-  --shadow-sm: 4px 4px 0px 0px hsl(0 0% 0% / 1),
+  --shadow-sm:
+    4px 4px 0px 0px hsl(0 0% 0% / 1),
     4px 1px 2px -1px hsl(0 0% 0% / 1);
-  --shadow: 4px 4px 0px 0px hsl(0 0% 0% / 1),
+  --shadow:
+    4px 4px 0px 0px hsl(0 0% 0% / 1),
     4px 1px 2px -1px hsl(0 0% 0% / 1);
-  --shadow-md: 4px 4px 0px 0px hsl(0 0% 0% / 1),
+  --shadow-md:
+    4px 4px 0px 0px hsl(0 0% 0% / 1),
     4px 2px 4px -1px hsl(0 0% 0% / 1);
-  --shadow-lg: 4px 4px 0px 0px hsl(0 0% 0% / 1),
+  --shadow-lg:
+    4px 4px 0px 0px hsl(0 0% 0% / 1),
     4px 4px 6px -1px hsl(0 0% 0% / 1);
-  --shadow-xl: 4px 4px 0px 0px hsl(0 0% 0% / 1),
+  --shadow-xl:
+    4px 4px 0px 0px hsl(0 0% 0% / 1),
     4px 8px 10px -1px hsl(0 0% 0% / 1);
   --shadow-2xl: 4px 4px 0px 0px hsl(0 0% 0% / 2.5);
   --tracking-normal: 0em;
@@ -95,8 +100,8 @@
   --sidebar-border: oklch(1 0 0);
   --sidebar-ring: oklch(0.7044 0.1872 23.1858);
   --font-sans: DM Sans, sans-serif;
-  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times,
-    serif;
+  --font-serif:
+    ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-mono: Space Mono, monospace;
   --radius: 0px;
   --shadow-x: 4px;
@@ -107,15 +112,20 @@
   --shadow-color: hsl(0 0% 0%);
   --shadow-2xs: 4px 4px 0px 0px hsl(0 0% 0% / 0.5);
   --shadow-xs: 4px 4px 0px 0px hsl(0 0% 0% / 0.5);
-  --shadow-sm: 4px 4px 0px 0px hsl(0 0% 0% / 1),
+  --shadow-sm:
+    4px 4px 0px 0px hsl(0 0% 0% / 1),
     4px 1px 2px -1px hsl(0 0% 0% / 1);
-  --shadow: 4px 4px 0px 0px hsl(0 0% 0% / 1),
+  --shadow:
+    4px 4px 0px 0px hsl(0 0% 0% / 1),
     4px 1px 2px -1px hsl(0 0% 0% / 1);
-  --shadow-md: 4px 4px 0px 0px hsl(0 0% 0% / 1),
+  --shadow-md:
+    4px 4px 0px 0px hsl(0 0% 0% / 1),
     4px 2px 4px -1px hsl(0 0% 0% / 1);
-  --shadow-lg: 4px 4px 0px 0px hsl(0 0% 0% / 1),
+  --shadow-lg:
+    4px 4px 0px 0px hsl(0 0% 0% / 1),
     4px 4px 6px -1px hsl(0 0% 0% / 1);
-  --shadow-xl: 4px 4px 0px 0px hsl(0 0% 0% / 1),
+  --shadow-xl:
+    4px 4px 0px 0px hsl(0 0% 0% / 1),
     4px 8px 10px -1px hsl(0 0% 0% / 1);
   --shadow-2xl: 4px 4px 0px 0px hsl(0 0% 0% / 2.5);
 }

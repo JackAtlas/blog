@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.font.im/css?family=Fira+Mono|Lora|Poppins');
 
 :root[data-theme='bubblegum'] {
   --background: oklch(0.9399 0.0203 345.6985);
@@ -35,19 +35,24 @@
   --sidebar-ring: oklch(0.6559 0.2118 354.3084);
   --font-sans: Poppins, sans-serif;
   --font-serif: Lora, serif;
-  --font-mono: Fira Code, monospace;
+  --font-mono: Fira Mono, monospace;
   --radius: 0.4rem;
   --shadow-2xs: 3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 0.5);
   --shadow-xs: 3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 0.5);
-  --shadow-sm: 3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 1),
+  --shadow-sm:
+    3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 1),
     3px 1px 2px -1px hsl(325.78 58.18% 56.86% / 1);
-  --shadow: 3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 1),
+  --shadow:
+    3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 1),
     3px 1px 2px -1px hsl(325.78 58.18% 56.86% / 1);
-  --shadow-md: 3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 1),
+  --shadow-md:
+    3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 1),
     3px 2px 4px -1px hsl(325.78 58.18% 56.86% / 1);
-  --shadow-lg: 3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 1),
+  --shadow-lg:
+    3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 1),
     3px 4px 6px -1px hsl(325.78 58.18% 56.86% / 1);
-  --shadow-xl: 3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 1),
+  --shadow-xl:
+    3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 1),
     3px 8px 10px -1px hsl(325.78 58.18% 56.86% / 1);
   --shadow-2xl: 3px 3px 0px 0px hsl(325.78 58.18% 56.86% / 2.5);
   --tracking-normal: 0em;
@@ -93,15 +98,20 @@
   --radius: 0.4rem;
   --shadow-2xs: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 0.5);
   --shadow-xs: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 0.5);
-  --shadow-sm: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1),
+  --shadow-sm:
+    3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1),
     3px 1px 2px -1px hsl(206.1538 28.0576% 27.2549% / 1);
-  --shadow: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1),
+  --shadow:
+    3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1),
     3px 1px 2px -1px hsl(206.1538 28.0576% 27.2549% / 1);
-  --shadow-md: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1),
+  --shadow-md:
+    3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1),
     3px 2px 4px -1px hsl(206.1538 28.0576% 27.2549% / 1);
-  --shadow-lg: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1),
+  --shadow-lg:
+    3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1),
     3px 4px 6px -1px hsl(206.1538 28.0576% 27.2549% / 1);
-  --shadow-xl: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1),
+  --shadow-xl:
+    3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1),
     3px 8px 10px -1px hsl(206.1538 28.0576% 27.2549% / 1);
   --shadow-2xl: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 2.5);
 }

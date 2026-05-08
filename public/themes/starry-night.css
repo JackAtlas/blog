@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.font.im/css?family=Libre+Baskerville');
 
 :root[data-theme='starry-night'] {
   --background: oklch(0.9755 0.0045 258.3245);
@@ -34,22 +34,28 @@
   --sidebar-border: oklch(0.7791 0.0156 251.1926);
   --sidebar-ring: oklch(0.8567 0.1164 81.0092);
   --font-sans: Libre Baskerville, serif;
-  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times,
-    serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+  --font-serif:
+    ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
   --radius: 0.5rem;
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+  --shadow-sm:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1),
     0 1px 2px -1px hsl(0 0% 0% / 0.1);
-  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+  --shadow:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1),
     0 1px 2px -1px hsl(0 0% 0% / 0.1);
-  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+  --shadow-md:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1),
     0 2px 4px -1px hsl(0 0% 0% / 0.1);
-  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+  --shadow-lg:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1),
     0 4px 6px -1px hsl(0 0% 0% / 0.1);
-  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+  --shadow-xl:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1),
     0 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
   --tracking-normal: 0em;
@@ -90,22 +96,28 @@
   --sidebar-border: oklch(0.3072 0.0287 281.7681);
   --sidebar-ring: oklch(0.9097 0.144 95.112);
   --font-sans: Libre Baskerville, serif;
-  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times,
-    serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+  --font-serif:
+    ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
   --radius: 0.5rem;
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+  --shadow-sm:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1),
     0 1px 2px -1px hsl(0 0% 0% / 0.1);
-  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+  --shadow:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1),
     0 1px 2px -1px hsl(0 0% 0% / 0.1);
-  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+  --shadow-md:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1),
     0 2px 4px -1px hsl(0 0% 0% / 0.1);
-  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+  --shadow-lg:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1),
     0 4px 6px -1px hsl(0 0% 0% / 0.1);
-  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+  --shadow-xl:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1),
     0 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
 }

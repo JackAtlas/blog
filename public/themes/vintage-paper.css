@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.font.im/css?family=IBM+Plex+Mono|Libre+Baskerville|Lora');
 
 :root[data-theme='vintage-paper'] {
   --background: oklch(0.9582 0.0152 90.2357);
@@ -39,15 +39,20 @@
   --radius: 0.25rem;
   --shadow-2xs: 2px 3px 5px 0px hsl(28 13% 20% / 0.06);
   --shadow-xs: 2px 3px 5px 0px hsl(28 13% 20% / 0.06);
-  --shadow-sm: 2px 3px 5px 0px hsl(28 13% 20% / 0.12),
+  --shadow-sm:
+    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
     2px 1px 2px -1px hsl(28 13% 20% / 0.12);
-  --shadow: 2px 3px 5px 0px hsl(28 13% 20% / 0.12),
+  --shadow:
+    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
     2px 1px 2px -1px hsl(28 13% 20% / 0.12);
-  --shadow-md: 2px 3px 5px 0px hsl(28 13% 20% / 0.12),
+  --shadow-md:
+    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
     2px 2px 4px -1px hsl(28 13% 20% / 0.12);
-  --shadow-lg: 2px 3px 5px 0px hsl(28 13% 20% / 0.12),
+  --shadow-lg:
+    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
     2px 4px 6px -1px hsl(28 13% 20% / 0.12);
-  --shadow-xl: 2px 3px 5px 0px hsl(28 13% 20% / 0.12),
+  --shadow-xl:
+    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
     2px 8px 10px -1px hsl(28 13% 20% / 0.12);
   --shadow-2xl: 2px 3px 5px 0px hsl(28 13% 20% / 0.3);
   --tracking-normal: 0em;
@@ -93,15 +98,20 @@
   --radius: 0.25rem;
   --shadow-2xs: 2px 3px 5px 0px hsl(28 13% 20% / 0.06);
   --shadow-xs: 2px 3px 5px 0px hsl(28 13% 20% / 0.06);
-  --shadow-sm: 2px 3px 5px 0px hsl(28 13% 20% / 0.12),
+  --shadow-sm:
+    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
     2px 1px 2px -1px hsl(28 13% 20% / 0.12);
-  --shadow: 2px 3px 5px 0px hsl(28 13% 20% / 0.12),
+  --shadow:
+    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
     2px 1px 2px -1px hsl(28 13% 20% / 0.12);
-  --shadow-md: 2px 3px 5px 0px hsl(28 13% 20% / 0.12),
+  --shadow-md:
+    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
     2px 2px 4px -1px hsl(28 13% 20% / 0.12);
-  --shadow-lg: 2px 3px 5px 0px hsl(28 13% 20% / 0.12),
+  --shadow-lg:
+    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
     2px 4px 6px -1px hsl(28 13% 20% / 0.12);
-  --shadow-xl: 2px 3px 5px 0px hsl(28 13% 20% / 0.12),
+  --shadow-xl:
+    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
     2px 8px 10px -1px hsl(28 13% 20% / 0.12);
   --shadow-2xl: 2px 3px 5px 0px hsl(28 13% 20% / 0.3);
 }

@@ -1,14 +1,20 @@
-import fs from 'fs'
-import path from 'path'
+export async function getThemes() {
+  const res = await fetch('/themes.json')
+  return res.json()
+}
 
-export function getThemes() {
-  const dirPath = path.join(process.cwd(), 'themes')
+export function applyTheme(theme: string) {
+  const id = 'theme-css'
 
-  if (!fs.existsSync(dirPath)) return []
+  let link = document.getElementById(id) as HTMLLinkElement | null
 
-  const files = fs.readdirSync(dirPath)
+  if (!link) {
+    link = document.createElement('link')
+    link.id = id
+    link.rel = 'stylesheet'
+    document.head.appendChild(link)
+  }
 
-  return files
-    .filter((f) => f.endsWith('.css'))
-    .map((file) => file.replace('.css', ''))
+  document.documentElement.setAttribute('data-theme', theme)
+  link.href = `/themes/${theme}.css`
 }

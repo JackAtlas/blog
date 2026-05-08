@@ -6,7 +6,6 @@ import {
   AppProviders,
   ThemeNameProvider
 } from '@/components/providers'
-import { getThemes } from '@/lib/themes'
 
 export const metadata: Metadata = {
   title: 'JackAtlas',
@@ -18,12 +17,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const themes = getThemes()
   return (
     <SessionProvider>
       <html lang="zh-cmn-Hans" suppressHydrationWarning>
         <body className="antialiased">
-          <ThemeNameProvider themes={themes}>
+          <ThemeNameProvider>
             <AppProviders>{children}</AppProviders>
           </ThemeNameProvider>
           <Toaster richColors />

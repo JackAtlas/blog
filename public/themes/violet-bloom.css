@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lora:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.font.im/css?family=IBM+Plex+Mono|Lora');
 
 :root[data-theme='violet-bloom'] {
   --background: oklch(0.994 0 0);
@@ -39,15 +39,20 @@
   --radius: 1.4rem;
   --shadow-2xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
   --shadow-xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
-  --shadow-sm: 0px 2px 3px 0px hsl(0 0% 0% / 0.16),
+  --shadow-sm:
+    0px 2px 3px 0px hsl(0 0% 0% / 0.16),
     0px 1px 2px -1px hsl(0 0% 0% / 0.16);
-  --shadow: 0px 2px 3px 0px hsl(0 0% 0% / 0.16),
+  --shadow:
+    0px 2px 3px 0px hsl(0 0% 0% / 0.16),
     0px 1px 2px -1px hsl(0 0% 0% / 0.16);
-  --shadow-md: 0px 2px 3px 0px hsl(0 0% 0% / 0.16),
+  --shadow-md:
+    0px 2px 3px 0px hsl(0 0% 0% / 0.16),
     0px 2px 4px -1px hsl(0 0% 0% / 0.16);
-  --shadow-lg: 0px 2px 3px 0px hsl(0 0% 0% / 0.16),
+  --shadow-lg:
+    0px 2px 3px 0px hsl(0 0% 0% / 0.16),
     0px 4px 6px -1px hsl(0 0% 0% / 0.16);
-  --shadow-xl: 0px 2px 3px 0px hsl(0 0% 0% / 0.16),
+  --shadow-xl:
+    0px 2px 3px 0px hsl(0 0% 0% / 0.16),
     0px 8px 10px -1px hsl(0 0% 0% / 0.16);
   --shadow-2xl: 0px 2px 3px 0px hsl(0 0% 0% / 0.4);
   --tracking-normal: -0.025em;
@@ -93,15 +98,20 @@
   --radius: 1.4rem;
   --shadow-2xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
   --shadow-xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
-  --shadow-sm: 0px 2px 3px 0px hsl(0 0% 0% / 0.16),
+  --shadow-sm:
+    0px 2px 3px 0px hsl(0 0% 0% / 0.16),
     0px 1px 2px -1px hsl(0 0% 0% / 0.16);
-  --shadow: 0px 2px 3px 0px hsl(0 0% 0% / 0.16),
+  --shadow:
+    0px 2px 3px 0px hsl(0 0% 0% / 0.16),
     0px 1px 2px -1px hsl(0 0% 0% / 0.16);
-  --shadow-md: 0px 2px 3px 0px hsl(0 0% 0% / 0.16),
+  --shadow-md:
+    0px 2px 3px 0px hsl(0 0% 0% / 0.16),
     0px 2px 4px -1px hsl(0 0% 0% / 0.16);
-  --shadow-lg: 0px 2px 3px 0px hsl(0 0% 0% / 0.16),
+  --shadow-lg:
+    0px 2px 3px 0px hsl(0 0% 0% / 0.16),
     0px 4px 6px -1px hsl(0 0% 0% / 0.16);
-  --shadow-xl: 0px 2px 3px 0px hsl(0 0% 0% / 0.16),
+  --shadow-xl:
+    0px 2px 3px 0px hsl(0 0% 0% / 0.16),
     0px 8px 10px -1px hsl(0 0% 0% / 0.16);
   --shadow-2xl: 0px 2px 3px 0px hsl(0 0% 0% / 0.4);
 }

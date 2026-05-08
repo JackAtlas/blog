@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.font.im/css?family=IBM+Plex+Mono|Libre+Baskerville|Poppins');
 
 :root[data-theme='elegant-luxury'] {
   --background: oklch(0.9779 0.0042 56.3756);
@@ -39,15 +39,20 @@
   --radius: 0.375rem;
   --shadow-2xs: 1px 1px 16px -2px hsl(0 63% 18% / 0.06);
   --shadow-xs: 1px 1px 16px -2px hsl(0 63% 18% / 0.06);
-  --shadow-sm: 1px 1px 16px -2px hsl(0 63% 18% / 0.12),
+  --shadow-sm:
+    1px 1px 16px -2px hsl(0 63% 18% / 0.12),
     1px 1px 2px -3px hsl(0 63% 18% / 0.12);
-  --shadow: 1px 1px 16px -2px hsl(0 63% 18% / 0.12),
+  --shadow:
+    1px 1px 16px -2px hsl(0 63% 18% / 0.12),
     1px 1px 2px -3px hsl(0 63% 18% / 0.12);
-  --shadow-md: 1px 1px 16px -2px hsl(0 63% 18% / 0.12),
+  --shadow-md:
+    1px 1px 16px -2px hsl(0 63% 18% / 0.12),
     1px 2px 4px -3px hsl(0 63% 18% / 0.12);
-  --shadow-lg: 1px 1px 16px -2px hsl(0 63% 18% / 0.12),
+  --shadow-lg:
+    1px 1px 16px -2px hsl(0 63% 18% / 0.12),
     1px 4px 6px -3px hsl(0 63% 18% / 0.12);
-  --shadow-xl: 1px 1px 16px -2px hsl(0 63% 18% / 0.12),
+  --shadow-xl:
+    1px 1px 16px -2px hsl(0 63% 18% / 0.12),
     1px 8px 10px -3px hsl(0 63% 18% / 0.12);
   --shadow-2xl: 1px 1px 16px -2px hsl(0 63% 18% / 0.3);
   --tracking-normal: 0em;
@@ -93,15 +98,20 @@
   --radius: 0.375rem;
   --shadow-2xs: 1px 1px 16px -2px hsl(0 63% 18% / 0.06);
   --shadow-xs: 1px 1px 16px -2px hsl(0 63% 18% / 0.06);
-  --shadow-sm: 1px 1px 16px -2px hsl(0 63% 18% / 0.12),
+  --shadow-sm:
+    1px 1px 16px -2px hsl(0 63% 18% / 0.12),
     1px 1px 2px -3px hsl(0 63% 18% / 0.12);
-  --shadow: 1px 1px 16px -2px hsl(0 63% 18% / 0.12),
+  --shadow:
+    1px 1px 16px -2px hsl(0 63% 18% / 0.12),
     1px 1px 2px -3px hsl(0 63% 18% / 0.12);
-  --shadow-md: 1px 1px 16px -2px hsl(0 63% 18% / 0.12),
+  --shadow-md:
+    1px 1px 16px -2px hsl(0 63% 18% / 0.12),
     1px 2px 4px -3px hsl(0 63% 18% / 0.12);
-  --shadow-lg: 1px 1px 16px -2px hsl(0 63% 18% / 0.12),
+  --shadow-lg:
+    1px 1px 16px -2px hsl(0 63% 18% / 0.12),
     1px 4px 6px -3px hsl(0 63% 18% / 0.12);
-  --shadow-xl: 1px 1px 16px -2px hsl(0 63% 18% / 0.12),
+  --shadow-xl:
+    1px 1px 16px -2px hsl(0 63% 18% / 0.12),
     1px 8px 10px -3px hsl(0 63% 18% / 0.12);
   --shadow-2xl: 1px 1px 16px -2px hsl(0 63% 18% / 0.3);
 }
