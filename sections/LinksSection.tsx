@@ -14,6 +14,8 @@ export default function LinksSection() {
               href="https://chi-flow.jackatlas.xyz/"
               className="flex items-center justify-between hover:bg-muted p-2"
               title="Chi-Flow"
+              target="_blank"
+              referrerPolicy="no-referrer"
             >
               <span className="text-sm md:text-base 2xl:text-lg">
                 Chi-Flow
@@ -28,6 +30,8 @@ export default function LinksSection() {
               href="https://chi-form.jackatlas.xyz/"
               className="flex items-center justify-between hover:bg-muted p-2"
               title="Chi-Form"
+              target="_blank"
+              referrerPolicy="no-referrer"
             >
               <span className="text-sm md:text-base 2xl:text-lg">
                 Chi-Form
