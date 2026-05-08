@@ -20,7 +20,7 @@ export default function RecentsSection({
         {articles.slice(0, 5).map((article) => (
           <div className="flex mt-7" key={article.id}>
             <Link
-              href={`/article/${article.slug}`}
+              href={`/articles/${article.slug}`}
               title={article.title}
               className="mr-2 md:mr-4"
             >
@@ -37,14 +37,14 @@ export default function RecentsSection({
                 {format(article.createdAt, 'yyyy-MM-dd')}
               </time>
               <Link
-                href={`/article/${article.slug}`}
+                href={`/articles/${article.slug}`}
                 title={article.title}
                 className="md:text-lg hover:text-primary truncate"
               >
                 {article.title}
               </Link>
               <Link
-                href={`/article/${article.category?.name}`}
+                href={`/categories/${article.category?.name}`}
                 title={article.category?.name}
                 className="text-sm md:text-base text-muted-foreground hover:text-muted-foreground/50 truncate"
               >
