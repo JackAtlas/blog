@@ -39,14 +39,25 @@ async function getRandomImage(
 
   for (const url of sources) {
     try {
+      console.log('fetching:', url)
       const resp = await fetch(url)
+      console.log('status', resp.status)
       if (resp.ok) return Buffer.from(await resp.arrayBuffer())
-    } catch {}
+    } catch (err) {
+      console.error('fetch error', err)
+    }
   }
 
   const fallbackUrl = `https://picsum.photos/${width}/${height}?ts=${Date.now()}`
-  const resp = await fetch(fallbackUrl)
-  return Buffer.from(await resp.arrayBuffer())
+  try {
+    console.log('fallback fetching:', fallbackUrl)
+    const resp = await fetch(fallbackUrl)
+    console.log('fallback status', resp.status)
+    return Buffer.from(await resp.arrayBuffer())
+  } catch (err) {
+    console.error('fallback error', err)
+    throw err
+  }
 }
 
 export class ArticleCoverCOSFixedManager {
