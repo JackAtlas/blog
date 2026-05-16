@@ -1,5 +1,5 @@
 import crypto from 'crypto'
-import { BUCKET, cos, COS_DOMAIN, REGION } from '@/lib/cos/cos-client'
+import { BUCKET, cos, REGION } from '@/lib/cos/cos-client'
 
 type Options = {
   width?: number
@@ -7,6 +7,9 @@ type Options = {
 }
 
 async function uploadToCOS(buffer: Buffer, filename: string) {
+  console.log('@@BUCKET', BUCKET)
+  console.log('@@cos', cos)
+  console.log('@@REGION', REGION)
   return new Promise((resolve, reject) => {
     cos.putObject(
       {
@@ -57,6 +60,7 @@ export class ArticleCoverCOSFixedManager {
       .digest('hex')
       .slice(0, 5)
     const filename = `blog/article-cover/${articleId}.${hash}.jpg`
+    console.log('@@filename', filename)
 
     return (await uploadToCOS(buffer, filename)) as string
   }
