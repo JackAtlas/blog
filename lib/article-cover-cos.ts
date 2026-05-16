@@ -33,6 +33,10 @@ async function getRandomImage(
   width: number,
   height: number
 ): Promise<Buffer> {
+  const headers = {
+    'User-Agent': 'Mozilla/5.0'
+  }
+
   const sources = [
     `https://api.vvhan.com/api/wallpaper/views?ts=${Date.now()}`
   ]
@@ -40,7 +44,10 @@ async function getRandomImage(
   for (const url of sources) {
     try {
       console.log('fetching:', url)
-      const resp = await fetch(url)
+      const resp = await fetch(url, {
+        headers,
+        cache: 'no-store'
+      })
       console.log('status', resp.status)
       if (resp.ok) return Buffer.from(await resp.arrayBuffer())
     } catch (err) {
@@ -51,7 +58,10 @@ async function getRandomImage(
   const fallbackUrl = `https://picsum.photos/${width}/${height}?ts=${Date.now()}`
   try {
     console.log('fallback fetching:', fallbackUrl)
-    const resp = await fetch(fallbackUrl)
+    const resp = await fetch(fallbackUrl, {
+      headers,
+      cache: 'no-store'
+    })
     console.log('fallback status', resp.status)
     return Buffer.from(await resp.arrayBuffer())
   } catch (err) {
