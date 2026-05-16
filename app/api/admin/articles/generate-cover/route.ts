@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
       {
         message:
           error instanceof Error
-            ? error.message
+            ? error.cause
             : '生成题图失败，未知原因'
       },
       { status: 500 }
