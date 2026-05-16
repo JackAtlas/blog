@@ -106,7 +106,7 @@ export default function MarkdownPreviewer({
                 height={400}
                 src={src}
                 alt={alt || ''}
-                className="max-w-full mx-auto"
+                className="max-w-full w-auto mx-auto"
               />
             )
           }
